@@ -1,0 +1,36 @@
+input[type="text"] {
+    padding: 0 4px;
+    height: 32px;
+    font-size: 14px;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    outline: 0;
+
+    &::placeholder {
+        color: #999;
+    }
+
+    &:focus {
+        border-color: #777;
+    }
+}
+
+button,
+input[type="submit"],
+input[type="button"] {
+    @extend %transition-all;
+    height: 32px;
+    padding: 0 10px;
+    font-size: 14px;
+    background-color: #eee;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    outline: 0;
+    cursor: pointer;
+
+    &:focus {}
+
+    &:hover {
+        background-color: #ccc;
+    }
+}

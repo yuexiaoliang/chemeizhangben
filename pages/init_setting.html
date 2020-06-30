@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>车美账本</title>
+    <link rel="stylesheet" href="./css/all.min.css">
+</head>
+
+<body>
+    <div id="init_settings" class="init-settings scrollbar-x">
+        <section class="section-content start-content">
+            <img class="logo" src="../resources/logo.png">
+            <div class="text-wrapper">
+                <p>第一次使用，或者关键配置有异常</p>
+                <p>为了保证您的数据安全，请进行一些基础设置。</p>
+            </div>
+            <div class="button-wrapper">
+                <button class="paging btn next start">开始</button>
+            </div>
+        </section>
+        <section class="section-content data-location-content">
+            <h2 class="title">数据储存目录</h2>
+            <div class="text-wrapper">
+                <p>数据储存目录是您之后使用本程序以后，你登记的数据，设置以后更方便您备份。</p>
+            </div>
+            <div class="path-setting-wrapper">
+                <input class="data-location-path" type="text" value="d://" placeholder="请选择数据储存位置">
+                <button class="btn select">选择目录</button>
+            </div>
+            <div class="button-wrapper">
+                <button class="paging btn prev">上一步</button>
+                <button class="paging btn next">下一步</button>
+            </div>
+        </section>
+        <section class="section-content password-content">
+            <h2 class="title">程序密码</h2>
+            <div class="text-wrapper">
+                <p>之后在进行程序解锁，或者一些敏感操作的时候，需要验证密码，请您进行设置。</p>
+            </div>
+            <div class="password-setting-wrapper">
+                <div class="box">
+                    <input class="password-input" type="text" placeholder="请输入密码">
+                    <span class="hint">
+                        <p>密码由6-16位数字和字母组成</p>
+                        <p>区分大小写</p>
+                    </span>
+                </div>
+                <div class="box">
+                    <input class="password-input" type="text" placeholder="请再次输入密码">
+                    <span class="hint"></span>
+                </div>
+            </div>
+            <div class="button-wrapper">
+                <button class="paging btn prev">上一步</button>
+                <button class="paging btn next">下一步</button>
+            </div>
+        </section>
+        <section class="section-content setup-complete-content">
+            <h2 class="title">设置完成</h2>
+            <div class="text-wrapper">
+                <p>请记住您的设置，密码尤其重要，之后解锁软件、更改密码等敏感操作，都需要验证您设置的密码。</p>
+                <p class="d path">数据目录：<span></span></p>
+                <p class="d password">密码：<span>admin888</span></p>
+                <p class="hint"></p>
+            </div>
+            <div class="button-wrapper">
+                <button class="paging btn prev">修改设置</button>
+                <button class="btn save-settings-btn">保存设置</button>
+            </div>
+        </section>
+    </div>
+    <script type="module" src="../src/renderer/init_web/init_setting.js"></script>
+</body>
+
+</html>

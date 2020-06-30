@@ -1,0 +1,28 @@
+{
+  "name": "chemeizhangben",
+  "productName": "Chemei Zhangben",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "electron:start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@e.coding.net:yuexiaoliang/chemeizhangben.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^9.0.5",
+    "typescript": "^3.9.5"
+  },
+  "dependencies": {
+    "@types/lowdb": "^1.0.9",
+    "lowdb": "^1.0.0"
+  }
+}
