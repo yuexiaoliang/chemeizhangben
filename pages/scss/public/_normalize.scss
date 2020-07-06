@@ -378,6 +378,19 @@ template {
     display: none;
 }
 
+ul,
+ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+@font-face {
+    font-family: fangzheng;
+    font-weight: normal;
+    src: url('../../resources/方正幼线简体.ttf');
+}
+
 html,
 body {
     @extend .scrollbar;
