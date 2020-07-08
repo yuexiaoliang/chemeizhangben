@@ -7,7 +7,8 @@
   --app-side-bg-color: #2347f2;
   --app-header-height: 34px;
   --app-header-bg-color: #f9f9f9;
-  --app-main-padding-x: 16px;
+  --app-main-padding-x: 50px;
+  --border-color: rgba(0, 0, 0, .1);
 }
 
 button,
@@ -456,33 +457,51 @@ h6 {
   font-size: 1.1em;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"],
+input[type="number"] {
   padding: 0 4px;
   height: 32px;
   font-size: 14px;
   border-radius: 2px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   outline: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
-input[type="text"]::-webkit-input-placeholder {
+input[type="text"]::-webkit-input-placeholder,
+input[type="password"]::-webkit-input-placeholder,
+input[type="number"]::-webkit-input-placeholder {
   color: #999;
 }
 
-input[type="text"]:-ms-input-placeholder {
+input[type="text"]:-ms-input-placeholder,
+input[type="password"]:-ms-input-placeholder,
+input[type="number"]:-ms-input-placeholder {
   color: #999;
 }
 
-input[type="text"]::-ms-input-placeholder {
+input[type="text"]::-ms-input-placeholder,
+input[type="password"]::-ms-input-placeholder,
+input[type="number"]::-ms-input-placeholder {
   color: #999;
 }
 
-input[type="text"]::placeholder {
+input[type="text"]::placeholder,
+input[type="password"]::placeholder,
+input[type="number"]::placeholder {
   color: #999;
 }
 
-input[type="text"]:focus {
-  border-color: #777;
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus {
+  border-color: var(--app-side-bg-color);
+}
+
+input[type="number"] {
+  width: 70px;
 }
 
 button,
@@ -493,7 +512,7 @@ input[type="button"] {
   font-size: 14px;
   background-color: #eee;
   border-radius: 2px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   outline: 0;
   cursor: pointer;
 }
@@ -639,10 +658,11 @@ html {
       -ms-flex-align: center;
           align-items: center;
   height: var(--app-header-height);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .app-header .header-title {
-  margin: 0 0 0 var(--app-main-padding-x);
+  margin: 0 0 0 14px;
   font-size: 18px;
   font-weight: normal;
   color: #555;
@@ -681,7 +701,7 @@ html {
           align-items: center;
   width: calc(var(--app-header-height) + 10px);
   height: var(--app-header-height);
-  color: #555;
+  color: #666;
   -webkit-transition: all 0.1s linear;
   transition: all 0.1s linear;
   cursor: pointer;
@@ -714,7 +734,7 @@ html {
   padding: 0 10px;
   background-color: #fff;
   border-radius: 4px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-color);
   -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
           box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   visibility: hidden;
@@ -735,15 +755,15 @@ html {
   height: 4px;
   background-color: #fff;
   border: 1px solid transparent;
-  border-top-color: rgba(0, 0, 0, 0.2);
-  border-right-color: rgba(0, 0, 0, 0.2);
+  border-top-color: var(--border-color);
+  border-right-color: var(--border-color);
   -webkit-transform: rotateZ(-45deg);
           transform: rotateZ(-45deg);
 }
 
 .app-header .window-control .more .list ul {
   padding: 6px 0;
-  border-top: 1px solid #f2f2f2;
+  border-top: 1px solid var(--border-color);
 }
 
 .app-header .window-control .more .list ul:first-child {
@@ -781,7 +801,247 @@ html {
   overflow-x: hidden;
 }
 
-.app-main .main-section {
+.main-section {
   padding: 0 var(--app-main-padding-x);
+}
+
+.main-setting {
+  padding: 20px var(--app-main-padding-x);
+}
+
+.main-setting .setting-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 30px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.main-setting .setting-box .box-title {
+  margin: 0;
+  width: 110px;
+  font-size: 14px;
+  font-weight: normal;
+  color: #000;
+}
+
+.main-setting .setting-box .box-detail {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  color: #777;
+}
+
+.main-setting .setting-box .box-detail .describe {
+  margin-bottom: 10px;
+}
+
+.main-setting .setting-box .box-detail .describe b {
+  font-weight: normal;
+}
+
+.main-setting .setting-box .box-detail .save {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 20px;
+  width: 60px;
+  height: 32px;
+  background-color: #ccc;
+  border-radius: 2px;
+  color: #fff;
+  cursor: no-drop;
+}
+
+.main-setting .setting-box .box-detail .save.true {
+  background-color: #2aa72a;
+  -webkit-transition: background-color .3s;
+  transition: background-color .3s;
+  cursor: pointer;
+}
+
+.main-setting .setting-box .box-detail .save.true:hover {
+  background-color: rgba(42, 167, 42, 0.8);
+}
+
+.main-setting .setting-options .box-detail .form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.main-setting .setting-options .box-detail .form input {
+  margin-right: 6px;
+}
+
+.main-setting .setting-options .box-detail .form .name {
+  width: 200px;
+}
+
+.main-setting .setting-options .box-detail .form .hint {
+  display: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 10px;
+  font-size: 12px;
+  color: red;
+}
+
+.main-setting .setting-options .box-detail .list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.main-setting .setting-options .box-detail .list li {
+  position: relative;
+  margin: 0 5px 5px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 28px;
+  border: 1px solid var(--border-color);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.main-setting .setting-options .box-detail .list li .item {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100%;
+  font-size: 12px;
+  white-space: nowrap;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.main-setting .setting-options .box-detail .list li .name {
+  position: relative;
+  padding-left: 8px;
+  padding-right: 6px;
+  color: #333;
+}
+
+.main-setting .setting-options .box-detail .list li .name::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -7px;
+  display: block;
+  height: 14px;
+  width: 1px;
+  background-color: var(--border-color);
+}
+
+.main-setting .setting-options .box-detail .list li .price {
+  padding-right: 8px;
+  padding-left: 5px;
+  color: red;
+}
+
+.main-setting .setting-options .box-detail .list li .delete {
+  position: absolute;
+  padding: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 14px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.main-setting .setting-options .box-detail .list li:hover .delete {
+  opacity: 1;
+}
+
+.main-setting .setting-license-plate-prefix .box-detail .list li .name,
+.main-setting .setting-car-type .box-detail .list li .name {
+  font-size: 14px;
+}
+
+.main-setting .setting-license-plate-prefix .box-detail .list li .name::after,
+.main-setting .setting-car-type .box-detail .list li .name::after {
+  display: none;
+}
+
+.main-setting .setting-data-location .box-detail .form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.main-setting .setting-data-location .box-detail .form input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  color: #666;
+}
+
+.main-setting .setting-data-location .box-detail .form input:focus {
+  border-color: var(--border-color);
+}
+
+.main-setting .setting-data-location .box-detail .form button {
+  margin-left: 6px;
+}
+
+.main-setting .setting-password .box-detail .form {
+  float: left;
+  position: relative;
+  margin-right: 10px;
+  width: 300px;
+}
+
+.main-setting .setting-password .box-detail .form input {
+  padding-right: 40px;
+  width: 100%;
+}
+
+.main-setting .setting-password .box-detail .form .look {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 40px;
+  height: 100%;
+  cursor: pointer;
+}
+
+.main-setting .setting-password .box-detail .save {
+  margin-top: 0;
 }
 /*# sourceMappingURL=app.css.map */

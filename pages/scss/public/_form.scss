@@ -1,18 +1,25 @@
-input[type="text"] {
+input[type="text"],
+input[type="password"],
+input[type="number"] {
     padding: 0 4px;
     height: 32px;
     font-size: 14px;
     border-radius: 2px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     outline: 0;
+    box-sizing: border-box;
 
     &::placeholder {
         color: #999;
     }
 
     &:focus {
-        border-color: #777;
+        border-color: var(--app-side-bg-color);
     }
+}
+
+input[type="number"] {
+    width: 70px;
 }
 
 button,
@@ -24,11 +31,9 @@ input[type="button"] {
     font-size: 14px;
     background-color: #eee;
     border-radius: 2px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     outline: 0;
     cursor: pointer;
-
-    &:focus {}
 
     &:hover {
         background-color: #ccc;

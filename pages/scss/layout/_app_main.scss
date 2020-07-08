@@ -7,8 +7,4 @@
     background-color: #fff;
     overflow-x: hidden;
     @extend .scrollbar-y;
-
-    .main-section {
-        padding: 0 var(--app-main-padding-x);
-    }
 }

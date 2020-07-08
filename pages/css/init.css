@@ -7,7 +7,8 @@
   --app-side-bg-color: #2347f2;
   --app-header-height: 34px;
   --app-header-bg-color: #f9f9f9;
-  --app-main-padding-x: 16px;
+  --app-main-padding-x: 50px;
+  --border-color: rgba(0, 0, 0, .1);
 }
 
 button,
@@ -456,33 +457,51 @@ h6 {
   font-size: 1.1em;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"],
+input[type="number"] {
   padding: 0 4px;
   height: 32px;
   font-size: 14px;
   border-radius: 2px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   outline: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
-input[type="text"]::-webkit-input-placeholder {
+input[type="text"]::-webkit-input-placeholder,
+input[type="password"]::-webkit-input-placeholder,
+input[type="number"]::-webkit-input-placeholder {
   color: #999;
 }
 
-input[type="text"]:-ms-input-placeholder {
+input[type="text"]:-ms-input-placeholder,
+input[type="password"]:-ms-input-placeholder,
+input[type="number"]:-ms-input-placeholder {
   color: #999;
 }
 
-input[type="text"]::-ms-input-placeholder {
+input[type="text"]::-ms-input-placeholder,
+input[type="password"]::-ms-input-placeholder,
+input[type="number"]::-ms-input-placeholder {
   color: #999;
 }
 
-input[type="text"]::placeholder {
+input[type="text"]::placeholder,
+input[type="password"]::placeholder,
+input[type="number"]::placeholder {
   color: #999;
 }
 
-input[type="text"]:focus {
-  border-color: #777;
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus {
+  border-color: var(--app-side-bg-color);
+}
+
+input[type="number"] {
+  width: 70px;
 }
 
 button,
@@ -493,7 +512,7 @@ input[type="button"] {
   font-size: 14px;
   background-color: #eee;
   border-radius: 2px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   outline: 0;
   cursor: pointer;
 }

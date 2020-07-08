@@ -1,7 +1,15 @@
 const path = require('path');
 const fs = require('fs');
 
-const { app, BrowserWindow, ipcMain, dialog, Tray, Menu } = require('electron');
+const {
+    app,
+    BrowserWindow,
+    ipcMain,
+    dialog,
+    Tray,
+    Menu,
+    shell,
+} = require('electron');
 
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
@@ -96,7 +104,7 @@ ipcMain.on('get-app-name', (event) => {
 });
 
 // 选择文件夹
-ipcMain.on('open-dir', (event) => {
+ipcMain.on('select-dir', (event) => {
     dialog
         .showOpenDialog({
             properties: ['openDirectory'],
@@ -107,6 +115,12 @@ ipcMain.on('open-dir', (event) => {
         .catch((err) => {
             console.log(err);
         });
+});
+
+// 打开文件夹
+ipcMain.on('open-dir', (event, dirPath) => {
+    shell.showItemInFolder(dirPath);
+    event.returnValue = null;
 });
 
 function createMainWindow() {

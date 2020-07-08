@@ -69,7 +69,7 @@ const SETTINGS = {
     dataLocationPathNode.value = defaultDataDir;
     setupCompletePath.innerText = defaultDataDir;
     selectDirNode.addEventListener('click', () => {
-        const dialogRest = ipcRenderer.sendSync('open-dir');
+        const dialogRest = ipcRenderer.sendSync('select-dir');
         if (!dialogRest.canceled) {
             const dataPath = path.join(dialogRest.filePaths[0], appName);
             dataLocationPathNode.value = setupCompletePath.innerHTML = SETTINGS[

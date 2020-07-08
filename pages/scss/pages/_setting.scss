@@ -1,0 +1,221 @@
+.main-setting {
+    padding: 20px var(--app-main-padding-x);
+
+    .setting-box {
+        display: flex;
+        padding: 30px 0;
+        border-bottom: 1px solid #f5f5f5;
+
+        .box-title {
+            margin: 0;
+            width: 110px;
+            font-size: 14px;
+            font-weight: normal;
+            color: #000;
+        }
+
+        .box-detail {
+            flex: 1;
+            color: #777;
+
+            .describe {
+                margin-bottom: 10px;
+
+                b {
+                    font-weight: normal;
+                }
+            }
+
+            .save {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 20px;
+                width: 60px;
+                height: 32px;
+                background-color: #ccc;
+                border-radius: 2px;
+                color: #fff;
+                cursor: no-drop;
+
+                &.true {
+                    background-color: #2aa72a;
+                    transition: background-color .3s;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: rgba($color: #2aa72a, $alpha: .8);
+                    }
+                }
+            }
+        }
+    }
+
+    .setting-options {
+        .box-detail {
+            .form {
+                display: flex;
+
+                input {
+                    margin-right: 6px;
+                }
+
+                .name {
+                    width: 200px;
+                }
+
+                .hint {
+                    display: none;
+                    align-items: center;
+                    margin-left: 10px;
+                    font-size: 12px;
+                    color: red;
+                }
+            }
+
+            .list {
+                display: flex;
+                flex-wrap: wrap;
+                margin-top: 10px;
+
+                li {
+                    $height: 28px;
+                    position: relative;
+                    margin: 0 5px 5px 0;
+                    display: flex;
+                    align-items: center;
+                    height: $height;
+                    border: 1px solid var(--border-color);
+                    box-sizing: border-box;
+                    border-radius: 2px;
+                    overflow: hidden;
+
+                    .item {
+                        flex: 1;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 100%;
+                        font-size: 12px;
+                        white-space: nowrap;
+                        box-sizing: border-box;
+                    }
+
+                    .name {
+                        position: relative;
+                        padding-left: 8px;
+                        padding-right: 6px;
+                        color: #333;
+
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            right: 0;
+                            top: 50%;
+                            margin-top: -7px;
+                            display: block;
+                            height: 14px;
+                            width: 1px;
+                            background-color: var(--border-color);
+                        }
+                    }
+
+                    .price {
+                        padding-right: 8px;
+                        padding-left: 5px;
+                        color: red;
+                    }
+
+                    .delete {
+                        position: absolute;
+                        padding: 0;
+                        width: 100%;
+                        background-color: rgba($color: #000000, $alpha: .6);
+                        color: #fff;
+                        font-size: 14px;
+                        opacity: 0;
+                        // transition: opacity .3s;
+                        cursor: pointer;
+                    }
+
+                    &:hover {
+                        .delete {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .setting-license-plate-prefix,
+    .setting-car-type {
+        .box-detail {
+            .list {
+                li {
+                    .name {
+                        font-size: 14px;
+
+                        &::after {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .setting-data-location {
+        .box-detail {
+            .form {
+                display: flex;
+
+                input {
+                    flex: 1;
+                    color: #666;
+
+                    &:focus {
+                        border-color: var(--border-color)
+                    }
+                }
+
+                button {
+                    margin-left: 6px;
+                }
+            }
+        }
+    }
+
+    .setting-password {
+        .box-detail {
+            .form {
+                $look-width: 40px;
+                float: left;
+                position: relative;
+                margin-right: 10px;
+                width: 300px;
+
+                input {
+                    padding-right: $look-width;
+                    width: 100%;
+                }
+
+                .look {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: $look-width;
+                    height: 100%;
+                    cursor: pointer;
+                }
+            }
+
+            .save {
+                margin-top: 0;
+            }
+        }
+    }
+}

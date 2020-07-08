@@ -8,9 +8,10 @@
     justify-content: flex-end;
     align-items: center;
     height: var(--app-header-height);
+    border-bottom: 1px solid var(--border-color);
 
     .header-title {
-        margin: 0 0 0 var(--app-main-padding-x);
+        margin: 0 0 0 14px;
         font-size: 18px;
         font-weight: normal;
         color: #555;
@@ -36,7 +37,7 @@
             align-items: center;
             width: calc(var(--app-header-height) + 10px);
             height: var(--app-header-height);
-            color: #555;
+            color: #666;
             transition: all 0.1s linear;
             cursor: pointer;
 
@@ -73,7 +74,7 @@
                 padding: 0 10px;
                 background-color: #fff;
                 border-radius: 4px;
-                border: 1px solid rgba($color: #000, $alpha: .2);
+                border: 1px solid var(--border-color);
                 box-shadow: 0 0 5px rgba($color: #000, $alpha: .1);
                 visibility: hidden;
                 opacity: 0;
@@ -90,14 +91,14 @@
                     height: 4px;
                     background-color: #fff;
                     border: 1px solid transparent;
-                    border-top-color: rgba($color: #000, $alpha: .2);
-                    border-right-color: rgba($color: #000, $alpha: .2);
+                    border-top-color: var(--border-color);
+                    border-right-color: var(--border-color);
                     transform: rotateZ(-45deg);
                 }
 
                 ul {
                     padding: 6px 0;
-                    border-top: 1px solid #f2f2f2;
+                    border-top: 1px solid var(--border-color);
 
                     &:first-child {
                         border-top: 0;
