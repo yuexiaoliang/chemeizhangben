@@ -6,6 +6,10 @@
         padding: 30px 0;
         border-bottom: 1px solid #f5f5f5;
 
+        &:last-child {
+            border-bottom: 0;
+        }
+
         .box-title {
             margin: 0;
             width: 110px;
@@ -215,6 +219,10 @@
 
             .save {
                 margin-top: 0;
+            }
+
+            .hint {
+                color: red;
             }
         }
     }

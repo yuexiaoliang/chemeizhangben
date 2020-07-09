@@ -1,10 +1,6 @@
-const path = require('path');
-
-import { defaultDataDir } from '../../../common/all_path.js';
 import { getDB } from '../../../common/tool.js';
-import { settingTemplate } from './contentTemplates.js';
 
-class SwitchPage {
+export class SwitchPage {
     constructor(html, dbPath) {
         this.html = html;
         this.dbPath = dbPath;
@@ -18,8 +14,3 @@ class SwitchPage {
         return appMain.children[0];
     }
 }
-
-// 设置页
-
-const settingsDBPath = path.join(defaultDataDir, 'settings-db.json');
-export const setting = new SwitchPage(settingTemplate, settingsDBPath);
