@@ -38,6 +38,16 @@ export const settingTemplate = `
                 <ul class="list"></ul>
             </div>
         </div>
+        <div class="setting-box setting-license-plate-prefix-default">
+            <h3 class="box-title">自动牌照前缀：</h3>
+            <div class="box-detail">
+                <div class="describe">自动添加的车牌照前缀，省去每次都要手动选择的操作</div>
+                <div class="form">
+                    <input type="text">
+                </div>
+                <span class="save">保存</span>
+            </div>
+        </div>
         <div class="setting-box setting-options setting-car-type">
             <h3 class="box-title">车辆类型：</h3>
             <div class="box-detail">
@@ -73,6 +83,90 @@ export const settingTemplate = `
                 <span class="save">保存</span>
                 <span class="hint"></span>
             </div>
+        </div>
+    </section>
+`;
+
+export const memberTemplate = `
+    <section class="main-section main-member">
+        <header class="main-member-header">
+            <span class="sort">ID<i class="icon"></i></span>
+            <span>称呼</span>
+            <span class="sort">车辆<i class="icon"></i></span>
+            <span class="sort">共充值<i class="icon"></i></span>
+            <span class="sort">共消费<i class="icon"></i></span>
+            <span class="sort">余额<i class="icon"></i></span>
+            <span>备注</span>
+            <span>详情</span>
+        </header>
+        <ul class="main-member-list"></ul>
+        <span class="add" title="增加会员"  switch-page="add-member"></span>
+    </section>
+`;
+
+export const addMemberTemplate = `
+    <section class="main-section main-add-member">
+        <div class="wrapper">
+            <input type="text" class="add-date" placeholder="选择时间">
+            <div class="member">
+                <h2>车主信息</h2>
+                <div class="box member-name">
+                    <label>称呼：</label>
+                    <input type="text" placeholder="输入称呼...">
+                </div>
+                <div class="box member-contact">
+                    <div class="item weixin">
+                        <label>微信：</label>
+                        <input type="text" class="weixin" placeholder="输入微信号...">
+                    </div>
+                    <div class="item shouji">
+                        <label>手机：</label>
+                        <input type="text" class="shouji" placeholder="输入手机号...">
+                    </div>
+                </div>
+                <div class="box member-ramarks">
+                    <label>备注：</label>
+                    <textarea placeholder="输入备注信息..."></textarea>
+                </div>
+            </div>
+            <div class="car">
+                <h2>添加车辆</h2>
+                <div class="car-license-tag">
+                    <label>牌照：</label>
+                    <input type="text" class="prefix" placeholder="冀G">
+                    <i class="iconfont icon-dian"></i>
+                    <input type="text" class="number" placeholder="88888">
+                </div>
+                <div class="car-type">
+                    <label>车型：</label>
+                    <input type="text" placeholder="宝马">
+                </div>
+                <button class="add iconfont icon-add"></button>
+                <ul class="car-list"></ul>
+            </div>
+            <div class="pay">
+                <h2>会员充值</h2>
+                <div class="pay-amount">
+                    <label>金额：</label>
+                    <input type="number" min="0" placeholder="人名币">
+                </div>
+                <ul class="pay-platform">
+                    <label>支付平台：</label>
+                    <li>
+                        <label for="pay-platform-weixin">微信</label>
+                        <input type="radio" name="pay-platform" id="pay-platform-weixin" value="微信" checked>
+                    </li>
+                    <li>
+                        <label for="pay-platform-zhifubao">支付宝</label>
+                        <input type="radio" name="pay-platform" id="pay-platform-zhifubao" value="支付宝">
+                    </li>
+                    <li>
+                        <label for="pay-platform-xianjin">现金</label>
+                        <input type="radio" name="pay-platform" id="pay-platform-xianjin" value="现金">
+                    </li>
+                </ul>
+            </div>
+            <button class="save">保存</button>
         </div>
     </section>
 `;

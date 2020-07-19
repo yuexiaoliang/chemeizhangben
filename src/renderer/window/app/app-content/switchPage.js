@@ -1,16 +1,34 @@
 import { getDB } from '../../../common/tool.js';
 
 export class SwitchPage {
-    constructor(html, dbPath) {
-        this.html = html;
-        this.dbPath = dbPath;
+    constructor(options, fn) {
+        this.options = options;
+        this.callback = fn;
+        this.switchPage();
     }
-    getDB() {
-        return getDB(this.dbPath);
-    }
-    createHtml() {
-        const appMain = document.querySelector('.app-main');
-        appMain.innerHTML = this.html;
-        return appMain.children[0];
+    switchPage() {
+        document.addEventListener('click', (e) => {
+            for (let i = 0; i < e.path.length; i++) {
+                const element = e.path[i];
+                if (element.nodeType === 1) {
+                    if (
+                        element.hasAttribute('switch-page') &&
+                        element.getAttribute('switch-page') ===
+                            this.options.page
+                    ) {
+                        const headerTitleElement = document.querySelector(
+                            '.app-header .header-title'
+                        );
+                        headerTitleElement.innerHTML = this.options.title;
+                        document.querySelector(
+                            '.app-main'
+                        ).innerHTML = this.options.html;
+                        this.callback(
+                            document.querySelector('.app-main').children[0]
+                        );
+                    }
+                }
+            }
+        });
     }
 }

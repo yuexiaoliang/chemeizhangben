@@ -1,14 +1,14 @@
 .app-shade {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: var(--app-header-height);
+    left: var(--app-side-width);
     right: 0;
     bottom: 0;
     z-index: 99999;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba($color: #000000, $alpha: .7);
+    background-color: rgba($color: #fff, $alpha:1);
 
     .close {
         position: absolute;
@@ -20,15 +20,9 @@
         text-align: center;
         line-height: 50px;
         font-size: 20px;
-        color: #fff;
+        color: #333;
         cursor: pointer;
     }
 
-    .content {
-        padding: 10px;
-        background-color: #fff;
-        border: 1px solid var(--border-color);
-        box-shadow: 0 0 5px #ccc;
-        border-radius: 4px;
-    }
+    .content {}
 }

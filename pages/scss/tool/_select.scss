@@ -1,0 +1,24 @@
+.select {
+    @extend .scrollbar-y;
+
+    &::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba($color: #000000, $alpha: .3);
+    }
+
+    max-height: 160px;
+    background-color: #fff;
+    border: 1px solid var(--app-side-bg-color);
+    border-radius: 2px;
+    box-sizing: border-box;
+
+    .item {
+        padding: 0 10px;
+        height: 30px;
+        line-height: 30px;
+        cursor: pointer;
+    }
+}

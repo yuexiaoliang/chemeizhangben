@@ -1,0 +1,227 @@
+.main-add-member {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+
+    .wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 50px;
+        width: 580px;
+    }
+
+    h2 {
+        width: 100%;
+        margin: 0 0 20px 0;
+        font-size: 14px;
+    }
+
+    label {
+        margin-right: 10px;
+    }
+
+    .add-date {
+        width: 100%;
+        height: auto;
+        line-height: 1;
+        margin-bottom: 20px;
+        padding: 0;
+        color: #555;
+        font-size: 16px;
+        border: 0 !important;
+    }
+
+    .member {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        margin-bottom: 50px;
+
+        .box {
+            display: flex;
+            width: 100%;
+            margin-bottom: 30px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+
+
+            &.member-name {
+                height: 34px;
+                line-height: 34px;
+            }
+
+            &.member-contact {
+                display: flex;
+                justify-content: space-between;
+
+                .item {
+                    display: flex;
+                    align-items: center;
+                }
+            }
+
+            &.member-ramarks {
+                display: flex;
+
+                textarea {
+                    flex: 1;
+                    height: 100px;
+                }
+            }
+        }
+    }
+
+    .car {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 50px;
+        width: 100%;
+
+        input {
+            padding: 0 10px;
+            height: 34px;
+        }
+
+
+        .car-license-tag {
+            display: flex;
+            align-items: center;
+
+
+            .prefix {
+                width: 70px;
+                text-transform: uppercase
+            }
+
+            .number {
+                width: 100px;
+                text-transform: uppercase
+            }
+        }
+
+        .car-type {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            margin-left: 30px;
+
+            input {
+                flex: 1;
+            }
+        }
+
+        .add {
+            width: 34px;
+            height: 34px;
+            border: 0;
+            margin-left: 14px;
+            background-color: #5eff54;
+            color: #fff;
+        }
+
+        .car-list {
+            width: 100%;
+            padding-top: 10px;
+
+            li {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                height: 32px;
+                margin-top: 10px;
+                background-color: rgba($color: #000000, $alpha: .015);
+                border-radius: 2px;
+                overflow: hidden;
+
+                .number {
+                    position: relative;
+                    padding: 0 11px;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        right: 0;
+                        top: 50%;
+                        margin-top: -7px;
+                        display: block;
+                        height: 14px;
+                        width: 1px;
+                        background-color: var(--border-color);
+                    }
+                }
+
+                .type {
+                    flex: 1;
+                    margin-left: 10px;
+                }
+
+
+                .delete {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 70px;
+                    height: 100%;
+                    background-color: red;
+                    color: #fff;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .pay {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        margin-bottom: 50px;
+
+        .pay-amount {
+            display: flex;
+            align-items: center;
+
+            input {
+                width: 100px;
+            }
+        }
+
+        .pay-platform {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 30px;
+            height: 30px;
+
+            li {
+                display: flex;
+                align-items: center;
+                margin-right: 16px;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                label {
+                    margin-right: 4px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .save {
+        margin-bottom: 50px;
+        width: 100%;
+        height: 40px;
+        font-size: 17px;
+        background-color: rgba($color: green, $alpha: .7);
+        color: #fff;
+    }
+}

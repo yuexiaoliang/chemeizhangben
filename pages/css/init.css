@@ -523,6 +523,33 @@ input[type="button"]:hover {
   background-color: #ccc;
 }
 
+textarea {
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+  outline: 0;
+}
+
+textarea::-webkit-input-placeholder {
+  color: #999;
+}
+
+textarea:-ms-input-placeholder {
+  color: #999;
+}
+
+textarea::-ms-input-placeholder {
+  color: #999;
+}
+
+textarea::placeholder {
+  color: #999;
+}
+
+textarea:focus {
+  border-color: var(--app-side-bg-color);
+}
+
 .init-app-header {
   position: fixed;
   top: 0;

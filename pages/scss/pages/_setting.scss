@@ -169,6 +169,20 @@
         }
     }
 
+    .setting-license-plate-prefix-default {
+        .box-detail {
+            .form {
+                float: left;
+                width: auto;
+                margin-right: 10px;
+            }
+
+            .save {
+                margin-top: 0;
+            }
+        }
+    }
+
     .setting-data-location {
         .box-detail {
             .form {

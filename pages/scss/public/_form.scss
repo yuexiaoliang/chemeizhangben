@@ -39,3 +39,18 @@ input[type="button"] {
         background-color: #ccc;
     }
 }
+
+textarea {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
+    outline: 0;
+
+    &::placeholder {
+        color: #999;
+    }
+
+    &:focus {
+        border-color: var(--app-side-bg-color);
+    }
+}

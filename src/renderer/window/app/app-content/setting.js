@@ -8,20 +8,46 @@ import { settingTemplate } from './contentTemplates.js';
 import { appName } from '../../../common/all_path.js';
 import passwordVerification from '../../../common/password_verification.js';
 import { SwitchPage } from './switchPage.js';
-import { verifyPassword } from '../../../common/tool.js';
+import { verifyPassword, getDB, createDir } from '../../../common/tool.js';
 
-const settingPageBtottn = document.querySelector(
-    '.app-side .button-wrap-bottom .setting-button'
-);
-settingPageBtottn.addEventListener('click', () => {
-    if (document.querySelector('.app-main .main-setting')) {
-        return;
+class SwithSetting extends SwitchPage {
+    switchPage() {
+        document.addEventListener('click', (e) => {
+            for (let i = 0; i < e.path.length; i++) {
+                const element = e.path[i];
+                if (element.nodeType === 1) {
+                    if (
+                        element.hasAttribute('switch-page') &&
+                        element.getAttribute('switch-page') ===
+                            this.options.page
+                    ) {
+                        verifyPassword(() => {
+                            const headerTitleElement = document.querySelector(
+                                '.app-header .header-title'
+                            );
+                            headerTitleElement.innerHTML = this.options.title;
+                            document.querySelector(
+                                '.app-main'
+                            ).innerHTML = this.options.html;
+                            this.callback(
+                                document.querySelector('.app-main').children[0]
+                            );
+                        });
+                    }
+                }
+            }
+        });
     }
-    verifyPassword(() => {
+}
+new SwithSetting(
+    {
+        page: 'setting',
+        title: '设置',
+        html: settingTemplate,
+    },
+    (settingElement) => {
         const settingsDBPath = path.join(defaultDataDir, 'settings-db.json');
-        const setting = new SwitchPage(settingTemplate, settingsDBPath);
-        const settingsDB = setting.getDB();
-        const settingElement = setting.createHtml();
+        const settingsDB = getDB(settingsDBPath);
 
         class SettingOptions {
             constructor(options) {
@@ -145,12 +171,12 @@ settingPageBtottn.addEventListener('click', () => {
 
                     // 更新HTML
                     this.options.nodes.listElement.innerHTML += `
-            <li>
-                <span class="item name">${nameElementValue}</span>
-                <span class="item price">￥${priceElementValue}</span>
-                <span class="item delete iconfont icon-shanchu"></span>
-            </li>
-        `;
+                        <li>
+                            <span class="item name">${nameElementValue}</span>
+                            <span class="item price">￥${priceElementValue}</span>
+                            <span class="item delete iconfont icon-shanchu"></span>
+                        </li>
+                    `;
                 });
             }
         }
@@ -195,11 +221,11 @@ settingPageBtottn.addEventListener('click', () => {
 
                     // 更新HTML
                     this.options.nodes.listElement.innerHTML += `
-            <li>
-                <span class="item name">${nameElementValue}</span>
-                <span class="item delete iconfont icon-shanchu"></span>
-            </li>
-        `;
+                        <li>
+                            <span class="item name">${nameElementValue}</span>
+                            <span class="item delete iconfont icon-shanchu"></span>
+                        </li>
+                    `;
                 });
             }
         }
@@ -263,6 +289,40 @@ settingPageBtottn.addEventListener('click', () => {
             });
         })();
 
+        // 默认车牌照前缀
+        (() => {
+            const optionsElement = settingElement.querySelector(
+                '.setting-license-plate-prefix-default .box-detail'
+            );
+            const inputElement = optionsElement.querySelector('.form input');
+            const saveElement = optionsElement.querySelector('.save');
+            const licensePlatePrefixOptionsDefault = settingsDB
+                .get('licensePlatePrefixOptionsDefault')
+                .value();
+            if (licensePlatePrefixOptionsDefault) {
+                inputElement.value = licensePlatePrefixOptionsDefault;
+            }
+            inputElement.addEventListener('input', () => {
+                const inputVal = inputElement.value;
+                if (inputVal !== licensePlatePrefixOptionsDefault) {
+                    saveElement.classList.add('true');
+                } else {
+                    saveElement.classList.remove('true');
+                }
+            });
+            saveElement.addEventListener('click', () => {
+                if (saveElement.classList.contains('true')) {
+                    settingsDB
+                        .set(
+                            'licensePlatePrefixOptionsDefault',
+                            inputElement.value
+                        )
+                        .write();
+                    saveElement.classList.remove('true');
+                }
+            });
+        })();
+
         // 车辆类型
         (() => {
             const optionsElement = settingElement.querySelector(
@@ -309,15 +369,18 @@ settingPageBtottn.addEventListener('click', () => {
                 if (saveElement.classList.contains('true')) {
                     const dataDir = locationElement.value;
                     settingsDB.set('dataDir', dataDir).write();
-                    if (!fs.existsSync(dataDir)) {
-                        try {
-                            fs.mkdirSync(dataDir, {
-                                recursive: true,
-                            });
-                        } catch (err) {
-                            return;
-                        }
+                    const memberDBDirPath = createDir(
+                        path.join(dataDir, 'database/member')
+                    ); // 会员数据保存的文件夹路径
+                    const memberDB = getDB(
+                        path.join(memberDBDirPath, 'member.json')
+                    ); // 会员数据
+
+                    // 会员数据初始化
+                    if (!memberDB.has('allMember').value()) {
+                        memberDB.defaults({ allMember: [] }).write();
                     }
+
                     saveElement.classList.remove('true');
                 }
             });
@@ -383,5 +446,5 @@ settingPageBtottn.addEventListener('click', () => {
                 }
             });
         })();
-    });
-});
+    }
+);

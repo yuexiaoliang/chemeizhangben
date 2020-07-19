@@ -9,6 +9,7 @@
     align-items: center;
     height: var(--app-header-height);
     border-bottom: 1px solid var(--border-color);
+    box-sizing: border-box;
 
     .header-title {
         margin: 0 0 0 14px;
