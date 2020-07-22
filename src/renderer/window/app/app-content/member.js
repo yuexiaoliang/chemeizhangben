@@ -111,7 +111,7 @@ new SwitchPage(
                             <span class="total-consumption">${item[4]}</span>
                             <span class="balance">${item[5]}</span>
                             <span class="ramarks"><p title="${item[6]}">${item[6]}</p></span>
-                            <span class="details" data-id="${item[0]}">查看</span>
+                            <span class="details" data-id="${item[0]}" switch-page="member-details">查看</span>
                         </li>
                     `;
                 }

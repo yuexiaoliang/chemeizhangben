@@ -1,0 +1,378 @@
+.main-member-details {
+    padding: 40px;
+    margin: 0 auto;
+    max-width: 580px;
+
+    .member-box {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .member-info {
+        .item {
+            display: flex;
+            margin-bottom: 10px;
+            width: 50%;
+
+            span {
+                display: flex;
+                align-items: center;
+
+                &:nth-child(1) {
+                    padding-right: 10px;
+                    width: 2.4em;
+                    color: #777;
+                }
+
+                &:nth-child(2) {
+                    padding: 0 4px;
+                }
+            }
+
+            input[readonly] {
+                border: 0;
+            }
+        }
+
+        .balance {
+            .recharge {
+                margin-left: 10px;
+                color: var(--app-side-bg-color);
+
+                &:hover {
+                    color: red;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        @at-root .member-recharge-form {
+            .pop-up-msg {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .pay-date {
+                    width: 180px;
+                    margin-bottom: 10px;
+                    padding: 0;
+                    color: #999;
+                    border: 0;
+                }
+
+                .pay-amount {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 10px;
+
+                    input {
+                        width: 180px;
+                        text-align: center;
+                    }
+                }
+
+                .pay-platform {
+                    display: flex;
+                    height: 30px;
+
+                    li {
+                        display: flex;
+                        align-items: center;
+                        margin-right: 16px;
+
+                        &:last-child {
+                            margin-right: 0;
+                        }
+
+                        label {
+                            margin-right: 4px;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+
+            .pop-up-buttons {
+                justify-content: center !important;
+                margin-top: 10px;
+
+                .button {
+                    width: 180px;
+                    height: 34px !important;
+                    background-color: #1E9FFF !important;
+                    font-size: 14px !important;
+                    color: #fff;
+                    border: 0;
+                }
+            }
+        }
+
+        .ramarks {
+            width: 100%;
+
+            span {
+                align-items: flex-start;
+                line-height: 1;
+            }
+
+            textarea {
+                @extend .scrollbar-y;
+                flex: 1;
+                width: 100%;
+                height: 90px;
+                line-height: 1.4;
+                font-size: 14px;
+                box-sizing: border-box;
+                resize: none;
+
+                &[readonly] {
+                    &:focus {
+                        border-color: var(--border-color);
+                    }
+                }
+            }
+        }
+
+        .buttons {
+            width: 100%;
+            justify-content: flex-end;
+
+            button {
+                color: #fff;
+                border: 0;
+            }
+
+            .alter {
+                background-color: red;
+                color: #fff;
+            }
+
+            .save {
+                background-color: #0ed60e;
+            }
+        }
+    }
+
+    .member-car {
+        margin-top: 30px;
+
+        .car-list {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            .item {
+                display: flex;
+                padding-left: 14px;
+                margin-bottom: 10px;
+                width: 100%;
+                height: 34px;
+                background-color: #f2f2f2;
+                border-radius: 2px;
+                box-sizing: border-box;
+                overflow: hidden;
+
+                span {
+                    display: flex;
+                    align-items: center;
+                    height: 100%;
+                }
+
+                .license,
+                .type {
+                    flex: 1;
+                }
+
+                .delete {
+                    height: 100%;
+                    padding: 0 14px;
+                    background-color: red;
+                    color: #fff;
+                    cursor: pointer;
+                }
+            }
+
+        }
+
+        .add-car {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+            width: 100%;
+
+            input {
+                padding: 0 10px;
+                height: 34px;
+            }
+
+            .car-license-tag {
+                display: flex;
+                align-items: center;
+
+                .prefix {
+                    width: 70px;
+                    text-transform: uppercase;
+                }
+
+                .number {
+                    width: 100px;
+                    text-transform: uppercase;
+                }
+            }
+
+            .car-type {
+                display: flex;
+                align-items: center;
+                flex: 1;
+                margin-left: 30px;
+
+                input {
+                    flex: 1;
+                }
+            }
+
+            .add {
+                width: 34px;
+                height: 34px;
+                border: 0;
+                margin-left: 14px;
+                background-color: #5eff54;
+                color: #fff;
+            }
+        }
+    }
+
+    .member-record {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        overflow: hidden;
+
+        .record-header {
+            position: relative;
+            z-index: 99;
+            display: flex;
+            height: 34px;
+            background-color: #f2f2f2;
+
+            span {
+                display: flex;
+                align-items: center;
+                padding: 0 14px;
+                height: 100%;
+                cursor: pointer;
+
+                &.active {
+                    background-color: #fff;
+                }
+            }
+        }
+
+        .record-content {
+            @extend .scrollbar-y;
+            position: relative;
+            height: 400px;
+
+            ul {
+                position: absolute;
+                display: none;
+                width: 100%;
+                padding: 0 10px;
+                box-sizing: border-box;
+
+                li {
+                    display: flex;
+                    flex-wrap: wrap;
+                    padding: 10px 0;
+                    width: 100%;
+                    border-bottom: 1px dashed var(--border-color);
+
+                    &:last-child {
+                        border-bottom: 0;
+                    }
+
+                    .time {
+                        width: 100%;
+                        color: #888;
+                    }
+
+                    p {
+                        width: 100%;
+                        margin: 10px 0 0 0;
+
+                        .method {
+                            color: var(--app-side-bg-color);
+                        }
+
+                        .money {
+                            color: red;
+                        }
+                    }
+                }
+
+                &.recharge-record {
+                    li {
+                        p {
+                            span {
+                                margin: 0 5px;
+                            }
+                        }
+                    }
+                }
+
+                &.expenses-record {
+                    li {
+                        p {
+                            display: flex;
+                            flex-wrap: wrap;
+                            margin: 7px -3px 7px;
+
+                            span {
+                                display: flex;
+                                align-items: center;
+                                margin: 3px;
+                                padding: 0 6px;
+                                height: 20px;
+                                background-color: #f2f2f2;
+                                font-size: 12px;
+                                border-radius: 2px;
+
+                                i {
+                                    font-style: normal;
+
+                                    &.method {
+                                        margin-right: 6px;
+                                    }
+                                }
+                            }
+                        }
+
+                        .total {
+                            b {
+                                color: red;
+                            }
+                        }
+                    }
+                }
+
+                &.show {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .delete-member {
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+        width: 100%;
+        height: 44px;
+        background-color: red;
+        color: #fff;
+        font-size: 16px;
+        border: 0;
+    }
+}

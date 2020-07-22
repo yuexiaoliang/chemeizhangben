@@ -23,7 +23,6 @@
   },
   "dependencies": {
     "@types/lowdb": "^1.0.9",
-    "lowdb": "^1.0.0",
-    "shortid": "^2.2.15"
+    "lowdb": "^1.0.0"
   }
 }

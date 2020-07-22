@@ -125,7 +125,7 @@ ipcMain.on('open-dir', (event, dirPath) => {
 
 function createMainWindow() {
     win = new BrowserWindow({
-        width: 1024,
+        width: 1524,
         height: 768,
         webPreferences: {
             nodeIntegration: true,

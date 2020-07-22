@@ -42,9 +42,6 @@ new SwitchPage(
         const payAmountNumberInput = mainAddMemberElement.querySelector(
             '.pay .pay-amount input'
         ); // 充值金额
-        const payAmountPlatformList = mainAddMemberElement.querySelectorAll(
-            '.pay .pay-platform li'
-        ); // 充值方式列表
         const saveButton = mainAddMemberElement.querySelector('.save'); // 保存按钮
 
         // 保存数据
@@ -56,6 +53,9 @@ new SwitchPage(
 
             // 保存数据
             saveButton.addEventListener('click', () => {
+                const payAmountPlatformChecked = mainAddMemberElement.querySelector(
+                    '.pay .pay-platform input:checked'
+                ); // 充值方式
                 const addDate = addDateElement.value.trim(); // 添加时间Value
                 const memberNameInputValue = memberNameInput.value.trim(); // 会员名称Value
                 const payAmountNumberInputValue = payAmountNumberInput.value.trim(); // 支付金额Value
@@ -104,6 +104,7 @@ new SwitchPage(
                         [
                             addDateElement.value.trim(),
                             payAmountNumberInput.value * 1,
+                            payAmountPlatformChecked.value,
                         ],
                     ], // 充值记录
                     expensesRecord: [], // 消费记录
@@ -132,32 +133,27 @@ new SwitchPage(
                     ]);
                 }
 
-                // 设置数据对象中第一次充值记录的支付平台
-                for (let i = 0; i < payAmountPlatformList.length; i++) {
-                    const input = payAmountPlatformList[i].querySelector(
-                        'input'
-                    );
-                    if (input.hasAttribute('checked')) {
-                        member.rechargeRecord[0].push(input.value);
-                    }
-                }
-
                 // 写入数据
                 memberDB.set(member.id, member).write();
 
                 // 写入成功的提示
-                PopUp.hint({ msg: '添加成功' }, () => {
-                    // 把已经填写的信息置空
-                    memberNameInput.value = memberContactWeixinInput.value = memberContactShoujiInput.value = memberRamarksTextarea.value = payAmountNumberInput.value = carList.innerHTML =
-                        '';
+                PopUp.hint(
+                    {
+                        msg: '添加成功',
+                    },
+                    () => {
+                        // 把已经填写的信息置空
+                        memberNameInput.value = memberContactWeixinInput.value = memberContactShoujiInput.value = memberRamarksTextarea.value = payAmountNumberInput.value = carList.innerHTML =
+                            '';
 
-                    // 重新设置时间
-                    laydate.render({
-                        elem: addDateElement,
-                        type: 'datetime',
-                        value: new Date(),
-                    });
-                });
+                        // 重新设置时间
+                        laydate.render({
+                            elem: addDateElement,
+                            type: 'datetime',
+                            value: new Date(),
+                        });
+                    }
+                );
             });
         })();
 

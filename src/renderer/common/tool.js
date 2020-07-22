@@ -158,3 +158,21 @@ export class CreateSelect {
         });
     }
 }
+
+/**
+ * 选项卡
+ * @param {Elements} buttons 选项卡的所有切换按钮
+ * @param {Elements} contents 选项卡的所有内容块
+ */
+export function tab(buttons, contents) {
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', () => {
+            for (let j = 0; j < buttons.length; j++) {
+                buttons[j].classList.remove('active');
+                contents[j].classList.remove('show');
+            }
+            buttons[i].classList.add('active');
+            contents[i].classList.add('show');
+        });
+    }
+}

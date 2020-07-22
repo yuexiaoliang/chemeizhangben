@@ -24,7 +24,8 @@ export class SwitchPage {
                             '.app-main'
                         ).innerHTML = this.options.html;
                         this.callback(
-                            document.querySelector('.app-main').children[0]
+                            document.querySelector('.app-main').children[0],
+                            element.getAttribute('data-id')
                         );
                     }
                 }

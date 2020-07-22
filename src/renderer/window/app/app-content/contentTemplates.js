@@ -170,3 +170,69 @@ export const addMemberTemplate = `
         </div>
     </section>
 `;
+
+export const memberDetailsTemplate = `
+    <section class="main-section main-member-details">
+        <div class="member-info member-box">
+            <div class="item id">
+                <span>编号</span>
+                <span></span>
+            </div>
+            <div class="item date">
+                <span>时间</span>
+                <span></span>
+            </div>
+            <div class="item name">
+                <span>称呼</span>
+                <input type="text" value="" readonly>
+            </div>
+            <div class="item balance">
+                <span>余额</span>
+                <span></span>
+                <span class="recharge">充值</span>
+            </div>
+            <div class="item weixin">
+                <span>微信</span>
+                <input type="text" value="" readonly>
+            </div>
+            <div class="item shouji">
+                <span>手机</span>
+                <input type="text" value="" readonly>
+            </div>
+            <div class="item ramarks">
+                <span>备注</span>
+                <textarea readonly></textarea>
+            </div>
+            <div class="item buttons">
+                <button class="button alter">修改</button>
+            </div>
+        </div>
+        <div class="member-car member-box">
+            <div class="car-list"></div>
+            <div class="add-car">
+                <div class="car-license-tag">
+                    <label>牌照：</label>
+                    <input type="text" class="prefix" placeholder="冀G">
+                    <i class="iconfont icon-dian"></i>
+                    <input type="text" class="number" placeholder="88888">
+                </div>
+                <div class="car-type">
+                    <label>车型：</label>
+                    <input type="text" placeholder="宝马">
+                </div>
+                <button class="add iconfont icon-add" title="添加新车辆"></button>
+            </div>
+        </div>
+        <div class="member-record member-box">
+            <header class="record-header">
+                <span class="active">消费记录</span>
+                <span>充值记录</span>
+            </header>
+            <div class="record-content">
+                <ul class="expenses-record show"></ul>
+                <ul class="recharge-record"></ul>
+            </div>
+        </div>
+        <button class="delete-member member-box">删除会员</button>
+    </section>
+`;

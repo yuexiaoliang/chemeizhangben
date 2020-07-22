@@ -1,9 +1,7 @@
-const { path, resolve } = require('path');
-const fs = require('fs');
-
 export class PopUp {
     constructor(options, fn) {
         this.options = {
+            addClass: options.addClass || false,
             type: options.type || '', // 类型
             showShade: options.showShade || false, // 是否显示遮罩层
             align: options.align || 'center', // 对齐方式
@@ -13,7 +11,7 @@ export class PopUp {
             msg: options.msg || '提示信息！', // 提示信息的内容
             buttons: options.buttons || [], // 按钮列表
         };
-        this.fn = fn || false; // 回调函数
+        this.fn = fn || function () {}; // 回调函数
         // this.create();
     }
     /**
@@ -21,31 +19,30 @@ export class PopUp {
      */
     createPopUp() {
         // 如果已经创建过则返回已经创建的弹出框
-        if (
-            this.options.showShade &&
-            document.body.querySelector('.pop-up-shade')
-        ) {
-            return document.body.querySelector('.pop-up-shade .pup-up');
+        if (document.body.querySelector('.pop-up-shade')) {
+            return document.body.querySelector('.pop-up-shade .pop-up');
         }
         if (document.body.querySelector('.pop-up')) {
             return document.body.querySelector('.pop-up');
         }
 
+        // 创建遮罩层
+
+        const shade = document.createElement('div');
+        shade.classList.add('pop-up-shade');
+        if (this.options.showShade) {
+            shade.classList.add('show');
+        }
+        document.body.appendChild(shade);
+
         // 创建弹出框元素
         const popUp = document.createElement('div');
-        popUp.classList.add('pop-up');
-        popUp.classList.add(this.options.align);
-
-        // 如果要显示遮罩层，则创建遮罩层，并把弹出框添加到遮罩层元素中
-        // 或者直接添加到body中
-        if (this.options.showShade) {
-            const shade = document.createElement('div');
-            shade.classList.add('pop-up-shade');
-            document.body.appendChild(shade);
-            shade.appendChild(popUp);
-        } else {
-            document.body.appendChild(popUp);
+        popUp.classList.add('pop-up', this.options.align);
+        if (this.options.addClass) {
+            popUp.classList.add(this.options.addClass);
         }
+
+        shade.appendChild(popUp);
 
         // 如果设置了左边距，则进行设置
         if (this.options.x) {
@@ -62,6 +59,24 @@ export class PopUp {
     }
 
     /**
+     * 获取 pop-up 元素
+     */
+    getPopUp() {
+        return this.createPopUp();
+    }
+
+    /**
+     * 删除 pop-up 元素
+     */
+    removePopUp() {
+        if (document.body.querySelector('.pop-up-shade')) {
+            document.body.removeChild(
+                document.body.querySelector('.pop-up-shade')
+            );
+        }
+    }
+
+    /**
      * 创建弹出框的Header区域
      */
     createHeader() {
@@ -72,9 +87,13 @@ export class PopUp {
         const headerElement = document.createElement('header');
         headerElement.classList.add('pop-up-header');
         const closeButton = document.createElement('span');
-        closeButton.classList.add('close');
+        closeButton.classList.add('close', 'iconfont', 'icon-close');
         headerElement.appendChild(closeButton);
         popUp.appendChild(headerElement);
+
+        closeButton.onclick = () => {
+            this.removePopUp();
+        };
         return headerElement;
     }
 
@@ -83,12 +102,16 @@ export class PopUp {
      */
     createType() {
         // 如果没有设置类型或者类型为“hint”，则退出
-        if (!this.options.type || 'hint') {
+        if (!this.options.type || this.options.type === 'hint') {
             return;
         }
         const header = this.createHeader();
         const typeElement = document.createElement('div');
-        typeElement.classList.add('pop-up-header-type', this.options.type);
+        typeElement.classList.add(
+            'pop-up-header-type',
+            'iconfont',
+            this.options.type
+        );
         header.appendChild(typeElement);
     }
 
@@ -138,15 +161,6 @@ export class PopUp {
         }
         popUp.appendChild(buttonsElement);
     }
-    // create() {
-    //     if (this.options.type === 'hint') {
-    //         this.msg();
-    //     }
-    //     this.type();
-    //     this.title();
-    //     this.msg();
-    //     this.buttons();
-    // }
 
     /**
      * 只创建一个提示信息框
@@ -181,7 +195,7 @@ export class PopUp {
                 popUpOpacity -= 0.1;
                 if (popUpOpacity <= 0) {
                     clearInterval(timer);
-                    document.body.removeChild(popUp);
+                    hint.removePopUp();
                 }
                 popUp.style.opacity = popUpOpacity;
             }, 26);
@@ -199,10 +213,12 @@ export class PopUp {
         }, 2000);
     }
 
-    static getInstance(options, fn) {
-        if (!this.instance) {
-            this.instance = new PopUp(options, fn);
-        }
-        return this.instance;
+    static open(options, fn) {
+        const hint = new PopUp(options, fn);
+        hint.createType();
+        hint.createTitle();
+        hint.createMsg();
+        hint.createButtons();
+        hint.getPopUp().classList.add('open');
     }
 }
