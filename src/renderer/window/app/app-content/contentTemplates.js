@@ -204,6 +204,7 @@ export const memberDetailsTemplate = `
                 <textarea readonly></textarea>
             </div>
             <div class="item buttons">
+                <button class="button settle-accounts">结账</button>
                 <button class="button alter">修改</button>
             </div>
         </div>
@@ -234,5 +235,24 @@ export const memberDetailsTemplate = `
             </div>
         </div>
         <button class="delete-member member-box">删除会员</button>
+    </section>
+`;
+
+export const searchTemplate = `
+    <section class="main-section main-search">
+        <div class="search-form">
+            <i class="search-icon iconfont icon-sousuo1"></i>
+            <input type="search" class="search-input" placeholder="搜索" autofocus>
+            <div class="search-select">
+                <div class="chosen">车牌号</div>
+                <div class="options">
+                    <div class="item">车牌号</div>
+                    <div class="item">车型号</div>
+                    <div class="item">编号</div>
+                    <div class="item">会员名</div>
+                </div>
+            </div>
+        </div>
+        <div class="search-rest"></div>
     </section>
 `;

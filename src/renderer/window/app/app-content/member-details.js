@@ -55,7 +55,7 @@ new SwitchPage(
                 '.ramarks textarea'
             );
             const memberAlterButton = memberInfoElement.querySelector(
-                '.buttons .button'
+                '.buttons .alter'
             );
             const memberRechargeButton = memberInfoElement.querySelector(
                 '.balance .recharge'
@@ -72,8 +72,7 @@ new SwitchPage(
 
             // 修改会员信息
             memberAlterButton.addEventListener('click', () => {
-                if (memberAlterButton.classList.contains('alter')) {
-                    memberAlterButton.classList.remove('alter');
+                if (!memberAlterButton.classList.contains('save')) {
                     memberAlterButton.classList.add('save');
                     memberAlterButton.innerHTML = '保存';
                     memberNameInput.removeAttribute('readonly');
@@ -81,6 +80,10 @@ new SwitchPage(
                     memberShoujiInput.removeAttribute('readonly');
                     memberRamarksElement.removeAttribute('readonly');
                 } else {
+                    if (!memberNameInput.value.trim()) {
+                        memberNameInput.focus();
+                        return;
+                    }
                     verifyPassword(() => {
                         try {
                             memberDB
@@ -108,7 +111,6 @@ new SwitchPage(
                                 )
                                 .write();
                             PopUp.hint({ msg: '修改成功' }, () => {
-                                memberAlterButton.classList.add('alter');
                                 memberAlterButton.classList.remove('save');
                                 memberAlterButton.innerHTML = '修改';
                                 memberNameInput.setAttribute(

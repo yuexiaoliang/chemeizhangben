@@ -18,34 +18,34 @@ input[type="button"] {
   transition: all .3s;
 }
 
-.scrollbar, .scrollbar-y, .app-main, .select, .main-member .main-member-list, .main-member-details .member-info .ramarks textarea, .main-member-details .member-record .record-content, .scrollbar-x, html,
+.scrollbar, .scrollbar-y, .app-main, .select, .main-member .main-member-list, .main-member-details .member-info .ramarks textarea, .main-member-details .member-record .record-content, .main-search .search-rest, .main-search .search-rest .member .content .car-list, .scrollbar-x, html,
 body {
   overflow: auto;
 }
 
-.scrollbar::-webkit-scrollbar, .scrollbar-y::-webkit-scrollbar, .app-main::-webkit-scrollbar, .select::-webkit-scrollbar, .main-member .main-member-list::-webkit-scrollbar, .main-member-details .member-info .ramarks textarea::-webkit-scrollbar, .main-member-details .member-record .record-content::-webkit-scrollbar, .scrollbar-x::-webkit-scrollbar, html::-webkit-scrollbar,
+.scrollbar::-webkit-scrollbar, .scrollbar-y::-webkit-scrollbar, .app-main::-webkit-scrollbar, .select::-webkit-scrollbar, .main-member .main-member-list::-webkit-scrollbar, .main-member-details .member-info .ramarks textarea::-webkit-scrollbar, .main-member-details .member-record .record-content::-webkit-scrollbar, .main-search .search-rest::-webkit-scrollbar, .main-search .search-rest .member .content .car-list::-webkit-scrollbar, .scrollbar-x::-webkit-scrollbar, html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   width: var(--scrollbar-size);
   height: var(--scrollbar-size);
 }
 
-.scrollbar::-webkit-scrollbar-thumb, .scrollbar-y::-webkit-scrollbar-thumb, .app-main::-webkit-scrollbar-thumb, .select::-webkit-scrollbar-thumb, .main-member .main-member-list::-webkit-scrollbar-thumb, .main-member-details .member-info .ramarks textarea::-webkit-scrollbar-thumb, .main-member-details .member-record .record-content::-webkit-scrollbar-thumb, .scrollbar-x::-webkit-scrollbar-thumb, html::-webkit-scrollbar-thumb,
+.scrollbar::-webkit-scrollbar-thumb, .scrollbar-y::-webkit-scrollbar-thumb, .app-main::-webkit-scrollbar-thumb, .select::-webkit-scrollbar-thumb, .main-member .main-member-list::-webkit-scrollbar-thumb, .main-member-details .member-info .ramarks textarea::-webkit-scrollbar-thumb, .main-member-details .member-record .record-content::-webkit-scrollbar-thumb, .main-search .search-rest::-webkit-scrollbar-thumb, .main-search .search-rest .member .content .car-list::-webkit-scrollbar-thumb, .scrollbar-x::-webkit-scrollbar-thumb, html::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb {
   border-radius: var(--scrollbar-size);
   background: var(--text-color);
 }
 
-.scrollbar::-webkit-scrollbar-track, .scrollbar-y::-webkit-scrollbar-track, .app-main::-webkit-scrollbar-track, .select::-webkit-scrollbar-track, .main-member .main-member-list::-webkit-scrollbar-track, .main-member-details .member-info .ramarks textarea::-webkit-scrollbar-track, .main-member-details .member-record .record-content::-webkit-scrollbar-track, .scrollbar-x::-webkit-scrollbar-track, html::-webkit-scrollbar-track,
+.scrollbar::-webkit-scrollbar-track, .scrollbar-y::-webkit-scrollbar-track, .app-main::-webkit-scrollbar-track, .select::-webkit-scrollbar-track, .main-member .main-member-list::-webkit-scrollbar-track, .main-member-details .member-info .ramarks textarea::-webkit-scrollbar-track, .main-member-details .member-record .record-content::-webkit-scrollbar-track, .main-search .search-rest::-webkit-scrollbar-track, .main-search .search-rest .member .content .car-list::-webkit-scrollbar-track, .scrollbar-x::-webkit-scrollbar-track, html::-webkit-scrollbar-track,
 body::-webkit-scrollbar-track {
   border-radius: var(--scrollbar-size);
   background: transparent;
 }
 
-.scrollbar-y, .app-main, .select, .main-member .main-member-list, .main-member-details .member-info .ramarks textarea, .main-member-details .member-record .record-content {
+.scrollbar-y, .app-main, .select, .main-member .main-member-list, .main-member-details .member-info .ramarks textarea, .main-member-details .member-record .record-content, .main-search .search-rest, .main-search .search-rest .member .content .car-list {
   overflow-y: auto;
 }
 
-.scrollbar-y::-webkit-scrollbar, .app-main::-webkit-scrollbar, .select::-webkit-scrollbar, .main-member .main-member-list::-webkit-scrollbar, .main-member-details .member-info .ramarks textarea::-webkit-scrollbar, .main-member-details .member-record .record-content::-webkit-scrollbar {
+.scrollbar-y::-webkit-scrollbar, .app-main::-webkit-scrollbar, .select::-webkit-scrollbar, .main-member .main-member-list::-webkit-scrollbar, .main-member-details .member-info .ramarks textarea::-webkit-scrollbar, .main-member-details .member-record .record-content::-webkit-scrollbar, .main-search .search-rest::-webkit-scrollbar, .main-search .search-rest .member .content .car-list::-webkit-scrollbar {
   width: var(--scrollbar-size);
   height: 0;
 }
@@ -459,7 +459,8 @@ h6 {
 
 input[type="text"],
 input[type="password"],
-input[type="number"] {
+input[type="number"],
+input[type="search"] {
   padding: 0 4px;
   height: 32px;
   font-size: 14px;
@@ -472,31 +473,36 @@ input[type="number"] {
 
 input[type="text"]::-webkit-input-placeholder,
 input[type="password"]::-webkit-input-placeholder,
-input[type="number"]::-webkit-input-placeholder {
+input[type="number"]::-webkit-input-placeholder,
+input[type="search"]::-webkit-input-placeholder {
   color: #999;
 }
 
 input[type="text"]:-ms-input-placeholder,
 input[type="password"]:-ms-input-placeholder,
-input[type="number"]:-ms-input-placeholder {
+input[type="number"]:-ms-input-placeholder,
+input[type="search"]:-ms-input-placeholder {
   color: #999;
 }
 
 input[type="text"]::-ms-input-placeholder,
 input[type="password"]::-ms-input-placeholder,
-input[type="number"]::-ms-input-placeholder {
+input[type="number"]::-ms-input-placeholder,
+input[type="search"]::-ms-input-placeholder {
   color: #999;
 }
 
 input[type="text"]::placeholder,
 input[type="password"]::placeholder,
-input[type="number"]::placeholder {
+input[type="number"]::placeholder,
+input[type="search"]::placeholder {
   color: #999;
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus,
-input[type="number"]:focus {
+input[type="number"]:focus,
+input[type="search"]:focus {
   border-color: var(--app-side-bg-color);
 }
 
@@ -548,6 +554,17 @@ textarea::placeholder {
 
 textarea:focus {
   border-color: var(--app-side-bg-color);
+}
+
+select {
+  padding: 0 10px;
+  height: 32px;
+  outline: 0;
+  border-color: var(--border-color);
+}
+
+select option {
+  padding: 3px 0;
 }
 
 body,
@@ -2061,9 +2078,17 @@ html {
   border: 0;
 }
 
+.main-member-details .member-info .buttons button:hover {
+  opacity: .8;
+}
+
+.main-member-details .member-info .buttons .settle-accounts {
+  margin-right: 10px;
+  background-color: var(--app-side-bg-color);
+}
+
 .main-member-details .member-info .buttons .alter {
   background-color: red;
-  color: #fff;
 }
 
 .main-member-details .member-info .buttons .save {
@@ -2332,5 +2357,252 @@ html {
   color: #fff;
   font-size: 16px;
   border: 0;
+}
+
+.main-search {
+  padding: 40px;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.main-search .search-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  height: 44px;
+  border: 1px solid var(--app-side-bg-color);
+  border-right: 0;
+  border-radius: 2px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.main-search .search-form.focus {
+  border-width: 2px;
+}
+
+.main-search .search-form .search-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 10px;
+  height: 42px;
+  color: #ccc;
+}
+
+.main-search .search-form .search-input {
+  padding: 0 10px 0 0;
+  width: 350px;
+  height: 100%;
+  border: 0;
+}
+
+.main-search .search-form .search-select {
+  position: relative;
+  z-index: 999;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.main-search .search-form .search-select .chosen {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0 14px;
+  width: 100px;
+  height: 42px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-right: 1px solid var(--app-side-bg-color);
+  border-radius: 0 2px 2px 0;
+  cursor: pointer;
+}
+
+.main-search .search-form .search-select .chosen::before {
+  position: absolute;
+  left: 0;
+  content: '';
+  width: 1px;
+  height: 1em;
+  background-color: #ccc;
+}
+
+.main-search .search-form .search-select .chosen::after {
+  content: '\e60b';
+  margin-left: 10px;
+  font-family: 'iconfont' !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+.main-search .search-form .options {
+  padding: 8px 0;
+  border-top: 0;
+  visibility: hidden;
+  background-color: #fff;
+  border: 1px solid var(--app-side-bg-color);
+  border-top: 0;
+  border-radius: 0 0 2px 2px;
+}
+
+.main-search .search-form .options.show {
+  visibility: visible;
+}
+
+.main-search .search-form .options .item {
+  padding: 0 14px;
+  height: 1.8em;
+  line-height: 1.8em;
+  cursor: pointer;
+}
+
+.main-search .search-form .options .item:hover {
+  background-color: var(--app-side-bg-color);
+  color: #fff;
+}
+
+.main-search .search-rest {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.main-search .search-rest .search-no {
+  text-align: center;
+}
+
+.main-search .search-rest .member {
+  width: calc(33.333333% - 10px);
+  margin: 5px;
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.main-search .search-rest .member.hidden {
+  display: none;
+}
+
+.main-search .search-rest .member:nth-child(1), .main-search .search-rest .member:nth-child(2), .main-search .search-rest .member:nth-child(3) {
+  margin-top: 0;
+}
+
+.main-search .search-rest .member .header {
+  padding: 0 14px;
+  height: 32px;
+  line-height: 32px;
+  font-weight: bold;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.main-search .search-rest .member .content {
+  padding: 14px;
+}
+
+.main-search .search-rest .member .content .box {
+  height: 30px;
+  line-height: 30px;
+  overflow: hidden;
+}
+
+.main-search .search-rest .member .content .box span {
+  color: #999;
+}
+
+.main-search .search-rest .member .content .balance b {
+  color: red;
+}
+
+.main-search .search-rest .member .content .car-list {
+  height: 90px;
+  margin-top: 10px;
+}
+
+.main-search .search-rest .member .content .car-list::-webkit-scrollbar {
+  width: 3px;
+}
+
+.main-search .search-rest .member .content .car-list li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  overflow: hidden;
+}
+
+.main-search .search-rest .member .content .car-list li i {
+  margin: 0 10px;
+  width: 1px;
+  height: 1em;
+  background-color: #ccc;
+}
+
+.main-search .search-rest .member .buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 14px;
+  padding: 0 14px;
+}
+
+.main-search .search-rest .member .buttons button {
+  width: calc(50% - 3px);
+  border: 0;
+  color: #fff;
+}
+
+.main-search .search-rest .member .buttons button:hover {
+  opacity: 0.8;
+}
+
+.main-search .search-rest .member .buttons .settle-accounts {
+  background-color: #03d603;
+}
+
+.main-search .search-rest .member .buttons .details {
+  background-color: #555;
 }
 /*# sourceMappingURL=app.css.map */

@@ -459,7 +459,8 @@ h6 {
 
 input[type="text"],
 input[type="password"],
-input[type="number"] {
+input[type="number"],
+input[type="search"] {
   padding: 0 4px;
   height: 32px;
   font-size: 14px;
@@ -472,31 +473,36 @@ input[type="number"] {
 
 input[type="text"]::-webkit-input-placeholder,
 input[type="password"]::-webkit-input-placeholder,
-input[type="number"]::-webkit-input-placeholder {
+input[type="number"]::-webkit-input-placeholder,
+input[type="search"]::-webkit-input-placeholder {
   color: #999;
 }
 
 input[type="text"]:-ms-input-placeholder,
 input[type="password"]:-ms-input-placeholder,
-input[type="number"]:-ms-input-placeholder {
+input[type="number"]:-ms-input-placeholder,
+input[type="search"]:-ms-input-placeholder {
   color: #999;
 }
 
 input[type="text"]::-ms-input-placeholder,
 input[type="password"]::-ms-input-placeholder,
-input[type="number"]::-ms-input-placeholder {
+input[type="number"]::-ms-input-placeholder,
+input[type="search"]::-ms-input-placeholder {
   color: #999;
 }
 
 input[type="text"]::placeholder,
 input[type="password"]::placeholder,
-input[type="number"]::placeholder {
+input[type="number"]::placeholder,
+input[type="search"]::placeholder {
   color: #999;
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus,
-input[type="number"]:focus {
+input[type="number"]:focus,
+input[type="search"]:focus {
   border-color: var(--app-side-bg-color);
 }
 
@@ -548,6 +554,17 @@ textarea::placeholder {
 
 textarea:focus {
   border-color: var(--app-side-bg-color);
+}
+
+select {
+  padding: 0 10px;
+  height: 32px;
+  outline: 0;
+  border-color: var(--border-color);
+}
+
+select option {
+  padding: 3px 0;
 }
 
 .init-app-header {

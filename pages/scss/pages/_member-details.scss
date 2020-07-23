@@ -140,11 +140,19 @@
             button {
                 color: #fff;
                 border: 0;
+
+                &:hover {
+                    opacity: .8;
+                }
+            }
+
+            .settle-accounts {
+                margin-right: 10px;
+                background-color: var(--app-side-bg-color);
             }
 
             .alter {
                 background-color: red;
-                color: #fff;
             }
 
             .save {

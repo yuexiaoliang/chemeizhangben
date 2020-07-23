@@ -176,3 +176,40 @@ export function tab(buttons, contents) {
         });
     }
 }
+
+/**
+ * 模糊查询
+ * @param  {Array}  list     原数组
+ * @param  {String} keyWord  查询的关键词
+ * @return {Array}           查询的结果
+ */
+export function fuzzyQuery(list, keyWord) {
+    const reg = new RegExp(keyWord.trim(), 'i');
+    const arr = [];
+    for (let i = 0; i < list.length; i++) {
+        const item = list[i];
+        if (reg.test(item[0])) {
+            arr.push(item);
+        }
+    }
+    return arr;
+}
+
+/**
+ * 节流函数
+ * @param {function} fn   要运行的函数
+ * @param {number}   delay 等待时间
+ */
+export function throttle(fn, delay) {
+    let canRun = true;
+    return function () {
+        const context = this;
+        let args = arguments;
+        if (!canRun) return; // 注意，这里不能用timer来做标记，因为setTimeout会返回一个定时器id
+        canRun = false;
+        setTimeout(() => {
+            fn.apply(context, args);
+            canRun = true;
+        }, delay);
+    };
+}
