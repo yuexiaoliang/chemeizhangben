@@ -99,7 +99,9 @@ export const memberTemplate = `
             <span>备注</span>
             <span>详情</span>
         </header>
-        <ul class="main-member-list"></ul>
+        <div class="main-member-list-wrap">
+            <ul class="main-member-list"></ul>
+        </div>
         <span class="add" title="增加会员"  switch-page="add-member"></span>
     </section>
 `;
@@ -242,7 +244,7 @@ export const searchTemplate = `
     <section class="main-section main-search">
         <div class="search-form">
             <i class="search-icon iconfont icon-sousuo1"></i>
-            <input type="search" class="search-input" placeholder="搜索" autofocus>
+            <input type="search" class="search-input" placeholder="搜索会员" autofocus>
             <div class="search-select">
                 <div class="chosen">车牌号</div>
                 <div class="options">
@@ -254,5 +256,24 @@ export const searchTemplate = `
             </div>
         </div>
         <div class="search-rest"></div>
+    </section>
+`;
+
+export const billTemplate = `
+    <section class="main-section main-bill">
+        <input type="text" class="bill-time">
+        <div class="bill-table">
+            <header class="header">
+                <span class="sort" data-key="date">日期<i class="icon"></i></span>
+                <span class="sort" data-key="moneyTotal">总收入<i class="icon"></i></span>
+                <span class="sort" data-key="moneyMemberRecharge">会员充值<i class="icon"></i></span>
+                <span class="sort" data-key="moneyOrdinaryConsumption">普通消费<i class="icon"></i></span>
+                <span>详情</span>
+            </header>
+            <div class="list-wrap">
+                <ul class="list"></ul>
+            </div>
+            <footer class="footer"></footer>
+        </div>
     </section>
 `;

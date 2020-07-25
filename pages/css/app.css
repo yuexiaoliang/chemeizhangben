@@ -18,34 +18,34 @@ input[type="button"] {
   transition: all .3s;
 }
 
-.scrollbar, .scrollbar-y, .app-main, .select, .main-member .main-member-list, .main-member-details .member-info .ramarks textarea, .main-member-details .member-record .record-content, .main-search .search-rest, .main-search .search-rest .member .content .car-list, .scrollbar-x, html,
+.scrollbar, .scrollbar-y, .app-main, .select, .main-member .main-member-list-wrap, .main-member-details .member-info .ramarks textarea, .main-member-details .member-record .record-content, .main-search .search-rest, .main-search .search-rest .member .content .car-list, .main-bill .bill-table .list-wrap, .main-bill .bill-money-detail .detail-content .list, .scrollbar-x, html,
 body {
   overflow: auto;
 }
 
-.scrollbar::-webkit-scrollbar, .scrollbar-y::-webkit-scrollbar, .app-main::-webkit-scrollbar, .select::-webkit-scrollbar, .main-member .main-member-list::-webkit-scrollbar, .main-member-details .member-info .ramarks textarea::-webkit-scrollbar, .main-member-details .member-record .record-content::-webkit-scrollbar, .main-search .search-rest::-webkit-scrollbar, .main-search .search-rest .member .content .car-list::-webkit-scrollbar, .scrollbar-x::-webkit-scrollbar, html::-webkit-scrollbar,
+.scrollbar::-webkit-scrollbar, .scrollbar-y::-webkit-scrollbar, .app-main::-webkit-scrollbar, .select::-webkit-scrollbar, .main-member .main-member-list-wrap::-webkit-scrollbar, .main-member-details .member-info .ramarks textarea::-webkit-scrollbar, .main-member-details .member-record .record-content::-webkit-scrollbar, .main-search .search-rest::-webkit-scrollbar, .main-search .search-rest .member .content .car-list::-webkit-scrollbar, .main-bill .bill-table .list-wrap::-webkit-scrollbar, .main-bill .bill-money-detail .detail-content .list::-webkit-scrollbar, .scrollbar-x::-webkit-scrollbar, html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   width: var(--scrollbar-size);
   height: var(--scrollbar-size);
 }
 
-.scrollbar::-webkit-scrollbar-thumb, .scrollbar-y::-webkit-scrollbar-thumb, .app-main::-webkit-scrollbar-thumb, .select::-webkit-scrollbar-thumb, .main-member .main-member-list::-webkit-scrollbar-thumb, .main-member-details .member-info .ramarks textarea::-webkit-scrollbar-thumb, .main-member-details .member-record .record-content::-webkit-scrollbar-thumb, .main-search .search-rest::-webkit-scrollbar-thumb, .main-search .search-rest .member .content .car-list::-webkit-scrollbar-thumb, .scrollbar-x::-webkit-scrollbar-thumb, html::-webkit-scrollbar-thumb,
+.scrollbar::-webkit-scrollbar-thumb, .scrollbar-y::-webkit-scrollbar-thumb, .app-main::-webkit-scrollbar-thumb, .select::-webkit-scrollbar-thumb, .main-member .main-member-list-wrap::-webkit-scrollbar-thumb, .main-member-details .member-info .ramarks textarea::-webkit-scrollbar-thumb, .main-member-details .member-record .record-content::-webkit-scrollbar-thumb, .main-search .search-rest::-webkit-scrollbar-thumb, .main-search .search-rest .member .content .car-list::-webkit-scrollbar-thumb, .main-bill .bill-table .list-wrap::-webkit-scrollbar-thumb, .main-bill .bill-money-detail .detail-content .list::-webkit-scrollbar-thumb, .scrollbar-x::-webkit-scrollbar-thumb, html::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb {
   border-radius: var(--scrollbar-size);
   background: var(--text-color);
 }
 
-.scrollbar::-webkit-scrollbar-track, .scrollbar-y::-webkit-scrollbar-track, .app-main::-webkit-scrollbar-track, .select::-webkit-scrollbar-track, .main-member .main-member-list::-webkit-scrollbar-track, .main-member-details .member-info .ramarks textarea::-webkit-scrollbar-track, .main-member-details .member-record .record-content::-webkit-scrollbar-track, .main-search .search-rest::-webkit-scrollbar-track, .main-search .search-rest .member .content .car-list::-webkit-scrollbar-track, .scrollbar-x::-webkit-scrollbar-track, html::-webkit-scrollbar-track,
+.scrollbar::-webkit-scrollbar-track, .scrollbar-y::-webkit-scrollbar-track, .app-main::-webkit-scrollbar-track, .select::-webkit-scrollbar-track, .main-member .main-member-list-wrap::-webkit-scrollbar-track, .main-member-details .member-info .ramarks textarea::-webkit-scrollbar-track, .main-member-details .member-record .record-content::-webkit-scrollbar-track, .main-search .search-rest::-webkit-scrollbar-track, .main-search .search-rest .member .content .car-list::-webkit-scrollbar-track, .main-bill .bill-table .list-wrap::-webkit-scrollbar-track, .main-bill .bill-money-detail .detail-content .list::-webkit-scrollbar-track, .scrollbar-x::-webkit-scrollbar-track, html::-webkit-scrollbar-track,
 body::-webkit-scrollbar-track {
   border-radius: var(--scrollbar-size);
   background: transparent;
 }
 
-.scrollbar-y, .app-main, .select, .main-member .main-member-list, .main-member-details .member-info .ramarks textarea, .main-member-details .member-record .record-content, .main-search .search-rest, .main-search .search-rest .member .content .car-list {
+.scrollbar-y, .app-main, .select, .main-member .main-member-list-wrap, .main-member-details .member-info .ramarks textarea, .main-member-details .member-record .record-content, .main-search .search-rest, .main-search .search-rest .member .content .car-list, .main-bill .bill-table .list-wrap, .main-bill .bill-money-detail .detail-content .list {
   overflow-y: auto;
 }
 
-.scrollbar-y::-webkit-scrollbar, .app-main::-webkit-scrollbar, .select::-webkit-scrollbar, .main-member .main-member-list::-webkit-scrollbar, .main-member-details .member-info .ramarks textarea::-webkit-scrollbar, .main-member-details .member-record .record-content::-webkit-scrollbar, .main-search .search-rest::-webkit-scrollbar, .main-search .search-rest .member .content .car-list::-webkit-scrollbar {
+.scrollbar-y::-webkit-scrollbar, .app-main::-webkit-scrollbar, .select::-webkit-scrollbar, .main-member .main-member-list-wrap::-webkit-scrollbar, .main-member-details .member-info .ramarks textarea::-webkit-scrollbar, .main-member-details .member-record .record-content::-webkit-scrollbar, .main-search .search-rest::-webkit-scrollbar, .main-search .search-rest .member .content .car-list::-webkit-scrollbar, .main-bill .bill-table .list-wrap::-webkit-scrollbar, .main-bill .bill-money-detail .detail-content .list::-webkit-scrollbar {
   width: var(--scrollbar-size);
   height: 0;
 }
@@ -1707,7 +1707,6 @@ html {
           flex-direction: column;
   padding: 0;
   border: 1px solid var(--border-color);
-  border-right: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
@@ -1808,7 +1807,6 @@ html {
   font-weight: bold;
   background-color: #f9f9f9;
   border-bottom: 1px solid var(--border-color);
-  border-right: 1px solid var(--border-color);
 }
 
 .main-member .main-member-header span.sort {
@@ -1860,20 +1858,23 @@ html {
   border-top-color: #333;
 }
 
-.main-member .main-member-list {
+.main-member .main-member-list-wrap {
+  width: calc(100% + 4px);
   overflow-y: scroll;
+}
+
+.main-member .main-member-list-wrap::-webkit-scrollbar {
+  width: 4px;
+}
+
+.main-member .main-member-list-wrap::-webkit-scrollbar-track {
+  border-radius: 0;
+}
+
+.main-member .main-member-list {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-}
-
-.main-member .main-member-list::-webkit-scrollbar {
-  width: 1px;
-}
-
-.main-member .main-member-list::-webkit-scrollbar-track {
-  background: var(--border-color);
-  border-radius: 0;
 }
 
 .main-member .main-member-list li {
@@ -2604,5 +2605,371 @@ html {
 
 .main-search .search-rest .member .buttons .details {
   background-color: #555;
+}
+
+.main-bill {
+  padding: 40px 0;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  max-width: 600px;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.main-bill .bill-time {
+  width: 300px;
+  height: 40px;
+  font-size: 18px;
+  text-align: center;
+  color: #666;
+  -webkit-box-shadow: 0 0 5px #ccc;
+          box-shadow: 0 0 5px #ccc;
+}
+
+.main-bill .bill-table {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 30px;
+  width: 100%;
+  height: calc(100% - 70px);
+  -webkit-box-shadow: 0 0 5px #ccc;
+          box-shadow: 0 0 5px #ccc;
+}
+
+.main-bill .bill-table .header span, .main-bill .bill-table .list span {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+}
+
+.main-bill .bill-table .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 40px;
+  background-color: #f2f2f2;
+}
+
+.main-bill .bill-table .header span.sort {
+  cursor: pointer;
+}
+
+.main-bill .bill-table .header span.sort .icon {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 5px;
+  width: 8px;
+  height: 1em;
+}
+
+.main-bill .bill-table .header span.sort .icon::before, .main-bill .bill-table .header span.sort .icon::after {
+  content: '';
+  display: block;
+  height: 0;
+  width: 0;
+  border: 4px solid transparent;
+}
+
+.main-bill .bill-table .header span.sort .icon::before {
+  margin-bottom: 2px;
+  border-bottom-color: #bbb;
+}
+
+.main-bill .bill-table .header span.sort .icon::after {
+  border-top-color: #bbb;
+}
+
+.main-bill .bill-table .header span.sort.up .icon::before {
+  border-bottom-color: #333;
+}
+
+.main-bill .bill-table .header span.sort.down .icon::after {
+  border-top-color: #333;
+}
+
+.main-bill .bill-table .list-wrap {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  width: calc(100% + 4px);
+  overflow-y: scroll;
+}
+
+.main-bill .bill-table .list-wrap::-webkit-scrollbar {
+  width: 4px;
+}
+
+.main-bill .bill-table .list-wrap::-webkit-scrollbar-track {
+  border-radius: 0;
+}
+
+.main-bill .bill-table .list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.main-bill .bill-table .list li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 32px;
+}
+
+.main-bill .bill-table .list li:nth-child(2n) {
+  background-color: #f9f9f9;
+}
+
+.main-bill .bill-table .list span:nth-child(2), .main-bill .bill-table .list span:nth-child(3), .main-bill .bill-table .list span:nth-child(4) {
+  color: red;
+  font-weight: bold;
+}
+
+.main-bill .bill-table .list span:last-child {
+  color: var(--app-side-bg-color);
+  cursor: pointer;
+}
+
+.main-bill .bill-table .list span:last-child:hover {
+  opacity: .8;
+}
+
+.main-bill .bill-table .footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 36px;
+  border-top: 1px solid var(--border-color);
+}
+
+.main-bill .bill-table .footer span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.main-bill .bill-table .footer span b {
+  margin: 0 4px;
+  font-weight: bold;
+  color: red;
+}
+
+.main-bill .bill-table .footer span::after {
+  content: '';
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 1px;
+  height: 1em;
+  margin: 0 10px;
+  background-color: #ccc;
+}
+
+.main-bill .bill-table .footer span:last-child::after {
+  display: none;
+}
+
+.main-bill .bill-money-detail {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #fff;
+}
+
+.main-bill .bill-money-detail .close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 99;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.main-bill .bill-money-detail .detail-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 40px 0;
+  width: 600px;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.main-bill .bill-money-detail .detail-content .date {
+  margin: 0 0 10px 0;
+  height: 40px;
+  line-height: 40px;
+}
+
+.main-bill .bill-money-detail .detail-content .list {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-shadow: 0 0 5px #ccc;
+          box-shadow: 0 0 5px #ccc;
+}
+
+.main-bill .bill-money-detail .detail-content .list li {
+  padding: 10px 14px;
+}
+
+.main-bill .bill-money-detail .detail-content .list li:last-child {
+  border-bottom: 0;
+}
+
+.main-bill .bill-money-detail .detail-content .list li:nth-child(2n) {
+  background-color: #f9f9f9;
+}
+
+.main-bill .bill-money-detail .detail-content .list li span {
+  margin-right: 14px;
+}
+
+.main-bill .bill-money-detail .detail-content .list li header .time {
+  color: var(--app-side-bg-color);
+}
+
+.main-bill .bill-money-detail .detail-content .list li header .type {
+  color: red;
+  font-weight: bold;
+}
+
+.main-bill .bill-money-detail .detail-content .list li .content {
+  padding: 10px 0;
+}
+
+.main-bill .bill-money-detail .detail-content .list li .content span i {
+  font-style: normal;
+}
+
+.main-bill .bill-money-detail .detail-content .list li .content span i.lan {
+  margin-right: 6px;
+  color: var(--app-side-bg-color);
+}
+
+.main-bill .bill-money-detail .detail-content .list li .content span i.hong {
+  color: red;
+}
+
+.main-bill .bill-money-detail .detail-content .list li.member header .id {
+  color: var(--app-side-bg-color);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.main-bill .bill-money-detail .detail-content .list li.member header .id:hover {
+  opacity: .8;
+}
+
+.main-bill .bill-money-detail .detail-content .list li.ordinary .content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 7px -3px 7px;
+}
+
+.main-bill .bill-money-detail .detail-content .list li.ordinary .content span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 3px;
+  padding: 0 6px;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+  border-radius: 2px;
 }
 /*# sourceMappingURL=app.css.map */

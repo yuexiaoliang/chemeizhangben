@@ -47,7 +47,7 @@ new SwitchPage(
         // 保存数据
         (function () {
             const memberDBDirPath = createDir(
-                path.join(settingsDB.get('dataDir').value(), 'database/member')
+                path.join(settingsDB.get('dataDir').value(), 'database')
             ); // 会员数据保存的文件夹路径
             const memberDB = getDB(path.join(memberDBDirPath, 'member.json')); // 会员数据
 

@@ -24,7 +24,7 @@ new SwitchPage(
         const settingsDB = getDB(settingsDBPath); // 获取设置数据文件的数据
         const memberDBPath = path.join(
             settingsDB.get('dataDir').value(),
-            'database/member/member.json'
+            'database/member.json'
         );
         const memberDB = getDB(memberDBPath);
         const memberData = memberDB.get(id).value();

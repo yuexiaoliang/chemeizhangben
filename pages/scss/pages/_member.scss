@@ -8,7 +8,6 @@
     flex-direction: column;
     padding: 0;
     border: 1px solid var(--border-color);
-    border-right: 0;
     box-sizing: border-box;
 
     >.add {
@@ -87,7 +86,6 @@
         font-weight: bold;
         background-color: #f9f9f9;
         border-bottom: 1px solid var(--border-color);
-        border-right: 1px solid var(--border-color);
 
 
         span {
@@ -144,19 +142,21 @@
         }
     }
 
-    .main-member-list {
+    .main-member-list-wrap {
         @extend .scrollbar-y;
+        width: calc(100% + 4px);
         overflow-y: scroll;
 
         &::-webkit-scrollbar {
-            width: 1px;
+            width: 4px;
         }
 
         &::-webkit-scrollbar-track {
-            background: var(--border-color);
             border-radius: 0;
         }
+    }
 
+    .main-member-list {
         flex: 1;
 
         li {
