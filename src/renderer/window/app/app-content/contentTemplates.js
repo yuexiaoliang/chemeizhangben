@@ -206,7 +206,7 @@ export const memberDetailsTemplate = `
                 <textarea readonly></textarea>
             </div>
             <div class="item buttons">
-                <button class="button settle-accounts">结账</button>
+                <button class="button settle-accounts" switch-page="member-settle-accounts">结账</button>
                 <button class="button alter">修改</button>
             </div>
         </div>
@@ -323,6 +323,34 @@ export const ordinarySettleAccountsTemplate = `
                     <input type="radio" name="pay-platform" id="pay-platform-qita" value="其他">
                 </li>
             </ul>
+            <button class="submit">提交</button>
+        </div>
+    </section>
+`;
+
+export const memberSettleAccountsTemplate = `
+    <section class="main-section main-member-settle-accounts">
+        <input type="text" class="settle-accounts-date">
+        <div class="member section">
+            <h2>会员信息</h2>
+            <div class="member-info">
+                <span class="id">编号：<b>123</b></span>
+                <span class="name">名称：<b>士大夫</b></span>
+                <span class="balance">余额：<b>1233</b>元</span>
+            </div>
+        </div>
+        <div class="serve section">
+            <h2>服务项目</h2>
+            <div class="member-serve-options box"></div>
+            <div class="add-serve-options box">
+                <input type="text" class="option-name" placeholder="项目名称">
+                <input type="number" class="option-sum" placeholder="价格">
+                <button class="add">添加</button>
+            </div>
+            <div class="added-serve-options box"></div>
+        </div>
+        <div class="pay section">
+            <div class="total">合计：<span>0</span> 元</div>
             <button class="submit">提交</button>
         </div>
     </section>

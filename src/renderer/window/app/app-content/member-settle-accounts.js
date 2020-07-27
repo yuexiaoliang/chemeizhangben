@@ -1,45 +1,38 @@
 const path = require('path');
 
 import { defaultDataDir } from '../../../common/all_path.js';
-import { CreateSelect, getDB } from '../../../common/tool.js';
+import { getDB } from '../../../common/tool.js';
 import { PopUp } from '../../../common/pop_up/pop_up.js';
 import { SwitchPage } from './switchPage.js';
-import { ordinarySettleAccountsTemplate } from './contentTemplates.js';
+import { memberSettleAccountsTemplate } from './contentTemplates.js';
 
 new SwitchPage(
     {
-        page: 'ordinary-settle-accounts',
-        title: '普通用户账单结算',
-        html: ordinarySettleAccountsTemplate,
+        page: 'member-settle-accounts',
+        title: '会员用户账单结算',
+        html: memberSettleAccountsTemplate,
     },
-    function (mainOrdinarySettleAccountsElement) {
+    function (mainMemberSettleAccountsElement, id) {
         const settingsDBPath = path.join(defaultDataDir, 'settings-db.json');
         const settingsDB = getDB(settingsDBPath);
-        const ordinaryDBPath = path.join(
+        const memberDBPath = path.join(
             settingsDB.get('dataDir').value(),
-            'database/ordinary.json'
+            'database/member.json'
         );
-        const ordinaryDB = getDB(ordinaryDBPath);
+        const memberDB = getDB(memberDBPath);
+        const memberId = id;
 
-        const settleAccountsDateInput = mainOrdinarySettleAccountsElement.querySelector(
+        const settleAccountsDateInput = mainMemberSettleAccountsElement.querySelector(
             '.settle-accounts-date'
         );
-        const carElement = mainOrdinarySettleAccountsElement.querySelector(
-            '.car'
+        const memberInfoElement = mainMemberSettleAccountsElement.querySelector(
+            '.member .member-info'
         );
-        const carLicenseTagprefixInput = carElement.querySelector(
-            '.car-license-tag .prefix'
-        );
-        const carLicenseTagnumberInput = carElement.querySelector(
-            '.car-license-tag .number'
-        );
-        const carTypeInput = carElement.querySelector('.car-type input');
-
-        const serveElement = mainOrdinarySettleAccountsElement.querySelector(
+        const serveElement = mainMemberSettleAccountsElement.querySelector(
             '.serve'
         );
-        const commonServeOptionsElement = serveElement.querySelector(
-            '.common-serve-options'
+        const memberServeOptionsElement = serveElement.querySelector(
+            '.member-serve-options'
         );
         const addServeOptions = serveElement.querySelector(
             '.add-serve-options'
@@ -48,14 +41,15 @@ new SwitchPage(
             '.added-serve-options'
         );
 
-        const payElement = mainOrdinarySettleAccountsElement.querySelector(
+        const payElement = mainMemberSettleAccountsElement.querySelector(
             '.pay'
         );
         const totalElement = payElement.querySelector('.total');
-        const submitButtom = mainOrdinarySettleAccountsElement.querySelector(
+        const submitButtom = mainMemberSettleAccountsElement.querySelector(
             '.submit'
         );
         let totalSum = 0;
+
         // 设置时间
         (function () {
             laydate.render({
@@ -65,51 +59,37 @@ new SwitchPage(
             });
         })();
 
-        // 车辆信息
+        // 渲染会员信息
+        rendererMemberInfo();
+        function rendererMemberInfo() {
+            const memberData = memberDB.get(memberId).value();
+            memberInfoElement.innerHTML = `
+                <span class="id">编号：<b>${memberData.id}</b></span>
+                <span class="name">名称：<b>${memberData.name}</b></span>
+                <span class="balance">余额：<b>${memberData.balance}</b>元</span>
+            `;
+        }
+
+        // 从数据库中获取会员用户服务项目，并渲染
         (() => {
-            // 从数据路获取默认牌照前缀
-            const licensePlatePrefixOptionsDefault = settingsDB
-                .get('licensePlatePrefixOptionsDefault')
-                .value();
-
-            // 牌照前缀下拉列表
-            new CreateSelect({
-                el: carLicenseTagprefixInput,
-                data: settingsDB.get('licensePlatePrefixOptions').value(),
-            });
-
-            // 车辆配型下拉列表
-            new CreateSelect({
-                el: carTypeInput,
-                data: settingsDB.get('carTypeOptions').value(),
-            });
-
-            // 如果设置数据中存在默认的牌照前缀，则进行设置
-            if (licensePlatePrefixOptionsDefault) {
-                carLicenseTagprefixInput.value = licensePlatePrefixOptionsDefault;
+            const memberServeOptions = settingsDB.value().memberServeOptions;
+            let memberServeOptionsHtml = '';
+            for (let i = 0; i < memberServeOptions.length; i++) {
+                const item = memberServeOptions[i];
+                memberServeOptionsHtml += `
+                    <div class="option">
+                        <span class="name">${item[0]}</span>
+                        <i class="fenge"></i>
+                        <span class="sum">${item[1]}</span>
+                    </div>
+                `;
             }
-        })();
-
-        // 从数据库中获取普通用户服务项目，并渲染
-        (() => {
-            const commonServeOptions = settingsDB.value().commonServeOptions;
-            let commonServeOptionsHtml = '';
-            for (let i = 0; i < commonServeOptions.length; i++) {
-                const item = commonServeOptions[i];
-                commonServeOptionsHtml += `
-            <div class="option">
-                <span class="name">${item[0]}</span>
-                <i class="fenge"></i>
-                <span class="sum">${item[1]}</span>
-            </div>
-        `;
-            }
-            commonServeOptionsElement.innerHTML = commonServeOptionsHtml;
+            memberServeOptionsElement.innerHTML = memberServeOptionsHtml;
         })();
 
         // 选择服务项目
         (() => {
-            commonServeOptionsElement.addEventListener('click', (e) => {
+            memberServeOptionsElement.addEventListener('click', (e) => {
                 const elementPath = e.path;
                 for (let i = 0; i < elementPath.length; i++) {
                     const element = elementPath[i];
@@ -122,14 +102,14 @@ new SwitchPage(
                         const optionSum = element.querySelector('.sum')
                             .innerText;
                         addedServeOptions.innerHTML += `
-                    <div class="item">
-                        <span class="option">
-                            <b class="name">${optionName}</b>
-                            <b class="sum">${optionSum}</b>元
-                        </span>
-                        <span class="delete">删除</span>
-                    </div>
-                `;
+                            <div class="item">
+                                <span class="option">
+                                    <b class="name">${optionName}</b>
+                                    <b class="sum">${optionSum}</b>元
+                                </span>
+                                <span class="delete">删除</span>
+                            </div>
+                        `;
                         totalSum += optionSum * 1;
                         rendererTotalHtml();
                     }
@@ -202,38 +182,10 @@ new SwitchPage(
         (() => {
             submitButtom.addEventListener('click', () => {
                 const settleAccountsDateInputValue = settleAccountsDateInput.value.trim();
-                const carLicenseTagprefixInputValue = carLicenseTagprefixInput.value
-                    .trim()
-                    .toUpperCase();
-                const carLicenseTagnumberInputValue = carLicenseTagnumberInput.value
-                    .trim()
-                    .toUpperCase();
-                const carTypeInputValue = carTypeInput.value.trim();
-                const payPlatformElement = mainOrdinarySettleAccountsElement.querySelector(
-                    '.pay-platform input:checked'
-                ).value;
 
                 // 如果时间为空
                 if (!settleAccountsDateInputValue) {
                     settleAccountsDateInput.focus();
-                    return;
-                }
-
-                // 如果牌照前缀为空
-                if (!carLicenseTagprefixInputValue) {
-                    carLicenseTagprefixInput.focus();
-                    return;
-                }
-
-                // 如果牌照号为空
-                if (!carLicenseTagnumberInputValue) {
-                    carLicenseTagnumberInput.focus();
-                    return;
-                }
-
-                // 如果车型为空
-                if (!carTypeInputValue) {
-                    carTypeInput.focus();
                     return;
                 }
 
@@ -249,34 +201,24 @@ new SwitchPage(
                 }
 
                 // 要写入的数据
-                const obj = {
-                    car: `${carLicenseTagprefixInputValue}·${carLicenseTagnumberInputValue}`,
-                    expensesRecord: [],
-                };
-                const expensesRecordItem = [
-                    settleAccountsDateInputValue,
-                    carTypeInputValue,
-                    payPlatformElement,
-                    [],
-                ];
+                const expensesRecordItem = [settleAccountsDateInputValue, []];
+                const balance =
+                    memberDB.get(`${memberId}.balance`).value() -
+                    totalElement.querySelector('span').innerText * 1;
+
                 for (let i = 0; i < addedServeOptions.children.length; i++) {
                     const option = addedServeOptions.children[i];
                     const optionName = option.querySelector('.name').innerText;
                     const optionSum =
                         option.querySelector('.sum').innerText * 1;
-                    expensesRecordItem[3].push([optionName, optionSum]);
+                    expensesRecordItem[1].push([optionName, optionSum]);
                 }
-                obj.expensesRecord.unshift(expensesRecordItem);
-
                 // 写入数据
-                if (ordinaryDB.has(obj.car).value()) {
-                    ordinaryDB
-                        .get(`${obj.car}.expensesRecord`)
-                        .unshift(obj.expensesRecord)
-                        .write();
-                } else {
-                    ordinaryDB.set(`${obj.car}`, obj).write();
-                }
+                memberDB
+                    .get(`${memberId}.expensesRecord`)
+                    .unshift(expensesRecordItem)
+                    .write();
+                memberDB.set(`${memberId}.balance`, balance).write();
 
                 // 提示并清空以添加数据
                 PopUp.hint({ msg: '结算成功' }, () => {
@@ -285,13 +227,9 @@ new SwitchPage(
                         type: 'datetime',
                         value: new Date(),
                     });
-
-                    carLicenseTagprefixInput.value = settingsDB
-                        .get('licensePlatePrefixOptionsDefault')
-                        .value();
-                    settleAccountsDateInput.value = carLicenseTagnumberInput.value = carTypeInput.value = addedServeOptions.innerHTML =
-                        '';
+                    addedServeOptions.innerHTML = '';
                     totalSum = 0;
+                    rendererMemberInfo();
                     rendererTotalHtml();
                 });
             });

@@ -1,0 +1,162 @@
+.main-member-settle-accounts {
+    width: 700px;
+    margin: 0 auto;
+    padding: 40px 0;
+
+    .settle-accounts-date {
+        width: 100%;
+        height: auto;
+        line-height: 1;
+        margin-bottom: 30px;
+        padding: 0;
+        color: #555;
+        font-size: 16px;
+        border: 0;
+    }
+
+    .section {
+        display: flex;
+        flex-wrap: wrap;
+
+        h2,
+        .box {
+            width: 100%;
+        }
+
+        &.member {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 30px;
+            width: 100%;
+
+            .member-info {
+                display: flex;
+
+                span {
+                    margin-right: 20px;
+
+                    b {
+                        color: #000;
+                    }
+                }
+
+                .balance {
+                    b {
+                        margin-right: 4px;
+                        color: red;
+                    }
+                }
+            }
+        }
+
+        &.serve {
+            .member-serve-options {
+                display: flex;
+                flex-wrap: wrap;
+                margin: -5px;
+
+                .option {
+                    display: flex;
+                    align-items: center;
+                    height: 30px;
+                    padding: 0 10px;
+                    margin: 5px;
+                    background-color: rgba($color: #000000, $alpha: .05);
+                    border-radius: 4px;
+                    cursor: pointer;
+
+                    .fenge {
+                        display: block;
+                        width: 1px;
+                        height: 1em;
+                        margin: 0 10px;
+                        background-color: rgba($color: #000000, $alpha: .2);
+                    }
+
+                    .name {
+                        color: var(--app-side-bg-color);
+                    }
+
+                    .sum {
+                        color: red;
+                        font-weight: bold;
+                    }
+                }
+            }
+
+            .add-serve-options {
+                margin-top: 30px;
+            }
+
+            .added-serve-options {
+                margin-top: 30px;
+
+                .item {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    height: 30px;
+                    margin-bottom: 10px;
+
+                    .option {
+                        flex: 1;
+                        display: flex;
+                        align-items: center;
+                        height: 100%;
+                        padding-left: 10px;
+                        background-color: #f9f9f9;
+                        border: 1px solid var(--border-color);
+                        border-right: 0;
+                        border-radius: 2px 0 0 2px;
+                        box-sizing: border-box;
+
+                        .name {
+                            font-weight: normal;
+                        }
+
+                        .sum {
+                            margin: 0 6px;
+                            color: red;
+                            font-weight: bold;
+                        }
+                    }
+
+                    .delete {
+                        display: flex;
+                        align-items: center;
+                        height: 100%;
+                        padding: 0 8px;
+                        color: #fff;
+                        background-color: red;
+                        border-radius: 0 2px 2px 0;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        &.pay {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+
+            .total {
+                font-size: 16px;
+
+                span {
+                    color: red;
+                    font-weight: bold;
+                }
+            }
+
+            .submit {
+                margin-top: 30px;
+                height: 36px;
+                background-color: #12e612;
+                color: #fff;
+                font-size: 16px;
+                border: 0;
+            }
+        }
+    }
+}

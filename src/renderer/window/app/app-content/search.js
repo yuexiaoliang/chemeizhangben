@@ -1,8 +1,5 @@
 const path = require('path');
 
-const { ipcRenderer } = require('electron');
-const holmes = require('holmes.js');
-
 import { defaultDataDir } from '../../../common/all_path.js';
 import { getDB, throttle, fuzzyQuery } from '../../../common/tool.js';
 import { SwitchPage } from './switchPage.js';
@@ -185,7 +182,7 @@ new SwitchPage(
                 <ul class="car-list">${obj.carList}</ul>
             </div>
             <div class="buttons">
-                <button class="settle-accounts">结账</button>
+                <button class="settle-accounts" data-id="${obj.id}" switch-page="member-settle-accounts">结账</button>
                 <button class="details" data-id="${obj.id}" switch-page="member-details">详情</button>
             </div>
         </div>

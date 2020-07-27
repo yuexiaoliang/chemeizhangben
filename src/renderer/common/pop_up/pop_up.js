@@ -12,7 +12,6 @@ export class PopUp {
             buttons: options.buttons || [], // 按钮列表
         };
         this.fn = fn || function () {}; // 回调函数
-        // this.create();
     }
     /**
      * 创建弹出框

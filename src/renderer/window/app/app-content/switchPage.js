@@ -1,5 +1,3 @@
-import { getDB } from '../../../common/tool.js';
-
 export class SwitchPage {
     constructor(options, fn) {
         this.options = options;

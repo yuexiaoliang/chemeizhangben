@@ -54,6 +54,9 @@ new SwitchPage(
             const memberRamarksElement = memberInfoElement.querySelector(
                 '.ramarks textarea'
             );
+            const settleAccountsButton = memberInfoElement.querySelector(
+                '.settle-accounts'
+            );
             const memberAlterButton = memberInfoElement.querySelector(
                 '.buttons .alter'
             );
@@ -69,6 +72,7 @@ new SwitchPage(
             memberWeixinInput.value = memberData.contact.weixin;
             memberShoujiInput.value = memberData.contact.shouji;
             memberRamarksElement.value = memberData.ramarks;
+            settleAccountsButton.setAttribute('date-id', memberData.id);
 
             // 修改会员信息
             memberAlterButton.addEventListener('click', () => {
@@ -84,58 +88,53 @@ new SwitchPage(
                         memberNameInput.focus();
                         return;
                     }
-                    verifyPassword(() => {
-                        try {
-                            memberDB
-                                .set(
-                                    `${memberData.id}.name`,
-                                    memberNameInput.value
-                                )
-                                .write();
-                            memberDB
-                                .set(
-                                    `${memberData.id}.contact.weixin`,
-                                    memberWeixinInput.value
-                                )
-                                .write();
-                            memberDB
-                                .set(
-                                    `${memberData.id}.contact.shouji`,
-                                    memberShoujiInput.value
-                                )
-                                .write();
-                            memberDB
-                                .set(
-                                    `${memberData.id}.ramarks`,
-                                    memberRamarksElement.value
-                                )
-                                .write();
-                            PopUp.hint({ msg: '修改成功' }, () => {
-                                memberAlterButton.classList.remove('save');
-                                memberAlterButton.innerHTML = '修改';
-                                memberNameInput.setAttribute(
-                                    'readonly',
-                                    'readonly'
-                                );
-                                memberWeixinInput.setAttribute(
-                                    'readonly',
-                                    'readonly'
-                                );
-                                memberShoujiInput.setAttribute(
-                                    'readonly',
-                                    'readonly'
-                                );
-                                memberRamarksElement.setAttribute(
-                                    'readonly',
-                                    'readonly'
-                                );
-                            });
-                        } catch (error) {
-                            PopUp.hint({ msg: '修改失败' }, () => {
-                                console.log(error);
-                            });
-                        }
-                    });
+                    try {
+                        memberDB
+                            .set(`${memberData.id}.name`, memberNameInput.value)
+                            .write();
+                        memberDB
+                            .set(
+                                `${memberData.id}.contact.weixin`,
+                                memberWeixinInput.value
+                            )
+                            .write();
+                        memberDB
+                            .set(
+                                `${memberData.id}.contact.shouji`,
+                                memberShoujiInput.value
+                            )
+                            .write();
+                        memberDB
+                            .set(
+                                `${memberData.id}.ramarks`,
+                                memberRamarksElement.value
+                            )
+                            .write();
+                        PopUp.hint({ msg: '修改成功' }, () => {
+                            memberAlterButton.classList.remove('save');
+                            memberAlterButton.innerHTML = '修改';
+                            memberNameInput.setAttribute(
+                                'readonly',
+                                'readonly'
+                            );
+                            memberWeixinInput.setAttribute(
+                                'readonly',
+                                'readonly'
+                            );
+                            memberShoujiInput.setAttribute(
+                                'readonly',
+                                'readonly'
+                            );
+                            memberRamarksElement.setAttribute(
+                                'readonly',
+                                'readonly'
+                            );
+                        });
+                    } catch (error) {
+                        PopUp.hint({ msg: '修改失败' }, () => {
+                            console.log(error);
+                        });
+                    }
                 }
             });
 

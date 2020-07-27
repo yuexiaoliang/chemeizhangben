@@ -3242,4 +3242,202 @@ html {
   font-size: 16px;
   border: 0;
 }
+
+.main-member-settle-accounts {
+  width: 700px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.main-member-settle-accounts .settle-accounts-date {
+  width: 100%;
+  height: auto;
+  line-height: 1;
+  margin-bottom: 30px;
+  padding: 0;
+  color: #555;
+  font-size: 16px;
+  border: 0;
+}
+
+.main-member-settle-accounts .section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.main-member-settle-accounts .section h2,
+.main-member-settle-accounts .section .box {
+  width: 100%;
+}
+
+.main-member-settle-accounts .section.member {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.main-member-settle-accounts .section.member .member-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.main-member-settle-accounts .section.member .member-info span {
+  margin-right: 20px;
+}
+
+.main-member-settle-accounts .section.member .member-info span b {
+  color: #000;
+}
+
+.main-member-settle-accounts .section.member .member-info .balance b {
+  margin-right: 4px;
+  color: red;
+}
+
+.main-member-settle-accounts .section.serve .member-serve-options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: -5px;
+}
+
+.main-member-settle-accounts .section.serve .member-serve-options .option {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 30px;
+  padding: 0 10px;
+  margin: 5px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.main-member-settle-accounts .section.serve .member-serve-options .option .fenge {
+  display: block;
+  width: 1px;
+  height: 1em;
+  margin: 0 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.main-member-settle-accounts .section.serve .member-serve-options .option .name {
+  color: var(--app-side-bg-color);
+}
+
+.main-member-settle-accounts .section.serve .member-serve-options .option .sum {
+  color: red;
+  font-weight: bold;
+}
+
+.main-member-settle-accounts .section.serve .add-serve-options {
+  margin-top: 30px;
+}
+
+.main-member-settle-accounts .section.serve .added-serve-options {
+  margin-top: 30px;
+}
+
+.main-member-settle-accounts .section.serve .added-serve-options .item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+.main-member-settle-accounts .section.serve .added-serve-options .item .option {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  padding-left: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid var(--border-color);
+  border-right: 0;
+  border-radius: 2px 0 0 2px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.main-member-settle-accounts .section.serve .added-serve-options .item .option .name {
+  font-weight: normal;
+}
+
+.main-member-settle-accounts .section.serve .added-serve-options .item .option .sum {
+  margin: 0 6px;
+  color: red;
+  font-weight: bold;
+}
+
+.main-member-settle-accounts .section.serve .added-serve-options .item .delete {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  padding: 0 8px;
+  color: #fff;
+  background-color: red;
+  border-radius: 0 2px 2px 0;
+  cursor: pointer;
+}
+
+.main-member-settle-accounts .section.pay {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 10px;
+}
+
+.main-member-settle-accounts .section.pay .total {
+  font-size: 16px;
+}
+
+.main-member-settle-accounts .section.pay .total span {
+  color: red;
+  font-weight: bold;
+}
+
+.main-member-settle-accounts .section.pay .submit {
+  margin-top: 30px;
+  height: 36px;
+  background-color: #12e612;
+  color: #fff;
+  font-size: 16px;
+  border: 0;
+}
 /*# sourceMappingURL=app.css.map */
