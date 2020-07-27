@@ -248,6 +248,15 @@
                             color: red;
                             font-weight: bold;
                         }
+
+                        .id {
+                            color: var(--app-side-bg-color);
+                            font-weight: bold;
+
+                            &:hover {
+                                opacity: .8;
+                            }
+                        }
                     }
 
                     .content {
@@ -256,6 +265,11 @@
                         span {
                             i {
                                 font-style: normal;
+
+                                &.sum {
+                                    margin-right: 4px;
+                                    font-weight: bold;
+                                }
 
                                 &.lan {
                                     margin-right: 6px;
@@ -272,18 +286,23 @@
                     &.member {
                         header {
                             .id {
-                                color: var(--app-side-bg-color);
-                                font-weight: bold;
                                 cursor: pointer;
-
-                                &:hover {
-                                    opacity: .8;
-                                }
                             }
                         }
                     }
 
                     &.ordinary {
+                        header {
+                            .id {
+                                i {
+                                    font-style: normal;
+                                    color: #999;
+                                }
+
+                                opacity: 1;
+                            }
+                        }
+
                         .content {
                             display: flex;
                             flex-wrap: wrap;
@@ -298,8 +317,28 @@
                                 background-color: rgba($color: #000000, $alpha: .1);
                                 font-size: 12px;
                                 border-radius: 2px;
+                            }
+                        }
 
+                        footer {
+                            span {
+                                i {
+                                    font-style: normal;
 
+                                    &.sum {
+                                        margin-right: 4px;
+                                        font-weight: bold;
+                                    }
+
+                                    &.lan {
+                                        margin-right: 6px;
+                                        color: var(--app-side-bg-color);
+                                    }
+
+                                    &.hong {
+                                        color: red;
+                                    }
+                                }
                             }
                         }
                     }

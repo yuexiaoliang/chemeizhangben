@@ -138,21 +138,21 @@ new SwitchPage(
             for (let i = 0; i < data.moneyData.length; i++) {
                 const moneyData = data.moneyData[i];
                 html += `
-            <li>
-                <span>${moneyData.date}</span>
-                <span>${moneyData.moneyTotal}</span>
-                <span>${moneyData.moneyMemberRecharge}</span>
-                <span>${moneyData.moneyOrdinaryConsumption}</span>
-                <span class="details-btn" data-date="${moneyData.date}">详情</span>
-            </li>
-        `;
+                    <li>
+                        <span>${moneyData.date}</span>
+                        <span>${moneyData.moneyTotal}</span>
+                        <span>${moneyData.moneyMemberRecharge}</span>
+                        <span>${moneyData.moneyOrdinaryConsumption}</span>
+                        <span class="details-btn" data-date="${moneyData.date}">详情</span>
+                    </li>
+                `;
             }
             billTableListElement.innerHTML = html;
             billTableFooterElement.innerHTML = `
-        <span>本月总收入<b>${data.dayData.dayTotal}</b>元</span>
-        <span>会员充值<b>${data.dayData.dayMemberRecharge}</b>元</span>
-        <span>普通消费<b>${data.dayData.dayOrdinaryConsumption}</b>元</span>
-    `;
+                <span>本月总收入<b>${data.dayData.dayTotal}</b>元</span>
+                <span>会员充值<b>${data.dayData.dayMemberRecharge}</b>元</span>
+                <span>普通消费<b>${data.dayData.dayOrdinaryConsumption}</b>元</span>
+            `;
         }
 
         (() => {
@@ -188,34 +188,40 @@ new SwitchPage(
                                             <span class="id" data-id="${item.id}" switch-page="member-details">${item.name}</span>
                                         </header>
                                         <div class="content">
-                                            <span><i class="lan">充值金额：</i>${item.record[1]}</span>
-                                            <span><i class="hong">充值方式：</i>${item.record[2]}</span>
+                                            <span>充值金额：<i class="hong sum">${item.record[1]}</i>元</span>
+                                            <span>充值方式：<i class="lan">${item.record[2]}</i></span>
                                         </div>
                                     </li>
                                 `;
                                         break;
                                     case 1:
                                         let conHtml = '';
+                                        let total = 0;
                                         for (
                                             let x = 0;
-                                            x < item.record[1].length;
+                                            x < item.record[3].length;
                                             x++
                                         ) {
-                                            const arr = item.record[1][x];
+                                            const arr = item.record[3][x];
                                             conHtml += `<span><i class="lan">${arr[0]}</i><i class="hong">${arr[1]}</i></span>`;
+                                            total += arr[1];
                                         }
                                         list += `
-                                    <li class="ordinary">
-                                        <header class="info">
-                                            <span class="time">${time}</span>
-                                            <span class="type">普通消费</span>
-                                            <span class="id">${item.id}</span>
-                                        </header>
-                                        <div class="content">
-                                            ${conHtml}
-                                        </div>
-                                    </li>
-                                `;
+                                            <li class="ordinary">
+                                                <header class="info">
+                                                    <span class="time">${time}</span>
+                                                    <span class="type">普通消费</span>
+                                                    <span class="id">${item.id}<i>（${item.record[1]}）</i></span>
+                                                </header>
+                                                <div class="content">
+                                                    ${conHtml}
+                                                </div>
+                                                <footer>
+                                                    <span>合计：<i class="hong sum">${total}</i>元</span>
+                                                    <span>支付方式：<i class="lan">${item.record[2]}</i></span>
+                                                </footer>
+                                            </li>
+                                        `;
                                         break;
                                 }
                             }
@@ -297,8 +303,8 @@ new SwitchPage(
                             data[key][dateOptions.month] = [];
                         }
 
-                        for (let j = 0; j < item[1].length; j++) {
-                            money += item[1][j][1];
+                        for (let j = 0; j < item[3].length; j++) {
+                            money += item[3][j][1];
                         }
                         const obj = {
                             type: 1,

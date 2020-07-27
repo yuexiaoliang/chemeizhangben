@@ -981,8 +981,6 @@ html {
           justify-content: space-between;
   min-width: 300px;
   max-width: 400px;
-  min-height: 200px;
-  max-height: 500px;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -1046,7 +1044,7 @@ html {
 }
 
 .pop-up.open .pop-up-msg {
-  padding: 10px 14px;
+  padding: 20px 14px;
 }
 
 .pop-up.open .pop-up-buttons {
@@ -2922,12 +2920,26 @@ html {
   font-weight: bold;
 }
 
+.main-bill .bill-money-detail .detail-content .list li header .id {
+  color: var(--app-side-bg-color);
+  font-weight: bold;
+}
+
+.main-bill .bill-money-detail .detail-content .list li header .id:hover {
+  opacity: .8;
+}
+
 .main-bill .bill-money-detail .detail-content .list li .content {
   padding: 10px 0;
 }
 
 .main-bill .bill-money-detail .detail-content .list li .content span i {
   font-style: normal;
+}
+
+.main-bill .bill-money-detail .detail-content .list li .content span i.sum {
+  margin-right: 4px;
+  font-weight: bold;
 }
 
 .main-bill .bill-money-detail .detail-content .list li .content span i.lan {
@@ -2940,13 +2952,16 @@ html {
 }
 
 .main-bill .bill-money-detail .detail-content .list li.member header .id {
-  color: var(--app-side-bg-color);
-  font-weight: bold;
   cursor: pointer;
 }
 
-.main-bill .bill-money-detail .detail-content .list li.member header .id:hover {
-  opacity: .8;
+.main-bill .bill-money-detail .detail-content .list li.ordinary header .id {
+  opacity: 1;
+}
+
+.main-bill .bill-money-detail .detail-content .list li.ordinary header .id i {
+  font-style: normal;
+  color: #999;
 }
 
 .main-bill .bill-money-detail .detail-content .list li.ordinary .content {
@@ -2971,5 +2986,260 @@ html {
   background-color: rgba(0, 0, 0, 0.1);
   font-size: 12px;
   border-radius: 2px;
+}
+
+.main-bill .bill-money-detail .detail-content .list li.ordinary footer span i {
+  font-style: normal;
+}
+
+.main-bill .bill-money-detail .detail-content .list li.ordinary footer span i.sum {
+  margin-right: 4px;
+  font-weight: bold;
+}
+
+.main-bill .bill-money-detail .detail-content .list li.ordinary footer span i.lan {
+  margin-right: 6px;
+  color: var(--app-side-bg-color);
+}
+
+.main-bill .bill-money-detail .detail-content .list li.ordinary footer span i.hong {
+  color: red;
+}
+
+.main-ordinary-settle-accounts {
+  width: 700px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.main-ordinary-settle-accounts .settle-accounts-date {
+  width: 100%;
+  height: auto;
+  line-height: 1;
+  margin-bottom: 30px;
+  padding: 0;
+  color: #555;
+  font-size: 16px;
+  border: 0;
+}
+
+.main-ordinary-settle-accounts .section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.main-ordinary-settle-accounts .section h2,
+.main-ordinary-settle-accounts .section .box {
+  width: 100%;
+}
+
+.main-ordinary-settle-accounts .section.car {
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.main-ordinary-settle-accounts .section.car .car-license-tag {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.main-ordinary-settle-accounts .section.car .car-license-tag input {
+  padding: 0 10px;
+  height: 34px;
+  text-transform: uppercase;
+}
+
+.main-ordinary-settle-accounts .section.car .car-license-tag .prefix {
+  width: 70px;
+  text-transform: uppercase;
+}
+
+.main-ordinary-settle-accounts .section.car .car-license-tag .number {
+  width: 100px;
+  text-transform: uppercase;
+}
+
+.main-ordinary-settle-accounts .section.car .car-type {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 30px;
+}
+
+.main-ordinary-settle-accounts .section.car .car-type input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.main-ordinary-settle-accounts .section.serve .common-serve-options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: -5px;
+}
+
+.main-ordinary-settle-accounts .section.serve .common-serve-options .option {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 30px;
+  padding: 0 10px;
+  margin: 5px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.main-ordinary-settle-accounts .section.serve .common-serve-options .option .fenge {
+  display: block;
+  width: 1px;
+  height: 1em;
+  margin: 0 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.main-ordinary-settle-accounts .section.serve .common-serve-options .option .name {
+  color: var(--app-side-bg-color);
+}
+
+.main-ordinary-settle-accounts .section.serve .common-serve-options .option .sum {
+  color: red;
+  font-weight: bold;
+}
+
+.main-ordinary-settle-accounts .section.serve .add-serve-options {
+  margin-top: 30px;
+}
+
+.main-ordinary-settle-accounts .section.serve .added-serve-options {
+  margin-top: 30px;
+}
+
+.main-ordinary-settle-accounts .section.serve .added-serve-options .item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+.main-ordinary-settle-accounts .section.serve .added-serve-options .item .option {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  padding-left: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid var(--border-color);
+  border-right: 0;
+  border-radius: 2px 0 0 2px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.main-ordinary-settle-accounts .section.serve .added-serve-options .item .option .name {
+  font-weight: normal;
+}
+
+.main-ordinary-settle-accounts .section.serve .added-serve-options .item .option .sum {
+  margin: 0 6px;
+  color: red;
+  font-weight: bold;
+}
+
+.main-ordinary-settle-accounts .section.serve .added-serve-options .item .delete {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  padding: 0 8px;
+  color: #fff;
+  background-color: red;
+  border-radius: 0 2px 2px 0;
+  cursor: pointer;
+}
+
+.main-ordinary-settle-accounts .section.pay {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 10px;
+}
+
+.main-ordinary-settle-accounts .section.pay .total {
+  font-size: 16px;
+}
+
+.main-ordinary-settle-accounts .section.pay .total span {
+  color: red;
+  font-weight: bold;
+}
+
+.main-ordinary-settle-accounts .section.pay .pay-platform {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 20px;
+}
+
+.main-ordinary-settle-accounts .section.pay .pay-platform li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-right: 14px;
+}
+
+.main-ordinary-settle-accounts .section.pay .pay-platform li label {
+  margin-right: 3px;
+}
+
+.main-ordinary-settle-accounts .section.pay .submit {
+  margin-top: 30px;
+  height: 36px;
+  background-color: #12e612;
+  color: #fff;
+  font-size: 16px;
+  border: 0;
 }
 /*# sourceMappingURL=app.css.map */

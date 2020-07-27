@@ -277,3 +277,53 @@ export const billTemplate = `
         </div>
     </section>
 `;
+
+export const ordinarySettleAccountsTemplate = `
+    <section class="main-section main-ordinary-settle-accounts">
+        <input type="text" class="settle-accounts-date">
+        <div class="car section">
+            <h2>车辆信息</h2>
+            <div class="car-license-tag">
+                <input type="text" class="prefix" placeholder="冀G">
+                <i class="iconfont icon-dian"></i>
+                <input type="text" class="number" placeholder="88888">
+            </div>
+            <div class="car-type">
+                <label>车型：</label>
+                <input type="text" placeholder="宝马">
+            </div>
+        </div>
+        <div class="serve section">
+            <h2>服务项目</h2>
+            <div class="common-serve-options box"></div>
+            <div class="add-serve-options box">
+                <input type="text" class="option-name" placeholder="项目名称">
+                <input type="number" class="option-sum" placeholder="价格">
+                <button class="add">添加</button>
+            </div>
+            <div class="added-serve-options box"></div>
+        </div>
+        <div class="pay section">
+            <div class="total">合计：<span>0</span> 元</div>
+            <ul class="pay-platform box">
+                <li>
+                    <label for="pay-platform-weixin">微信</label>
+                    <input type="radio" name="pay-platform" id="pay-platform-weixin" value="微信" checked>
+                </li>
+                <li>
+                    <label for="pay-platform-zhifubao">支付宝</label>
+                    <input type="radio" name="pay-platform" id="pay-platform-zhifubao" value="支付宝">
+                </li>
+                <li>
+                    <label for="pay-platform-xianjin">现金</label>
+                    <input type="radio" name="pay-platform" id="pay-platform-xianjin" value="现金">
+                </li>
+                <li>
+                    <label for="pay-platform-qita">其他</label>
+                    <input type="radio" name="pay-platform" id="pay-platform-qita" value="其他">
+                </li>
+            </ul>
+            <button class="submit">提交</button>
+        </div>
+    </section>
+`;
