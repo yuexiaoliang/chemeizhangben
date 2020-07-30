@@ -72,7 +72,7 @@ new SwitchPage(
             memberWeixinInput.value = memberData.contact.weixin;
             memberShoujiInput.value = memberData.contact.shouji;
             memberRamarksElement.value = memberData.ramarks;
-            settleAccountsButton.setAttribute('date-id', memberData.id);
+            settleAccountsButton.setAttribute('data-id', memberData.id);
 
             // 修改会员信息
             memberAlterButton.addEventListener('click', () => {
@@ -158,6 +158,10 @@ new SwitchPage(
                             <li>
                                 <label for="pay-platform-xianjin">现金</label>
                                 <input type="radio" name="pay-platform" id="pay-platform-xianjin" value="现金">
+                            </li>
+                            <li>
+                                <label for="pay-platform-qita">其他</label>
+                                <input type="radio" name="pay-platform" id="pay-platform-qita" value="其他">
                             </li>
                         </ul>
                     `;

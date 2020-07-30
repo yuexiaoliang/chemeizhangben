@@ -1,19 +1,86 @@
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto');
 
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
+const getmac = require('getmac');
 
 import { defaultDataDir } from '../common/all_path.js';
 import { verifyPasswordTemplate } from './html_templates.js';
+import { PopUp } from './pop_up/pop_up.js';
 
 /**
  * 获取数据
  * @param {String} dbPath 数据的路径
  */
 export function getDB(dbPath) {
-    const adapter = new FileSync(dbPath);
+    const dirPath = path.dirname(dbPath);
+    if (!fs.existsSync(dirPath)) {
+        try {
+            fs.mkdirSync(dirPath, { recursive: true });
+        } catch (err) {
+            PopUp.hint({ msg: `程序出错了: ${err}` });
+        }
+    }
+    let adapter = new FileSync(dbPath);
     return low(adapter);
+}
+
+/**
+ * 获取设置数据
+ */
+export function getSettingsDB() {
+    return getDB(path.join(defaultDataDir, 'settings-db.json'));
+}
+
+/**
+ * 获取会员数据
+ */
+export function getMemberDB() {
+    const settingsDB = getSettingsDB();
+    const memberDBPath = path.join(
+        settingsDB.get('dataDir').value(),
+        'database/member.json'
+    );
+    return getDB(memberDBPath);
+}
+
+/**
+ * 获取普通消费数据
+ */
+export function getOrdinaryDB() {
+    const settingsDB = getSettingsDB();
+    const ordinaryDBPath = path.join(
+        settingsDB.get('dataDir').value(),
+        'database/ordinary.json'
+    );
+    return getDB(ordinaryDBPath);
+}
+
+/**
+ * 获取数据库中的 MAC 地址
+ */
+export function getDBMAC() {
+    const settingsDB = getSettingsDB();
+    const mac = getMAC();
+    if (!settingsDB.has('mac').value() || !testMAC()) {
+        settingsDB.set('mac', mac).write();
+        return mac;
+    }
+
+    return settingsDB.get('mac').value();
+
+    function testMAC() {
+        return settingsDB.get('mac').value() === mac ? true : false;
+    }
+}
+
+/**
+ * 获取本机的 MAC 地址
+ */
+export function getMAC() {
+    return getmac.default().replace(/:/gi, ' ');
 }
 
 /**
@@ -32,7 +99,36 @@ export function createDir(dirPath) {
 }
 
 /**
- *
+ * 获取程序激活状态
+ */
+export function getAppStatus() {
+    const body = document.body;
+    if (
+        body.hasAttribute('data-status') &&
+        body.getAttribute('data-status') === 'no'
+    ) {
+        return false;
+    }
+    return true;
+}
+
+export function activationCodeDecryption(str) {
+    const rsaPubKey = `-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAocNEOd8Qx+c2nda5dzEc
+yMaToinVAwqK1mxZC0LELsLP8VKApPmAgJ0qB3xArg0Gfo0Y7efnruAfM6blyDKO
+SpUdx+3SAlIvQKC8a6zslC8h0TcKyPtrcONPXSJMkIAotoGzaXkaAUTBLqjkmoru
+9DBQYewIP6VXa8ZqH40NMBT2YL/FmZfAYhv7pUTVKJJGOVMC6jcsVvHiH6xHMeAQ
+7ft3RPCRYYGvmxVIiEdMW2p89fZPZZ4X6S/y0xhjl5ql3z3ezPj/tLKp1QUBWdrK
+ynJ97tHYt7M01lJh8bGdntUIV82VcQK27kcIlpZr3J7G+4xQ3kYwFn7RXvBcXGsU
+KQIDAQAB
+-----END PUBLIC KEY-----`;
+    return crypto
+        .publicDecrypt(rsaPubKey, Buffer.from(str, 'hex'))
+        .toString('utf8');
+}
+
+/**
+ * 创建遮罩层
  * @param {*} contentHtml
  */
 export function createShade(contentHtml) {
@@ -65,32 +161,33 @@ export function verifyPassword(fn) {
     const settingsDBPath = path.join(defaultDataDir, 'settings-db.json');
     const settingsDB = getDB(settingsDBPath);
     const password = settingsDB.get('password').value();
-
-    const body = document.querySelector('body');
-    const appShadeElement = createShade(verifyPasswordTemplate);
-    const verifyPasswordElement = appShadeElement.querySelector(
-        '.verify-password'
-    );
-    const passwordInput = verifyPasswordElement.querySelector(
-        '.form .password'
-    );
-    const passwordButton = verifyPasswordElement.querySelector(
-        '.form .confirm'
-    );
-    const hint = verifyPasswordElement.querySelector('.hint');
-    passwordInput.addEventListener('focus', () => {
-        hint.innerHTML = '';
-    });
-    passwordButton.addEventListener('click', () => {
-        if (passwordInput.value === password) {
-            body.removeChild(appShadeElement);
-            fn();
-            return true;
-        } else {
-            hint.innerHTML = '密码输入错误！';
-            return false;
+    PopUp.open(
+        {
+            addClass: 'verify-password',
+            type: 'warn',
+            title: '验证密码',
+            msg:
+                '<input class="password-input" type="password" placeholder="请输入密码"><p class="hint"></p>',
+            buttons: ['确定', '取消'],
+        },
+        function (index) {
+            if (index === 1) {
+                this.removePopUp();
+                return;
+            }
+            const popUpElement = this.getPopUp();
+            const passwordInput = popUpElement.querySelector(
+                '.pop-up-msg .password-input'
+            );
+            const hintElement = popUpElement.querySelector('.pop-up-msg .hint');
+            if (passwordInput.value === password) {
+                this.removePopUp();
+                fn();
+            } else {
+                hintElement.innerHTML = '密码输入错误！';
+            }
         }
-    });
+    );
 }
 
 /**
@@ -188,9 +285,16 @@ export function fuzzyQuery(list, keyWord) {
     const arr = [];
     for (let i = 0; i < list.length; i++) {
         const item = list[i];
-        if (reg.test(item[0])) {
-            arr.push(item);
-        }
+        (() => {
+            if (reg.test(item[0])) {
+                for (let j = 0; j < arr.length; j++) {
+                    if (item[1] === arr[j][1]) {
+                        return;
+                    }
+                }
+                arr.push(item);
+            }
+        })();
     }
     return arr;
 }

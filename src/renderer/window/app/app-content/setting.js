@@ -369,18 +369,11 @@ new SwithSetting(
                 if (saveElement.classList.contains('true')) {
                     const dataDir = locationElement.value;
                     settingsDB.set('dataDir', dataDir).write();
-                    const memberDBDirPath = createDir(
-                        path.join(dataDir, 'database/member')
-                    ); // 会员数据保存的文件夹路径
-                    const memberDB = getDB(
-                        path.join(memberDBDirPath, 'member.json')
-                    ); // 会员数据
-
-                    // 会员数据初始化
-                    if (!memberDB.has('allMember').value()) {
-                        memberDB.defaults({ allMember: [] }).write();
-                    }
-
+                    const dataDirPath = createDir(
+                        path.join(dataDir, 'database')
+                    ); // 数据保存的文件夹路径
+                    getDB(path.join(dataDirPath, 'member.json'));
+                    getDB(path.join(dataDirPath, 'ordinary.json'));
                     saveElement.classList.remove('true');
                 }
             });

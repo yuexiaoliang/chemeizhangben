@@ -1,20 +1,68 @@
-const path = require('path');
-
-import { defaultDataDir } from '../../../common/all_path.js';
-import { CreateSelect, getDB, createDir } from '../../../common/tool.js';
+import {
+    CreateSelect,
+    getSettingsDB,
+    getMemberDB,
+    getAppStatus,
+} from '../../../common/tool.js';
 import { PopUp } from '../../../common/pop_up/pop_up.js';
 import { SwitchPage } from './switchPage.js';
 import { addMemberTemplate } from './contentTemplates.js';
 
-new SwitchPage(
+class SwitchAddMemberPage extends SwitchPage {
+    switchPage() {
+        document.addEventListener('click', (e) => {
+            for (let i = 0; i < e.path.length; i++) {
+                const element = e.path[i];
+                if (element.nodeType === 1) {
+                    if (
+                        element.hasAttribute('switch-page') &&
+                        element.getAttribute('switch-page') ===
+                            this.options.page
+                    ) {
+                        if (
+                            !getAppStatus() &&
+                            getMemberDB().size().value() >= 10
+                        ) {
+                            PopUp.open(
+                                {
+                                    title: '未激活',
+                                    type: 'warn',
+                                    msg: '程序还未激活，最多只能添加 10 个会员',
+                                    buttons: ['关闭'],
+                                },
+                                function () {
+                                    this.removePopUp();
+                                }
+                            );
+                        } else {
+                            const headerTitleElement = document.querySelector(
+                                '.app-header .header-title'
+                            );
+                            headerTitleElement.innerHTML = this.options.title;
+                            document.querySelector(
+                                '.app-main'
+                            ).innerHTML = this.options.html;
+                            this.callback(
+                                document.querySelector('.app-main').children[0],
+                                element.getAttribute('data-id')
+                            );
+                        }
+                    }
+                }
+            }
+        });
+    }
+}
+
+new SwitchAddMemberPage(
     {
         page: 'add-member',
         title: '添加会员',
         html: addMemberTemplate,
     },
     (mainAddMemberElement) => {
-        const settingsDBPath = path.join(defaultDataDir, 'settings-db.json');
-        const settingsDB = getDB(settingsDBPath);
+        const settingsDB = getSettingsDB();
+        const memberDB = getMemberDB();
         const addDateElement = mainAddMemberElement.querySelector('.add-date'); // 时间
         const memberNameInput = mainAddMemberElement.querySelector(
             '.member .member-name input'
@@ -46,11 +94,6 @@ new SwitchPage(
 
         // 保存数据
         (function () {
-            const memberDBDirPath = createDir(
-                path.join(settingsDB.get('dataDir').value(), 'database')
-            ); // 会员数据保存的文件夹路径
-            const memberDB = getDB(path.join(memberDBDirPath, 'member.json')); // 会员数据
-
             // 保存数据
             saveButton.addEventListener('click', () => {
                 const payAmountPlatformChecked = mainAddMemberElement.querySelector(

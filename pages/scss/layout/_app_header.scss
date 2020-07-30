@@ -18,6 +18,21 @@
         color: #555;
     }
 
+    .unregistered {
+        margin-left: 20px;
+        padding: 3px 7px;
+        line-height: 1;
+        background-color: #000;
+        color: red;
+        font-weight: bold;
+        border-radius: 2px;
+        cursor: pointer;
+
+        &::after {
+            content: '未激活';
+        }
+    }
+
     .drag-area {
         flex: 1;
         height: 100%;

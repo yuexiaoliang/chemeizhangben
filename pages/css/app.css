@@ -714,6 +714,21 @@ html {
   color: #555;
 }
 
+.app-header .unregistered {
+  margin-left: 20px;
+  padding: 3px 7px;
+  line-height: 1;
+  background-color: #000;
+  color: red;
+  font-weight: bold;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.app-header .unregistered::after {
+  content: '未激活';
+}
+
 .app-header .drag-area {
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -847,6 +862,122 @@ html {
   overflow-x: hidden;
 }
 
+.lockout-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999999;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 70px 0;
+  background-color: #000;
+  background-image: url(../../resources/lockout-bg.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.lockout-wrapper .unlock-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+}
+
+.lockout-wrapper .unlock-form input,
+.lockout-wrapper .unlock-form button {
+  height: 100%;
+  background-color: transparent;
+  border: 0;
+  color: #fff;
+}
+
+.lockout-wrapper .unlock-form input {
+  padding-left: 20px;
+}
+
+.lockout-wrapper .unlock-form input::-webkit-input-placeholder {
+  color: #fff;
+  opacity: .5;
+}
+
+.lockout-wrapper .unlock-form input:-ms-input-placeholder {
+  color: #fff;
+  opacity: .5;
+}
+
+.lockout-wrapper .unlock-form input::-ms-input-placeholder {
+  color: #fff;
+  opacity: .5;
+}
+
+.lockout-wrapper .unlock-form input::placeholder {
+  color: #fff;
+  opacity: .5;
+}
+
+.lockout-wrapper .unlock-form input:focus + button, .lockout-wrapper .unlock-form input:focus::-webkit-input-placeholder {
+  opacity: 1;
+}
+
+.lockout-wrapper .unlock-form input:focus + button, .lockout-wrapper .unlock-form input:focus:-ms-input-placeholder {
+  opacity: 1;
+}
+
+.lockout-wrapper .unlock-form input:focus + button, .lockout-wrapper .unlock-form input:focus::-ms-input-placeholder {
+  opacity: 1;
+}
+
+.lockout-wrapper .unlock-form input:focus + button, .lockout-wrapper .unlock-form input:focus::placeholder {
+  opacity: 1;
+}
+
+.lockout-wrapper .unlock-form button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 40px;
+  font-size: 18px;
+  opacity: .5;
+  cursor: pointer;
+  -webkit-transform: none;
+          transform: none;
+}
+
+.lockout-wrapper .unlock-form button:hover {
+  opacity: 1;
+}
+
+.lockout-wrapper .unlock-hint {
+  margin: 10px 0 0 0;
+  line-height: 1;
+  color: red;
+}
+
 .app-shade {
   position: fixed;
   top: var(--app-header-height);
@@ -880,34 +1011,51 @@ html {
   cursor: pointer;
 }
 
-.app-shade .verify-password .text {
-  margin: 0 0 6px 0;
-  color: #333;
-  font-size: 16px;
+.pop-up.verify-password .pop-up-msg {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.app-shade .verify-password .form input,
-.app-shade .verify-password .form button {
-  height: 40px;
-  border-color: #999;
+.pop-up.verify-password .pop-up-msg .password-input {
+  width: 100%;
+  max-width: 200px;
+  text-align: center;
 }
 
-.app-shade .verify-password .form input {
-  width: 300px;
-}
-
-.app-shade .verify-password .form button {
-  padding: 0 20px;
-  font-size: 16px;
-}
-
-.app-shade .verify-password .hint {
+.pop-up.verify-password .pop-up-msg .hint {
   display: block;
   margin: 0;
   height: 20px;
   line-height: 20px;
   font-size: 12px;
   color: red;
+}
+
+.pop-up.verify-password .pop-up-buttons {
+  -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
+}
+
+.pop-up.verify-password .pop-up-buttons .button {
+  height: 34px;
+}
+
+.pop-up.verify-password .pop-up-buttons .button:first-child {
+  background-color: #7373ff;
+  border-color: #7373ff;
+  color: #fff;
 }
 
 .select {
@@ -3439,5 +3587,80 @@ html {
   color: #fff;
   font-size: 16px;
   border: 0;
+}
+
+.activate-app {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+}
+
+.activate-app .step {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.activate-app .step h3,
+.activate-app .step p {
+  margin: 0 0 10px;
+}
+
+.activate-app .step h3 {
+  font-size: 20px;
+}
+
+.activate-app .step p {
+  font-size: 16px;
+}
+
+.activate-app .first-step {
+  margin: 50px 0 70px;
+}
+
+.activate-app .first-step .identifier {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 20px;
+  width: 100%;
+  height: 36px;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #000;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.activate-app .second-step .key-box {
+  width: 100%;
+  height: 200px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.activate-app .activate-button {
+  margin-top: 10px;
+  width: 100%;
+  height: 36px;
+  font-size: 16px;
+  border: 0;
+  background-color: green;
+  color: #fff;
 }
 /*# sourceMappingURL=app.css.map */

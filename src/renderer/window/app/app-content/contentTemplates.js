@@ -1,7 +1,7 @@
 export const settingTemplate = `
     <section class="main-section main-setting">
         <div class="setting-box setting-options setting-member-serve-options">
-            <h3 class="box-title">会员结算项目：</h3>
+            <h3 class="box-title">会员用户服务：</h3>
             <div class="box-detail">
                 <div class="describe"><b>会员用户</b>结算时默认可选的服务项目，可以简化反复的输入</div>
                 <div class="form">
@@ -14,7 +14,7 @@ export const settingTemplate = `
             </div>
         </div>
         <div class="setting-box setting-options setting-common-serve-options">
-            <h3 class="box-title">普通结算项目：</h3>
+            <h3 class="box-title">普通用户服务：</h3>
             <div class="box-detail">
                 <div class="describe"><b>普通用户</b>结算时默认可选的服务项目，可以简化反复的输入</div>
                 <div class="form">
@@ -27,7 +27,7 @@ export const settingTemplate = `
             </div>
         </div>
         <div class="setting-box setting-options setting-license-plate-prefix">
-            <h3 class="box-title">车牌照前缀：</h3>
+            <h3 class="box-title">车牌前缀：</h3>
             <div class="box-detail">
                 <div class="describe">结算时<b>车牌照前缀</b>默认可选的选项，可以简化反复的输入</div>
                 <div class="form">
@@ -39,7 +39,7 @@ export const settingTemplate = `
             </div>
         </div>
         <div class="setting-box setting-license-plate-prefix-default">
-            <h3 class="box-title">自动牌照前缀：</h3>
+            <h3 class="box-title">默认车牌前缀：</h3>
             <div class="box-detail">
                 <div class="describe">自动添加的车牌照前缀，省去每次都要手动选择的操作</div>
                 <div class="form">
@@ -91,7 +91,7 @@ export const memberTemplate = `
     <section class="main-section main-member">
         <header class="main-member-header">
             <span class="sort">ID<i class="icon"></i></span>
-            <span>称呼</span>
+            <span>名称</span>
             <span class="sort">车辆<i class="icon"></i></span>
             <span class="sort">共充值<i class="icon"></i></span>
             <span class="sort">共消费<i class="icon"></i></span>
@@ -113,8 +113,8 @@ export const addMemberTemplate = `
             <div class="member">
                 <h2>车主信息</h2>
                 <div class="box member-name">
-                    <label>称呼：</label>
-                    <input type="text" placeholder="输入称呼...">
+                    <label>名称：</label>
+                    <input type="text" placeholder="输入名称...">
                 </div>
                 <div class="box member-contact">
                     <div class="item weixin">
@@ -134,7 +134,7 @@ export const addMemberTemplate = `
             <div class="car">
                 <h2>添加车辆</h2>
                 <div class="car-license-tag">
-                    <label>牌照：</label>
+                    <label>车牌：</label>
                     <input type="text" class="prefix" placeholder="冀G">
                     <i class="iconfont icon-dian"></i>
                     <input type="text" class="number" placeholder="88888">
@@ -147,7 +147,7 @@ export const addMemberTemplate = `
                 <ul class="car-list"></ul>
             </div>
             <div class="pay">
-                <h2>会员充值</h2>
+                <h2>支付信息</h2>
                 <div class="pay-amount">
                     <label>金额：</label>
                     <input type="number" min="0" placeholder="人名币">
@@ -165,6 +165,10 @@ export const addMemberTemplate = `
                     <li>
                         <label for="pay-platform-xianjin">现金</label>
                         <input type="radio" name="pay-platform" id="pay-platform-xianjin" value="现金">
+                    </li>
+                    <li>
+                        <label for="pay-platform-qita">其他</label>
+                        <input type="radio" name="pay-platform" id="pay-platform-qita" value="其他">
                     </li>
                 </ul>
             </div>
@@ -185,7 +189,7 @@ export const memberDetailsTemplate = `
                 <span></span>
             </div>
             <div class="item name">
-                <span>称呼</span>
+                <span>名称</span>
                 <input type="text" value="" readonly>
             </div>
             <div class="item balance">
@@ -353,5 +357,21 @@ export const memberSettleAccountsTemplate = `
             <div class="total">合计：<span>0</span> 元</div>
             <button class="submit">提交</button>
         </div>
+    </section>
+`;
+
+export const activateAppTemplate = `
+    <section class="main-section activate-app">
+        <div class="step first-step">
+            <h3>第一步</h3>
+            <p>发送下列编号</p>
+            <span class="identifier"></span>
+        </div>
+        <div class="step second-step">
+            <h3>第二步</h3>
+            <p>将收到的激活码粘贴到输入框内，然后点击激活即可</p>
+            <textarea class="key-box" placeholder="输入激活码..."></textarea>
+        </div>
+        <button class="activate-button">激活</button>
     </section>
 `;

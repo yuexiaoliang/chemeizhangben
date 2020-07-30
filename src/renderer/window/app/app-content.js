@@ -6,3 +6,5 @@ import './app-content/search.js';
 import './app-content/bill.js';
 import './app-content/ordinary-settle-accounts.js';
 import './app-content/member-settle-accounts.js';
+import './app-content/member-settle-accounts.js';
+import './app-content/activate-app.js';

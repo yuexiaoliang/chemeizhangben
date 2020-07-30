@@ -3,7 +3,7 @@ export class PopUp {
         this.options = {
             addClass: options.addClass || false,
             type: options.type || '', // 类型
-            showShade: options.showShade || false, // 是否显示遮罩层
+            showShade: options.showShade || true, // 是否显示遮罩层
             align: options.align || 'center', // 对齐方式
             x: options.x || 0, // 左边距
             y: options.y || 0, // 上边距

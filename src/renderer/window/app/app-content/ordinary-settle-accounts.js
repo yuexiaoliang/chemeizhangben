@@ -272,7 +272,7 @@ new SwitchPage(
                 if (ordinaryDB.has(obj.car).value()) {
                     ordinaryDB
                         .get(`${obj.car}.expensesRecord`)
-                        .unshift(obj.expensesRecord)
+                        .unshift(expensesRecordItem)
                         .write();
                 } else {
                     ordinaryDB.set(`${obj.car}`, obj).write();
