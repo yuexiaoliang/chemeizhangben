@@ -1,6 +1,3 @@
-const path = require('path');
-
-import { defaultDataDir } from '../../../common/all_path.js';
 import { CreateSelect, getDB } from '../../../common/tool.js';
 import { PopUp } from '../../../common/pop_up/pop_up.js';
 import { SwitchPage } from './switchPage.js';
@@ -13,13 +10,8 @@ new SwitchPage(
         html: ordinarySettleAccountsTemplate,
     },
     function (mainOrdinarySettleAccountsElement) {
-        const settingsDBPath = path.join(defaultDataDir, 'settings-db.json');
-        const settingsDB = getDB(settingsDBPath);
-        const ordinaryDBPath = path.join(
-            settingsDB.get('dataDir').value(),
-            'database/ordinary.json'
-        );
-        const ordinaryDB = getDB(ordinaryDBPath);
+        const settingsDB = getDB.settings();
+        const ordinaryDB = getDB.ordinary();
 
         const settleAccountsDateInput = mainOrdinarySettleAccountsElement.querySelector(
             '.settle-accounts-date'
@@ -293,6 +285,11 @@ new SwitchPage(
                         '';
                     totalSum = 0;
                     rendererTotalHtml();
+                    laydate.render({
+                        elem: settleAccountsDateInput,
+                        type: 'datetime',
+                        value: new Date(),
+                    });
                 });
             });
         })();

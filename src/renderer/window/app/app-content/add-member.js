@@ -1,9 +1,4 @@
-import {
-    CreateSelect,
-    getSettingsDB,
-    getMemberDB,
-    getAppStatus,
-} from '../../../common/tool.js';
+import { CreateSelect, getDB, getAppStatus } from '../../../common/tool.js';
 import { PopUp } from '../../../common/pop_up/pop_up.js';
 import { SwitchPage } from './switchPage.js';
 import { addMemberTemplate } from './contentTemplates.js';
@@ -61,8 +56,8 @@ new SwitchAddMemberPage(
         html: addMemberTemplate,
     },
     (mainAddMemberElement) => {
-        const settingsDB = getSettingsDB();
-        const memberDB = getMemberDB();
+        const settingsDB = getDB.settings();
+        const memberDB = getDB.members();
         const addDateElement = mainAddMemberElement.querySelector('.add-date'); // 时间
         const memberNameInput = mainAddMemberElement.querySelector(
             '.member .member-name input'

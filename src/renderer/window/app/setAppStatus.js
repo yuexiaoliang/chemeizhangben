@@ -1,13 +1,8 @@
-import {
-    getSettingsDB,
-    getDBMAC,
-    activationCodeDecryption,
-} from '../../common/tool.js';
+import { getDB, getMAC, activationCodeDecryption } from '../../common/tool.js';
 
-const settingsDB = getSettingsDB();
-const mac = getDBMAC();
+const settingsDB = getDB.settings();
+const mac = getMAC();
 const activationCode = settingsDB.get('activationCode').value();
-let decryptedString;
 
 (() => {
     if (!activationCode || typeof activationCode !== 'string') {
@@ -15,8 +10,7 @@ let decryptedString;
         return;
     }
     try {
-        decryptedString = activationCodeDecryption(activationCode);
-        if (decryptedString !== mac) {
+        if (activationCodeDecryption(activationCode) !== mac) {
             setStatus();
         }
     } catch (error) {

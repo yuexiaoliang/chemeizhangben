@@ -1,6 +1,3 @@
-const path = require('path');
-
-import { defaultDataDir } from '../../../common/all_path.js';
 import { getDB } from '../../../common/tool.js';
 import { PopUp } from '../../../common/pop_up/pop_up.js';
 import { SwitchPage } from './switchPage.js';
@@ -13,13 +10,8 @@ new SwitchPage(
         html: memberSettleAccountsTemplate,
     },
     function (mainMemberSettleAccountsElement, id) {
-        const settingsDBPath = path.join(defaultDataDir, 'settings-db.json');
-        const settingsDB = getDB(settingsDBPath);
-        const memberDBPath = path.join(
-            settingsDB.get('dataDir').value(),
-            'database/member.json'
-        );
-        const memberDB = getDB(memberDBPath);
+        const settingsDB = getDB.settings();
+        const memberDB = getDB.members();
         const memberId = id;
 
         const settleAccountsDateInput = mainMemberSettleAccountsElement.querySelector(

@@ -2,13 +2,41 @@
   "name": "chemeizhangben",
   "productName": "Chemei Zhangben",
   "version": "1.0.0",
-  "description": "",
+  "description": "适合中小型洗车店、汽车美容店的电子账本",
   "main": "src/main.js",
-  "directories": {
-    "doc": "docs"
-  },
   "scripts": {
-    "electron:start": "electron ."
+    "electron:start": "electron .",
+    "build": "electron-builder --ia32"
+  },
+  "build": {
+    "productName": "车美账本",
+    "appId": "com.0313.www",
+    "copyright": "布尔网络",
+    "directories": {
+      "output": "build/app"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "./build/icons/installer.ico",
+      "uninstallerIcon": "./build/icons/uninstaller.ico",
+      "installerHeaderIcon": "./build/icons/installerHeader.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "车美账本"
+    },
+    "win": {
+      "icon": "build/icons/aims.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "ia32"
+          ]
+        }
+      ]
+    }
   },
   "repository": {
     "type": "git",
@@ -19,12 +47,10 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^9.0.5",
-    "typescript": "^3.9.5"
+    "electron-builder": "^22.7.0"
   },
   "dependencies": {
-    "@types/lowdb": "^1.0.9",
     "getmac": "^5.13.0",
-    "holmes.js": "^1.17.3",
     "lowdb": "^1.0.0"
   }
 }

@@ -1,63 +1,105 @@
 const path = require('path');
 const fs = require('fs');
 
-const {
-    app,
-    BrowserWindow,
-    ipcMain,
-    dialog,
-    Tray,
-    Menu,
-    shell,
-} = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, shell } = require('electron');
 
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 
-let win, tray;
+let win;
 
 app.whenReady().then(() => {
-    const appSettingsPath = path.join(
-        app.getPath('home'),
-        app.getName(),
-        'settings-db.json'
-    );
-    if (!fs.existsSync(appSettingsPath)) {
-        createInitWindow();
-    } else {
+    const documentsPath = app.getPath('documents');
+    const appDocumentsPath = path.join(documentsPath, app.getName());
+    const settingsPath = path.join(appDocumentsPath, 'settings.json');
+    const ordinaryPath = path.join(appDocumentsPath, 'ordinary.json');
+    const membersPath = path.join(appDocumentsPath, 'members.json');
+
+    // 如果程序数据文件夹不存在，则创建
+    if (!fs.existsSync(appDocumentsPath)) {
         try {
-            const adapter = new FileSync(appSettingsPath);
-            const db = low(adapter);
-            const password = db.get('password').value();
-            const dataDir = db.get('dataDir').value();
-            if (!password || !dataDir) {
-                createInitWindow();
-                return;
-            }
-            if (dataDir) {
-                if (!fs.existsSync(dataDir)) {
-                    try {
-                        fs.mkdirSync(dataDir, {
-                            recursive: true,
-                        });
-                    } catch (err) {
-                        createInitWindow();
-                        return;
-                    }
-                }
-            }
-        } catch (error) {
-            createInitWindow();
-            return;
+            fs.mkdirSync(appDocumentsPath, {
+                recursive: true,
+            });
+        } catch (err) {
+            dialog.showErrorBox('出错啦！！！', err);
         }
-        createMainWindow();
     }
+
+    // 如果程序设置数据文件不存在则创建，并初始化
+    if (!fs.existsSync(settingsPath)) {
+        try {
+            const adapter = new FileSync(settingsPath);
+            const db = low(adapter);
+            db.defaults({
+                password: '8888888',
+            }).write();
+        } catch (err) {
+            dialog.showErrorBox('出错啦！！！', err);
+        }
+    }
+    // 如果程序设置数据文件存在
+    else {
+        try {
+            const adapter = new FileSync(settingsPath);
+            const db = low(adapter);
+            // 检测密码设置
+            if (
+                !db.has('password').value() ||
+                !db.get('password').value() ||
+                typeof db.get('password').value() !== 'string'
+            ) {
+                db.set('password', '8888888').write();
+            }
+        } catch (err) {
+            dialog.showErrorBox('出错啦！！！', err);
+        }
+    }
+
+    // 如果程序会员数据文件不存在则创建，并初始化
+    if (!fs.existsSync(membersPath)) {
+        try {
+            const adapter = new FileSync(membersPath);
+            const db = low(adapter);
+        } catch (err) {
+            dialog.showErrorBox('出错啦！！！', err);
+        }
+    }
+
+    // 如果程序普通数据文件不存在则创建，并初始化
+    if (!fs.existsSync(ordinaryPath)) {
+        try {
+            const adapter = new FileSync(ordinaryPath);
+            const db = low(adapter);
+        } catch (err) {
+            dialog.showErrorBox('出错啦！！！', err);
+        }
+    }
+
+    // 创建 BrowserWindow
+    win = new BrowserWindow({
+        width: 1524,
+        height: 768,
+        webPreferences: {
+            nodeIntegration: true,
+        },
+        backgroundColor: '#ffffff',
+        resizable: false,
+        frame: false,
+        show: false,
+    });
+
+    win.loadFile('pages/index.html');
+
+    // 取消打开时窗口闪烁
+    win.once('ready-to-show', () => {
+        setTimeout(() => {
+            win.show();
+        }, 500);
+    });
+    win.webContents.openDevTools();
 });
 
-// 完成初始化时被触发
-app.on('ready', () => {
-    createTray();
-});
 //当所有窗口都被关闭后退出
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
@@ -66,10 +108,7 @@ app.on('window-all-closed', () => {
 });
 
 // 程序退出前事件
-app.on('before-quit', () => {
-    // 销毁托盘图标
-    tray.destroy();
-});
+app.on('before-quit', () => {});
 
 // -------- ipc -------- //
 // 关闭窗口
@@ -103,6 +142,11 @@ ipcMain.on('get-app-name', (event) => {
     event.returnValue = app.getName();
 });
 
+// 获取用户目录路径
+ipcMain.on('get-path', (event, path) => {
+    event.returnValue = app.getPath(path);
+});
+
 // 选择文件夹
 ipcMain.on('select-dir', (event) => {
     dialog
@@ -113,7 +157,7 @@ ipcMain.on('select-dir', (event) => {
             event.returnValue = result;
         })
         .catch((err) => {
-            console.log(err);
+            dialog.showErrorBox('出错啦！！！', err);
         });
 });
 
@@ -123,67 +167,8 @@ ipcMain.on('open-dir', (event, dirPath) => {
     event.returnValue = null;
 });
 
-function createMainWindow() {
-    win = new BrowserWindow({
-        width: 1524,
-        height: 768,
-        webPreferences: {
-            nodeIntegration: true,
-        },
-        backgroundColor: '#ffffff',
-        resizable: false,
-        frame: false,
-        show: false,
-        icon: 'resources/tray.png',
-    });
-
-    win.loadFile('pages/index.html');
-
-    // 取消打开时窗口闪烁
-    win.once('ready-to-show', () => {
-        setTimeout(() => {
-            win.show();
-        }, 500);
-    });
-    win.webContents.openDevTools();
-}
-
-function createInitWindow() {
-    win = new BrowserWindow({
-        width: 900,
-        height: 500,
-        webPreferences: {
-            nodeIntegration: true,
-        },
-        center: true,
-        backgroundColor: '#ffffff',
-        resizable: false,
-        frame: false,
-        show: false,
-        icon: 'resources/tray.png',
-    });
-
-    win.loadFile('pages/init.html');
-
-    // 取消打开时窗口闪烁
-    win.once('ready-to-show', () => {
-        setTimeout(() => {
-            win.show();
-        }, 500);
-    });
-
-    // 打开控制台
-    win.webContents.openDevTools();
-}
-
-function createTray() {
-    tray = new Tray('resources/tray48X48.ico');
-    const contextMenu = Menu.buildFromTemplate([
-        { label: 'Item1', type: 'radio' },
-        { label: 'Item2', type: 'radio' },
-        { label: 'Item3', type: 'radio', checked: true },
-        { label: 'Item4', type: 'radio' },
-    ]);
-    tray.setToolTip('车美账本');
-    tray.setContextMenu(contextMenu);
-}
+// 弹出错误对话框
+ipcMain.on('show-error-box', (event, options) => {
+    dialog.showErrorBox(options.title, options.msg);
+    event.returnValue = null;
+});

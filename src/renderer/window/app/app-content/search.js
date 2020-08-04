@@ -1,6 +1,3 @@
-const path = require('path');
-
-import { defaultDataDir } from '../../../common/all_path.js';
 import { getDB, throttle, fuzzyQuery } from '../../../common/tool.js';
 import { SwitchPage } from './switchPage.js';
 import { searchTemplate } from './contentTemplates.js';
@@ -17,13 +14,8 @@ new SwitchPage(
 );
 mainSearch();
 function mainSearch(ele) {
-    const settingsDBPath = path.join(defaultDataDir, 'settings-db.json'); // 设置数据文件的路径
-    const settingsDB = getDB(settingsDBPath); // 获取设置数据文件的数据
-    const memberDBPath = path.join(
-        settingsDB.get('dataDir').value(),
-        'database/member.json'
-    );
-    const memberDB = getDB(memberDBPath);
+    const settingsDB = getDB.settings();
+    const memberDB = getDB.members();
     const memberData = {};
     let mainSearchElement;
     if (ele) {

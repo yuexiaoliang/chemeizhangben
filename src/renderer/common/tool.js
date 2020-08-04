@@ -2,67 +2,55 @@ const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 
+const { ipcRenderer } = require('electron');
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const getmac = require('getmac');
-
-import { defaultDataDir } from '../common/all_path.js';
-import { verifyPasswordTemplate } from './html_templates.js';
 import { PopUp } from './pop_up/pop_up.js';
 
-/**
- * 获取数据
- * @param {String} dbPath 数据的路径
- */
-export function getDB(dbPath) {
-    const dirPath = path.dirname(dbPath);
-    if (!fs.existsSync(dirPath)) {
-        try {
-            fs.mkdirSync(dirPath, { recursive: true });
-        } catch (err) {
-            PopUp.hint({ msg: `程序出错了: ${err}` });
-        }
-    }
-    let adapter = new FileSync(dbPath);
-    return low(adapter);
-}
+// 获取常用路径
+export const getPath = {
+    userDocuments() {
+        return ipcRenderer.sendSync('get-path', 'documents');
+    },
+    appDocuments() {
+        return path.join(
+            this.userDocuments(),
+            ipcRenderer.sendSync('get-app-name')
+        );
+    },
+    settings() {
+        return path.join(this.appDocuments(), 'settings.json');
+    },
+    members() {
+        return path.join(this.appDocuments(), 'members.json');
+    },
+    ordinary() {
+        return path.join(this.appDocuments(), 'ordinary.json');
+    },
+};
 
-/**
- * 获取设置数据
- */
-export function getSettingsDB() {
-    return getDB(path.join(defaultDataDir, 'settings-db.json'));
-}
-
-/**
- * 获取会员数据
- */
-export function getMemberDB() {
-    const settingsDB = getSettingsDB();
-    const memberDBPath = path.join(
-        settingsDB.get('dataDir').value(),
-        'database/member.json'
-    );
-    return getDB(memberDBPath);
-}
-
-/**
- * 获取普通消费数据
- */
-export function getOrdinaryDB() {
-    const settingsDB = getSettingsDB();
-    const ordinaryDBPath = path.join(
-        settingsDB.get('dataDir').value(),
-        'database/ordinary.json'
-    );
-    return getDB(ordinaryDBPath);
-}
+// 获取数据
+export const getDB = {
+    settings() {
+        let adapter = new FileSync(getPath.settings());
+        return low(adapter);
+    },
+    members() {
+        let adapter = new FileSync(getPath.members());
+        return low(adapter);
+    },
+    ordinary() {
+        let adapter = new FileSync(getPath.ordinary());
+        return low(adapter);
+    },
+};
 
 /**
  * 获取数据库中的 MAC 地址
  */
 export function getDBMAC() {
-    const settingsDB = getSettingsDB();
+    const settingsDB = getDB.settings();
     const mac = getMAC();
     if (!settingsDB.has('mac').value() || !testMAC()) {
         settingsDB.set('mac', mac).write();
@@ -75,27 +63,11 @@ export function getDBMAC() {
         return settingsDB.get('mac').value() === mac ? true : false;
     }
 }
-
 /**
  * 获取本机的 MAC 地址
  */
 export function getMAC() {
     return getmac.default().replace(/:/gi, ' ');
-}
-
-/**
- * 创建目录
- * @param {String} dirPath 目录路径
- */
-export function createDir(dirPath) {
-    if (!fs.existsSync(dirPath)) {
-        try {
-            fs.mkdirSync(dirPath, { recursive: true });
-        } catch (err) {
-            console.error(err);
-        }
-    }
-    return dirPath;
 }
 
 /**
@@ -112,45 +84,26 @@ export function getAppStatus() {
     return true;
 }
 
+/**
+ * 检测激活码
+ * @param {String} str 激活码
+ */
 export function activationCodeDecryption(str) {
-    const rsaPubKey = `-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAocNEOd8Qx+c2nda5dzEc
-yMaToinVAwqK1mxZC0LELsLP8VKApPmAgJ0qB3xArg0Gfo0Y7efnruAfM6blyDKO
-SpUdx+3SAlIvQKC8a6zslC8h0TcKyPtrcONPXSJMkIAotoGzaXkaAUTBLqjkmoru
-9DBQYewIP6VXa8ZqH40NMBT2YL/FmZfAYhv7pUTVKJJGOVMC6jcsVvHiH6xHMeAQ
-7ft3RPCRYYGvmxVIiEdMW2p89fZPZZ4X6S/y0xhjl5ql3z3ezPj/tLKp1QUBWdrK
-ynJ97tHYt7M01lJh8bGdntUIV82VcQK27kcIlpZr3J7G+4xQ3kYwFn7RXvBcXGsU
-KQIDAQAB
------END PUBLIC KEY-----`;
+    const rsaPubKey = fs
+        .readFileSync(path.join(__dirname, '../rsa_public_key.pem'))
+        .toString();
     return crypto
         .publicDecrypt(rsaPubKey, Buffer.from(str, 'hex'))
         .toString('utf8');
 }
 
 /**
- * 创建遮罩层
- * @param {*} contentHtml
+ * 验证密码格式是否符合
+ * @param {String} val 密码
  */
-export function createShade(contentHtml) {
-    const body = document.querySelector('body');
-    const appShadeElement = document.createElement('div');
-    const closeElement = document.createElement('span');
-    const contentElement = document.createElement('div');
-
-    appShadeElement.classList.add('app-shade');
-    closeElement.classList.add('close', 'iconfont', 'icon-close');
-    contentElement.classList.add('content');
-    contentElement.innerHTML = contentHtml;
-
-    appShadeElement.appendChild(closeElement);
-    appShadeElement.appendChild(contentElement);
-    body.appendChild(appShadeElement);
-
-    closeElement.addEventListener('click', () => {
-        body.removeChild(appShadeElement);
-    });
-
-    return appShadeElement;
+export function passwordVerification(val) {
+    const pwdRegex = /^([0-9a-zA-Z]){6,16}$/;
+    return pwdRegex.test(val);
 }
 
 /**
@@ -158,8 +111,7 @@ export function createShade(contentHtml) {
  * @param {Function} fn 回调函数
  */
 export function verifyPassword(fn) {
-    const settingsDBPath = path.join(defaultDataDir, 'settings-db.json');
-    const settingsDB = getDB(settingsDBPath);
+    const settingsDB = getDB.settings();
     const password = settingsDB.get('password').value();
     PopUp.open(
         {
@@ -182,7 +134,7 @@ export function verifyPassword(fn) {
             const hintElement = popUpElement.querySelector('.pop-up-msg .hint');
             if (passwordInput.value === password) {
                 this.removePopUp();
-                fn();
+                fn && fn();
             } else {
                 hintElement.innerHTML = '密码输入错误！';
             }
@@ -191,7 +143,7 @@ export function verifyPassword(fn) {
 }
 
 /**
- * 创建选项
+ * 创建下拉选项
  */
 export class CreateSelect {
     constructor(opsions) {
@@ -316,4 +268,22 @@ export function throttle(fn, delay) {
             canRun = true;
         }, delay);
     };
+}
+
+/**
+ * 创建目录
+ * @param {String} dirPath 目录路径
+ */
+export function createDir(dirPath) {
+    if (!fs.existsSync(dirPath)) {
+        try {
+            fs.mkdirSync(dirPath, { recursive: true });
+        } catch (err) {
+            ipcRenderer.sendSync('show-error-box', {
+                title: '出错啦！！！',
+                msg: err,
+            });
+        }
+    }
+    return dirPath;
 }

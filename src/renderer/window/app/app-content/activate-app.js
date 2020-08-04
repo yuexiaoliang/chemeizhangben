@@ -1,8 +1,8 @@
 const { ipcRenderer } = require('electron');
 
 import {
-    getSettingsDB,
-    getDBMAC,
+    getDB,
+    getMAC,
     activationCodeDecryption,
 } from '../../../common/tool.js';
 import { PopUp } from '../../../common/pop_up/pop_up.js';
@@ -21,8 +21,8 @@ new SwitchPage(
         const activateButton = activateAppElement.querySelector(
             '.activate-button'
         );
-        const settingsDB = getSettingsDB();
-        const mac = getDBMAC();
+        const settingsDB = getDB.settings();
+        const mac = getMAC();
         identifier.innerHTML = mac;
         activateButton.addEventListener('click', () => {
             const code = keyBox.value;
@@ -36,7 +36,7 @@ new SwitchPage(
                     });
                 }
             } catch (error) {
-                PopUp.hint({ msg: '激活码失败' });
+                PopUp.hint({ msg: '激活失败' });
             }
         });
     }

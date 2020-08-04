@@ -1,8 +1,5 @@
-const path = require('path');
-
 const { ipcRenderer } = require('electron');
 
-import { defaultDataDir } from '../../../common/all_path.js';
 import {
     getDB,
     CreateSelect,
@@ -20,13 +17,8 @@ new SwitchPage(
         html: memberDetailsTemplate,
     },
     function (mainMemberDetailsElement, id) {
-        const settingsDBPath = path.join(defaultDataDir, 'settings-db.json'); // 设置数据文件的路径
-        const settingsDB = getDB(settingsDBPath); // 获取设置数据文件的数据
-        const memberDBPath = path.join(
-            settingsDB.get('dataDir').value(),
-            'database/member.json'
-        );
-        const memberDB = getDB(memberDBPath);
+        const settingsDB = getDB.settings();
+        const memberDB = getDB.members();
         const memberData = memberDB.get(id).value();
         // 会员信息
         (() => {
@@ -344,7 +336,6 @@ new SwitchPage(
                             const index = target.parentNode.getAttribute(
                                 'data-index'
                             );
-                            console.log(index);
                             memberDB
                                 .get(`${memberData.id}.carList`)
                                 .splice(index, 1)

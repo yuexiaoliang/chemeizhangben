@@ -1,14 +1,13 @@
-const path = require('path');
-const fs = require('fs');
-
 const { ipcRenderer } = require('electron');
 
-import { defaultDataDir } from '../../../common/all_path.js';
 import { settingTemplate } from './contentTemplates.js';
-import { appName } from '../../../common/all_path.js';
-import passwordVerification from '../../../common/password_verification.js';
 import { SwitchPage } from './switchPage.js';
-import { verifyPassword, getDB, createDir } from '../../../common/tool.js';
+import {
+    verifyPassword,
+    getDB,
+    getPath,
+    passwordVerification,
+} from '../../../common/tool.js';
 
 class SwithSetting extends SwitchPage {
     switchPage() {
@@ -46,8 +45,7 @@ new SwithSetting(
         html: settingTemplate,
     },
     (settingElement) => {
-        const settingsDBPath = path.join(defaultDataDir, 'settings-db.json');
-        const settingsDB = getDB(settingsDBPath);
+        const settingsDB = getDB.settings();
 
         class SettingOptions {
             constructor(options) {
@@ -199,7 +197,9 @@ new SwithSetting(
                 super.addOptions();
                 // 添加按钮点击事件
                 this.options.nodes.addElement.addEventListener('click', () => {
-                    const nameElementValue = this.options.nodes.nameElement.value.trim();
+                    const nameElementValue = this.options.nodes.nameElement.value
+                        .trim()
+                        .toUpperCase();
 
                     // 如果名称为空
                     if (!nameElementValue) {
@@ -315,7 +315,7 @@ new SwithSetting(
                     settingsDB
                         .set(
                             'licensePlatePrefixOptionsDefault',
-                            inputElement.value
+                            inputElement.value.trim().toUpperCase()
                         )
                         .write();
                     saveElement.classList.remove('true');
@@ -347,36 +347,11 @@ new SwithSetting(
             const optionsElement = settingElement.querySelector(
                 '.setting-data-location .box-detail'
             );
-            const saveElement = optionsElement.querySelector('.save');
             const locationElement = optionsElement.querySelector(
                 '.form .location'
             );
-            const changeElement = optionsElement.querySelector('.form .change');
             const openElement = optionsElement.querySelector('.form .open');
-
-            locationElement.value = settingsDB.get('dataDir').value();
-            changeElement.addEventListener('click', () => {
-                const dialogRest = ipcRenderer.sendSync('select-dir');
-                if (!dialogRest.canceled) {
-                    locationElement.value = path.join(
-                        dialogRest.filePaths[0],
-                        appName
-                    );
-                    saveElement.classList.add('true');
-                }
-            });
-            saveElement.addEventListener('click', () => {
-                if (saveElement.classList.contains('true')) {
-                    const dataDir = locationElement.value;
-                    settingsDB.set('dataDir', dataDir).write();
-                    const dataDirPath = createDir(
-                        path.join(dataDir, 'database')
-                    ); // 数据保存的文件夹路径
-                    getDB(path.join(dataDirPath, 'member.json'));
-                    getDB(path.join(dataDirPath, 'ordinary.json'));
-                    saveElement.classList.remove('true');
-                }
-            });
+            locationElement.value = getPath.appDocuments();
             openElement.addEventListener('click', () => {
                 ipcRenderer.sendSync('open-dir', locationElement.value);
             });

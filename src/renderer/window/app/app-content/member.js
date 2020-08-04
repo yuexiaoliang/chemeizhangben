@@ -1,6 +1,3 @@
-const path = require('path');
-
-import { defaultDataDir } from '../../../common/all_path.js';
 import { getDB } from '../../../common/tool.js';
 import { SwitchPage } from './switchPage.js';
 import { memberTemplate } from './contentTemplates.js';
@@ -12,13 +9,7 @@ new SwitchPage(
         html: memberTemplate,
     },
     (mainMemberElement) => {
-        const settingsDBPath = path.join(defaultDataDir, 'settings-db.json'); // 设置数据文件的路径
-        const settingsDB = getDB(settingsDBPath); // 获取设置数据文件的数据
-        const memberDBPath = path.join(
-            settingsDB.get('dataDir').value(),
-            'database/member.json'
-        );
-        const memberDB = getDB(memberDBPath).value();
+        const memberDB = getDB.members().value();
         const mainMemberHeaderItemElements = mainMemberElement.querySelectorAll(
             '.main-member-header span'
         );

@@ -169,12 +169,26 @@
         }
     }
 
+    .setting-license-plate-prefix {
+        .box-detail {
+            .form {
+                .name {
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+
     .setting-license-plate-prefix-default {
         .box-detail {
             .form {
                 float: left;
                 width: auto;
                 margin-right: 10px;
+
+                input {
+                    text-transform: uppercase;
+                }
             }
 
             .save {

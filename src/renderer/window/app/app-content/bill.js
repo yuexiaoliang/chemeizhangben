@@ -1,6 +1,3 @@
-const path = require('path');
-
-import { defaultDataDir } from '../../../common/all_path.js';
 import { getDB } from '../../../common/tool.js';
 import { SwitchPage } from './switchPage.js';
 import { billTemplate } from './contentTemplates.js';
@@ -11,18 +8,9 @@ new SwitchPage(
         html: billTemplate,
     },
     function (mainBillElement) {
-        const settingsDBPath = path.join(defaultDataDir, 'settings-db.json'); // 设置数据文件的路径
-        const settingsDB = getDB(settingsDBPath); // 获取设置数据文件的数据
-        const memberDBPath = path.join(
-            settingsDB.get('dataDir').value(),
-            'database/member.json'
-        );
-        const ordinaryDBPath = path.join(
-            settingsDB.get('dataDir').value(),
-            'database/ordinary.json'
-        );
-        const memberDB = getDB(memberDBPath).value();
-        const ordinaryDB = getDB(ordinaryDBPath).value();
+        const settingsDB = getDB.settings();
+        const memberDB = getDB.members().value();
+        const ordinaryDB = getDB.ordinary().value();
 
         const billTimeInput = mainBillElement.querySelector('.bill-time');
         const billTableListElement = mainBillElement.querySelector(

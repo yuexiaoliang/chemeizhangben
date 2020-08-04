@@ -1,14 +1,10 @@
-const path = require('path');
-
-import { defaultDataDir } from '../../common/all_path.js';
 import { getDB } from '../../common/tool.js';
-const settingsDBPath = path.join(defaultDataDir, 'settings-db.json');
-const settingsDB = getDB(settingsDBPath);
+const settingsDB = getDB.settings();
 const password = settingsDB.get('password').value();
 
 const lockoutButton = document.querySelector('.lockout');
 lockoutButton.addEventListener('click', lockout);
-// lockout();
+
 function lockout() {
     const lockoutElement = document.createElement('div');
     lockoutElement.classList.add('lockout-wrapper');

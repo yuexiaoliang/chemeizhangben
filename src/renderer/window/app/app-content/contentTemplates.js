@@ -66,10 +66,8 @@ export const settingTemplate = `
                 <div class="describe">您的数据保存在此文件夹中，<b>和软件初始设置中的数据储存目录一致</b></div>
                 <div class="form">
                     <input class="location" type="text" readonly>
-                    <button class="change">更改目录</button>
                     <button class="open">打开文件夹</button>
                 </div>
-                <span class="save">保存</span>
             </div>
         </div>
         <div class="setting-box setting-password">
