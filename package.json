@@ -19,15 +19,15 @@
       "oneClick": false,
       "allowElevation": true,
       "allowToChangeInstallationDirectory": true,
-      "installerIcon": "./build/icons/installer.ico",
-      "uninstallerIcon": "./build/icons/uninstaller.ico",
-      "installerHeaderIcon": "./build/icons/installerHeader.ico",
+      "installerIcon": "./resources/icons/installer.ico",
+      "uninstallerIcon": "./resources/icons/uninstaller.ico",
+      "installerHeaderIcon": "./resources/icons/installerHeader.ico",
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "车美账本"
     },
     "win": {
-      "icon": "build/icons/aims.ico",
+      "icon": "./resources/icons/aims.ico",
       "target": [
         {
           "target": "nsis",
