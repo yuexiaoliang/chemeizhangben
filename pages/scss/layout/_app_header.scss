@@ -128,6 +128,15 @@
                         white-space: nowrap;
                         transition: color .3s;
 
+                        a {
+                            text-decoration: none;
+                            color: #777;
+
+                            &:hover {
+                                color: #333;
+                            }
+                        }
+
                         &:hover {
                             color: #333;
                         }

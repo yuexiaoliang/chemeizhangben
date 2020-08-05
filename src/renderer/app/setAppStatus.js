@@ -1,4 +1,4 @@
-import { getDB, getMAC, activationCodeDecryption } from '../../common/tool.js';
+import { getDB, getMAC, activationCodeDecryption } from '../common/tool.js';
 
 const settingsDB = getDB.settings();
 const mac = getMAC();

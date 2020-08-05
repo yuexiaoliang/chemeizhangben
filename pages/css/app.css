@@ -841,6 +841,15 @@ html {
   transition: color .3s;
 }
 
+.app-header .window-control .more .list ul li a {
+  text-decoration: none;
+  color: #777;
+}
+
+.app-header .window-control .more .list ul li a:hover {
+  color: #333;
+}
+
 .app-header .window-control .more .list ul li:hover {
   color: #333;
 }

@@ -1,4 +1,4 @@
-import { getDB } from '../../../common/tool.js';
+import { getDB } from '../../common/tool.js';
 import { SwitchPage } from './switchPage.js';
 import { billTemplate } from './contentTemplates.js';
 new SwitchPage(

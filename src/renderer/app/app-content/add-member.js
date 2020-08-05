@@ -1,5 +1,5 @@
-import { CreateSelect, getDB, getAppStatus } from '../../../common/tool.js';
-import { PopUp } from '../../../common/pop_up/pop_up.js';
+import { CreateSelect, getDB, getAppStatus } from '../../common/tool.js';
+import { PopUp } from '../../common/pop_up/pop_up.js';
 import { SwitchPage } from './switchPage.js';
 import { addMemberTemplate } from './contentTemplates.js';
 

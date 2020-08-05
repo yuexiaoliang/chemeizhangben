@@ -116,4 +116,7 @@ dist
 .pnp.*
 
 # electron-builder 打包后的目录
-build/app
+build/
+
+# 创建测试数据
+test/createTestData/node_modules/

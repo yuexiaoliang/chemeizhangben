@@ -1,4 +1,4 @@
-import { getDB, throttle, fuzzyQuery } from '../../../common/tool.js';
+import { getDB, throttle, fuzzyQuery } from '../../common/tool.js';
 import { SwitchPage } from './switchPage.js';
 import { searchTemplate } from './contentTemplates.js';
 

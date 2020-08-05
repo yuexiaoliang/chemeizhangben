@@ -1,12 +1,7 @@
 const { ipcRenderer } = require('electron');
 
-import {
-    getDB,
-    CreateSelect,
-    tab,
-    verifyPassword,
-} from '../../../common/tool.js';
-import { PopUp } from '../../../common/pop_up/pop_up.js';
+import { getDB, CreateSelect, tab, verifyPassword } from '../../common/tool.js';
+import { PopUp } from '../../common/pop_up/pop_up.js';
 import { SwitchPage } from './switchPage.js';
 import { memberDetailsTemplate } from './contentTemplates.js';
 

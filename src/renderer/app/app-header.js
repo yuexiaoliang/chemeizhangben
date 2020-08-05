@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron');
 
-import { getAppStatus } from '../../common/tool.js';
+import { getAppStatus } from '../common/tool.js';
 
 const appHeader = document.querySelector('.app-header');
 const windowControlElement = appHeader.querySelector('.window-control');

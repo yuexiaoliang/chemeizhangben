@@ -1,5 +1,5 @@
-import { CreateSelect, getDB } from '../../../common/tool.js';
-import { PopUp } from '../../../common/pop_up/pop_up.js';
+import { CreateSelect, getDB } from '../../common/tool.js';
+import { PopUp } from '../../common/pop_up/pop_up.js';
 import { SwitchPage } from './switchPage.js';
 import { ordinarySettleAccountsTemplate } from './contentTemplates.js';
 

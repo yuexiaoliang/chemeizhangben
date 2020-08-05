@@ -13,7 +13,7 @@
     "appId": "com.0313.www",
     "copyright": "布尔网络",
     "directories": {
-      "output": "build/app"
+      "output": "build"
     },
     "nsis": {
       "oneClick": false,
@@ -26,6 +26,13 @@
       "createStartMenuShortcut": true,
       "shortcutName": "车美账本"
     },
+    "files": [
+      "node_modules/",
+      "pages/",
+      "resources/",
+      "src/",
+      "rsa_public_key.pem"
+    ],
     "win": {
       "icon": "./resources/icons/aims.ico",
       "target": [

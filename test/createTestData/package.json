@@ -1,0 +1,16 @@
+{
+  "name": "createTestData",
+  "version": "1.0.0",
+  "description": "",
+  "main": "createTestData.js",
+  "scripts": {
+    "start": "node createTestData.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.27.0",
+    "shortid": "^2.2.15"
+  }
+}

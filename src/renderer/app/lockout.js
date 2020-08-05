@@ -1,4 +1,4 @@
-import { getDB } from '../../common/tool.js';
+import { getDB } from '../common/tool.js';
 const settingsDB = getDB.settings();
 const password = settingsDB.get('password').value();
 

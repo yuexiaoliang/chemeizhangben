@@ -7,7 +7,7 @@ import {
     getDB,
     getPath,
     passwordVerification,
-} from '../../../common/tool.js';
+} from '../../common/tool.js';
 
 class SwithSetting extends SwitchPage {
     switchPage() {
