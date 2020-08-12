@@ -39,7 +39,7 @@ app.whenReady().then(() => {
             const db = low(adapter);
             db.defaults({
                 password: '888888',
-                memberServeOptions: [['洗车', 300]],
+                memberServeOptions: [['洗车', 30]],
                 commonServeOptions: [['洗车', 35]],
                 carTypeOptions: ['宝马'],
                 licensePlatePrefixOptions: ['冀G'],
@@ -152,7 +152,7 @@ app.whenReady().then(() => {
             win.show();
         }, 500);
     });
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
 });
 
 //当所有窗口都被关闭后退出

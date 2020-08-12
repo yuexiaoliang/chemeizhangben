@@ -89,12 +89,12 @@ new SwitchPage(
             for (let i = 0; i < commonServeOptions.length; i++) {
                 const item = commonServeOptions[i];
                 commonServeOptionsHtml += `
-            <div class="option">
-                <span class="name">${item[0]}</span>
-                <i class="fenge"></i>
-                <span class="sum">￥${item[1]}</span>
-            </div>
-        `;
+                    <div class="option">
+                        <span class="name">${item[0]}</span>
+                        <i class="fenge"></i>
+                        <span class="sum">￥${item[1]}</span>
+                    </div>
+                `;
             }
             commonServeOptionsElement.innerHTML = commonServeOptionsHtml;
         })();
@@ -115,14 +115,14 @@ new SwitchPage(
                             .querySelector('.sum')
                             .innerText.replace('￥', '');
                         addedServeOptions.innerHTML += `
-                    <div class="item">
-                        <span class="option">
-                            <b class="name">${optionName}</b>
-                            <b class="sum">${optionSum}</b>元
-                        </span>
-                        <span class="delete">删除</span>
-                    </div>
-                `;
+                            <div class="item">
+                                <span class="option">
+                                    <b class="name">${optionName}</b>
+                                    <b class="sum">${optionSum}</b>元
+                                </span>
+                                <span class="delete">删除</span>
+                            </div>
+                        `;
                         totalSum += optionSum * 1;
                         rendererTotalHtml();
                     }
