@@ -8,6 +8,7 @@ import {
     getPath,
     passwordVerification,
 } from '../../common/tool.js';
+import { PopUp } from '../../common/pop_up/pop_up.js';
 
 class SwithSetting extends SwitchPage {
     switchPage() {
@@ -446,18 +447,16 @@ new SwithSetting(
                     if (!passwordVerification(passwordVal)) {
                         hintElement.innerHTML = '密码格式错误';
                     } else {
-                        passwordElement.value = settingsDB
-                            .set('password', passwordVal)
-                            .write();
-                        passwordElement.value = settingsDB
-                            .get('password')
-                            .value();
-                        passwordElement.setAttribute('type', 'password');
-                        lookElement.classList.remove(
-                            'icon-icon_chakanmima_kai'
-                        );
-                        lookElement.classList.add('icon-icon_chakanmima_guan');
-                        saveElement.classList.remove('true');
+                        try {
+                            settingsDB.set('password', passwordVal).write();
+                            PopUp.hint({ msg: '修改成功' }, () => {
+                                ipcRenderer.send('win-reload');
+                            });
+                        } catch (error) {
+                            PopUp.hint({ msg: '修改失败' }, () => {
+                                console.log(error);
+                            });
+                        }
                     }
                 }
             });
