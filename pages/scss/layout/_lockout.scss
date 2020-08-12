@@ -16,51 +16,20 @@
     background-repeat: no-repeat;
     background-size: cover;
 
-    .unlock-form {
-        display: flex;
-        align-items: center;
+    .unlock-password {
+        padding: 0 20px;
+        width: 260px;
         height: 40px;
         background-color: rgba($color: #fff, $alpha: .2);
         border-radius: 20px;
+        border: 0;
+        text-align: center;
+        transition: all .3s;
 
-        input,
-        button {
-            height: 100%;
-            background-color: transparent;
-            border: 0;
-            color: #fff;
-        }
-
-        input {
-            padding-left: 20px;
-
-            &::placeholder {
-                color: #fff;
-                opacity: .5;
-            }
-
-            &:focus {
-
-                &+button,
-                &::placeholder {
-                    opacity: 1;
-                }
-            }
-        }
-
-        button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            font-size: 18px;
-            opacity: .5;
-            cursor: pointer;
-            transform: none;
-
-            &:hover {
-                opacity: 1;
-            }
+        &:focus {
+            background-color: rgba($color: #fff, $alpha: 1);
+            color: #333;
+            box-shadow: 0 0 8px 2px #fff;
         }
     }
 

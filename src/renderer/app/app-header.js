@@ -7,6 +7,8 @@ const windowControlElement = appHeader.querySelector('.window-control');
 const reloadBtn = windowControlElement.querySelector('.reload');
 const closeBtn = windowControlElement.querySelector('.close');
 const minimizeBtn = windowControlElement.querySelector('.minimize');
+const moreButton = windowControlElement.querySelector('.more > .iconfont');
+const moreList = windowControlElement.querySelector('.more > .list');
 
 // 如果程序是未激活状态，添加未激活按钮
 if (!getAppStatus()) {
@@ -26,4 +28,14 @@ reloadBtn.addEventListener('click', () => {
 
 minimizeBtn.addEventListener('click', () => {
     ipcRenderer.send('win-minimize');
+});
+
+moreButton.addEventListener('click', (e) => {
+    e.stopPropagation();
+    moreList.classList.toggle('show');
+});
+document.addEventListener('click', () => {
+    if (moreList.classList.contains('show')) {
+        moreList.classList.remove('show');
+    }
 });

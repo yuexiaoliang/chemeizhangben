@@ -92,7 +92,7 @@ new SwitchPage(
             <div class="option">
                 <span class="name">${item[0]}</span>
                 <i class="fenge"></i>
-                <span class="sum">${item[1]}</span>
+                <span class="sum">￥${item[1]}</span>
             </div>
         `;
             }
@@ -111,8 +111,9 @@ new SwitchPage(
                     ) {
                         const optionName = element.querySelector('.name')
                             .innerText;
-                        const optionSum = element.querySelector('.sum')
-                            .innerText;
+                        const optionSum = element
+                            .querySelector('.sum')
+                            .innerText.replace('￥', '');
                         addedServeOptions.innerHTML += `
                     <div class="item">
                         <span class="option">
@@ -135,36 +136,48 @@ new SwitchPage(
                 '.option-name'
             );
             const optionSumInput = addServeOptions.querySelector('.option-sum');
-            const addButton = addServeOptions.querySelector('.add');
-
-            addButton.addEventListener('click', () => {
-                const optionNameInputValue = addServeOptions
-                    .querySelector('.option-name')
-                    .value.trim();
-                const optionSumInputValue = addServeOptions
-                    .querySelector('.option-sum')
-                    .value.trim();
-
-                if (!optionNameInputValue) {
-                    optionNameInput.focus();
-                    return;
-                }
-                if (!optionSumInputValue) {
+            optionNameInput.addEventListener('keypress', (e) => {
+                if (e.charCode === 13) {
+                    const optionNameInputValue = addServeOptions
+                        .querySelector('.option-name')
+                        .value.trim();
+                    if (!optionNameInputValue) {
+                        optionNameInput.focus();
+                        return;
+                    }
                     optionSumInput.focus();
-                    return;
                 }
-                addedServeOptions.innerHTML += `
-                    <div class="item">
-                        <span class="option">
-                            <b class="name">${optionNameInputValue}</b>
-                            <b class="sum">${optionSumInputValue}</b>元
-                        </span>
-                        <span class="delete">删除</span>
-                    </div>
-                `;
-                totalSum += optionSumInputValue * 1;
-                rendererTotalHtml();
-                optionNameInput.value = optionSumInput.value = '';
+            });
+            optionSumInput.addEventListener('keypress', (e) => {
+                if (e.charCode === 13) {
+                    const optionNameInputValue = addServeOptions
+                        .querySelector('.option-name')
+                        .value.trim();
+                    const optionSumInputValue = addServeOptions
+                        .querySelector('.option-sum')
+                        .value.trim();
+
+                    if (!optionNameInputValue) {
+                        optionNameInput.focus();
+                        return;
+                    }
+                    if (!optionSumInputValue) {
+                        optionSumInput.focus();
+                        return;
+                    }
+                    addedServeOptions.innerHTML += `
+                        <div class="item">
+                            <span class="option">
+                                <b class="name">${optionNameInputValue}</b>
+                                <b class="sum">${optionSumInputValue}</b>元
+                            </span>
+                            <span class="delete">删除</span>
+                        </div>
+                    `;
+                    totalSum += optionSumInputValue * 1;
+                    rendererTotalHtml();
+                    optionNameInput.value = optionSumInput.value = '';
+                }
             });
         })();
 

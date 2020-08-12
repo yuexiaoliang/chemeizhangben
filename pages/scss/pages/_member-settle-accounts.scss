@@ -31,6 +31,7 @@
 
             .member-info {
                 display: flex;
+                flex-wrap: wrap;
 
                 span {
                     margin-right: 20px;
@@ -39,11 +40,26 @@
                         color: #000;
                     }
                 }
+                .name {
+                    b {
+                        color: var(--app-side-bg-color);
+                        cursor: pointer;
 
+                        &:hover {
+                            opacity: 0.8;
+                        }
+                    }
+                }
                 .balance {
                     b {
                         margin-right: 4px;
                         color: red;
+                    }
+                }
+                .ramarks {
+                    b {
+                        font-weight: normal;
+                        color: #999;
                     }
                 }
             }
@@ -61,7 +77,7 @@
                     height: 30px;
                     padding: 0 10px;
                     margin: 5px;
-                    background-color: rgba($color: #000000, $alpha: .05);
+                    background-color: rgba($color: #000000, $alpha: 0.05);
                     border-radius: 4px;
                     cursor: pointer;
 
@@ -70,7 +86,7 @@
                         width: 1px;
                         height: 1em;
                         margin: 0 10px;
-                        background-color: rgba($color: #000000, $alpha: .2);
+                        background-color: rgba($color: #000000, $alpha: 0.2);
                     }
 
                     .name {

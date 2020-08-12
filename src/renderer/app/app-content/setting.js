@@ -73,16 +73,29 @@ new SwithSetting(
                 this.data = settingsDB.get(this.options.dataKey).value();
             }
             addOptions() {
-                // 所有 input 失去焦点
                 for (
                     let i = 0;
                     i < this.options.nodes.inputElement.length;
                     i++
                 ) {
                     const input = this.options.nodes.inputElement[i];
+
+                    // 所有 input 失去焦点
                     input.addEventListener('blur', () => {
-                        this.options.nodes.hintElement.style.display = 'none';
-                        this.options.nodes.hintElement.innerHTML = '';
+                        if (this.options.nodes.hintElement.innerHTML) {
+                            this.options.nodes.hintElement.style.display =
+                                'none';
+                            this.options.nodes.hintElement.innerHTML = '';
+                        }
+                    });
+
+                    // 输入时，如果有提示内容则清空提示内容
+                    input.addEventListener('input', () => {
+                        if (this.options.nodes.hintElement.innerHTML) {
+                            this.options.nodes.hintElement.style.display =
+                                'none';
+                            this.options.nodes.hintElement.innerHTML = '';
+                        }
                     });
                 }
 
@@ -132,50 +145,79 @@ new SwithSetting(
             }
             addOptions() {
                 super.addOptions();
-                // 添加按钮点击事件
-                this.options.nodes.addElement.addEventListener('click', () => {
-                    const nameElementValue = this.options.nodes.nameElement.value.trim();
-                    const priceElementValue = this.options.nodes.priceElement
-                        .value;
-
-                    // 如果名称为空
-                    if (!nameElementValue) {
-                        this.options.nodes.hintElement.style.display = 'flex';
-                        this.options.nodes.hintElement.innerHTML =
-                            '请输入项目名称';
-                        this.options.nodes.nameElement.value = '';
-                        this.options.nodes.nameElement.focus();
-                        return;
+                // 名称字段按下 Enter 事件
+                this.options.nodes.nameElement.addEventListener(
+                    'keypress',
+                    (e) => {
+                        if (e.charCode === 13) {
+                            const nameElementValue = this.options.nodes.nameElement.value.trim();
+                            // 如果名称为空
+                            if (!nameElementValue) {
+                                this.options.nodes.hintElement.style.display =
+                                    'flex';
+                                this.options.nodes.hintElement.innerHTML =
+                                    '请输入项目名称';
+                                this.options.nodes.nameElement.value = '';
+                                this.options.nodes.nameElement.focus();
+                                return;
+                            }
+                            this.options.nodes.priceElement.focus();
+                        }
                     }
+                );
 
-                    // 如果价格为空
-                    if (!priceElementValue) {
-                        this.options.nodes.hintElement.style.display = 'flex';
-                        this.options.nodes.hintElement.innerHTML = '请输入价格';
-                        this.options.nodes.priceElement.value = '';
-                        this.options.nodes.priceElement.focus();
-                        return;
+                // 价格字段按下 Enter 事件
+                this.options.nodes.priceElement.addEventListener(
+                    'keypress',
+                    (e) => {
+                        if (e.charCode === 13) {
+                            const nameElementValue = this.options.nodes.nameElement.value.trim();
+                            const priceElementValue = this.options.nodes
+                                .priceElement.value;
+
+                            // 如果名称为空
+                            if (!nameElementValue) {
+                                this.options.nodes.hintElement.style.display =
+                                    'flex';
+                                this.options.nodes.hintElement.innerHTML =
+                                    '请输入项目名称';
+                                this.options.nodes.nameElement.value = '';
+                                this.options.nodes.nameElement.focus();
+                                return;
+                            }
+
+                            // 如果价格为空
+                            if (!priceElementValue) {
+                                this.options.nodes.hintElement.style.display =
+                                    'flex';
+                                this.options.nodes.hintElement.innerHTML =
+                                    '请输入价格';
+                                this.options.nodes.priceElement.value = '';
+                                this.options.nodes.priceElement.focus();
+                                return;
+                            }
+
+                            // 清空名称和价格输入框
+                            this.options.nodes.nameElement.value = this.options.nodes.priceElement.value =
+                                '';
+
+                            // 更新数据库
+                            settingsDB
+                                .get(this.options.dataKey)
+                                .push([nameElementValue, priceElementValue * 1])
+                                .write();
+
+                            // 更新HTML
+                            this.options.nodes.listElement.innerHTML += `
+                                <li>
+                                    <span class="item name">${nameElementValue}</span>
+                                    <span class="item price">￥${priceElementValue}</span>
+                                    <span class="item delete iconfont icon-shanchu"></span>
+                                </li>
+                            `;
+                        }
                     }
-
-                    // 清空名称和价格输入框
-                    this.options.nodes.nameElement.value = this.options.nodes.priceElement.value =
-                        '';
-
-                    // 更新数据库
-                    settingsDB
-                        .get(this.options.dataKey)
-                        .push([nameElementValue, priceElementValue])
-                        .write();
-
-                    // 更新HTML
-                    this.options.nodes.listElement.innerHTML += `
-                        <li>
-                            <span class="item name">${nameElementValue}</span>
-                            <span class="item price">￥${priceElementValue}</span>
-                            <span class="item delete iconfont icon-shanchu"></span>
-                        </li>
-                    `;
-                });
+                );
             }
         }
         class SettingTypeOptions extends SettingOptions {
@@ -185,48 +227,54 @@ new SwithSetting(
                 for (let i = 0; i < this.data.length; i++) {
                     const item = this.data[i];
                     html += `
-                <li>
-                    <span class="item name">${item}</span>
-                    <span class="item delete iconfont icon-shanchu"></span>
-                </li>
-            `;
+                        <li>
+                            <span class="item name">${item}</span>
+                            <span class="item delete iconfont icon-shanchu"></span>
+                        </li>
+                    `;
                 }
                 this.options.nodes.listElement.innerHTML = html;
             }
             addOptions() {
                 super.addOptions();
-                // 添加按钮点击事件
-                this.options.nodes.addElement.addEventListener('click', () => {
-                    const nameElementValue = this.options.nodes.nameElement.value
-                        .trim()
-                        .toUpperCase();
+                // 添加Enter事件
+                this.options.nodes.nameElement.addEventListener(
+                    'keypress',
+                    (e) => {
+                        if (e.charCode === 13) {
+                            const nameElementValue = this.options.nodes.nameElement.value
+                                .trim()
+                                .toUpperCase();
+                            // 如果名称为空
+                            if (!nameElementValue) {
+                                this.options.nodes.hintElement.style.display =
+                                    'flex';
+                                this.options.nodes.hintElement.innerHTML =
+                                    '车牌照前缀';
+                                this.options.nodes.nameElement.value = '';
+                                this.options.nodes.nameElement.focus();
+                                return;
+                            }
 
-                    // 如果名称为空
-                    if (!nameElementValue) {
-                        this.options.nodes.hintElement.style.display = 'flex';
-                        this.options.nodes.hintElement.innerHTML = '车牌照前缀';
-                        this.options.nodes.nameElement.value = '';
-                        this.options.nodes.nameElement.focus();
-                        return;
+                            // 清空名称输入框
+                            this.options.nodes.nameElement.value = '';
+
+                            // 更新数据库
+                            settingsDB
+                                .get(this.options.dataKey)
+                                .push(nameElementValue)
+                                .write();
+
+                            // 更新HTML
+                            this.options.nodes.listElement.innerHTML += `
+                                <li>
+                                    <span class="item name">${nameElementValue}</span>
+                                    <span class="item delete iconfont icon-shanchu"></span>
+                                </li>
+                            `;
+                        }
                     }
-
-                    // 清空名称和价格输入框
-                    this.options.nodes.nameElement.value = '';
-
-                    // 更新数据库
-                    settingsDB
-                        .get(this.options.dataKey)
-                        .push(nameElementValue)
-                        .write();
-
-                    // 更新HTML
-                    this.options.nodes.listElement.innerHTML += `
-                        <li>
-                            <span class="item name">${nameElementValue}</span>
-                            <span class="item delete iconfont icon-shanchu"></span>
-                        </li>
-                    `;
-                });
+                );
             }
         }
 

@@ -18,12 +18,14 @@ new SwitchPage(
             '.activate-button'
         );
         const settingsDB = getDB.settings();
+
+        const reg = /\s/gi;
         const mac = getMAC();
         identifier.innerHTML = mac;
         activateButton.addEventListener('click', () => {
             const code = keyBox.value;
             try {
-                if (activationCodeDecryption(code) !== mac) {
+                if (activationCodeDecryption(code) !== mac.replace(reg, '')) {
                     PopUp.hint({ msg: '激活码错误' });
                 } else {
                     settingsDB.set('activationCode', code).write();

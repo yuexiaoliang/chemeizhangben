@@ -8,7 +8,6 @@ new SwitchPage(
         html: billTemplate,
     },
     function (mainBillElement) {
-        const settingsDB = getDB.settings();
         const memberDB = getDB.members().value();
         const ordinaryDB = getDB.ordinary().value();
 
@@ -163,24 +162,27 @@ new SwitchPage(
                         const moneyData = data.moneyData[i];
                         let list = '';
                         if (moneyData.date === date) {
+                            moneyData.bill.sort((a, b) => {
+                                return a.record[0] < b.record[0] ? 1 : -1;
+                            });
                             for (let j = 0; j < moneyData.bill.length; j++) {
                                 const item = moneyData.bill[j];
                                 const time = item.record[0].split(' ')[1];
                                 switch (item.type) {
                                     case 0:
                                         list += `
-                                    <li class="member">
-                                        <header>
-                                            <span class="time">${time}</span>
-                                            <span class="type">会员充值</span>
-                                            <span class="id" data-id="${item.id}" switch-page="member-details">${item.name}</span>
-                                        </header>
-                                        <div class="content">
-                                            <span>充值金额：<i class="hong sum">${item.record[1]}</i>元</span>
-                                            <span>充值方式：<i class="lan">${item.record[2]}</i></span>
-                                        </div>
-                                    </li>
-                                `;
+                                            <li class="member">
+                                                <header>
+                                                    <span class="time">${time}</span>
+                                                    <span class="type">会员充值</span>
+                                                    <span class="id" data-id="${item.id}" switch-page="member-details">${item.name}</span>
+                                                </header>
+                                                <div class="content">
+                                                    <span>充值金额：<i class="hong sum">${item.record[1]}</i>元</span>
+                                                    <span>充值方式：<i class="lan">${item.record[2]}</i></span>
+                                                </div>
+                                            </li>
+                                        `;
                                         break;
                                     case 1:
                                         let conHtml = '';
@@ -214,15 +216,15 @@ new SwitchPage(
                                 }
                             }
                             detailContentHtml += `
-                        <h2 class="date">${moneyData.date}</h2>
-                        <ul class="list">${list}</ul>
-                    `;
+                                <h2 class="date">${moneyData.date}</h2>
+                                <ul class="list">${list}</ul>
+                            `;
                         }
                     }
                     billMoneyDetailElement.innerHTML = `
-                <span class="close iconfont icon-close"></span>
-                <div class="detail-content">${detailContentHtml}</div>
-            `;
+                        <span class="close iconfont icon-close"></span>
+                        <div class="detail-content">${detailContentHtml}</div>
+                    `;
                     mainBillElement.appendChild(billMoneyDetailElement);
                 }
             });

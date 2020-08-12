@@ -35,6 +35,13 @@
         }
 
         .balance {
+            span {
+                &:nth-child(2) {
+                    color: red;
+                    font-weight: bold;
+                }
+            }
+
             .recharge {
                 margin-left: 10px;
                 color: var(--app-side-bg-color);

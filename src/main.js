@@ -8,6 +8,12 @@ const FileSync = require('lowdb/adapters/FileSync');
 
 let win;
 
+// 阻止程序多开
+const gotTheLock = app.requestSingleInstanceLock();
+if (!gotTheLock) {
+    app.quit();
+}
+
 app.whenReady().then(() => {
     const documentsPath = app.getPath('documents');
     const appDocumentsPath = path.join(documentsPath, app.getName());
@@ -32,7 +38,12 @@ app.whenReady().then(() => {
             const adapter = new FileSync(settingsPath);
             const db = low(adapter);
             db.defaults({
-                password: '8888888',
+                password: '888888',
+                memberServeOptions: [['洗车', 300]],
+                commonServeOptions: [['洗车', 35]],
+                carTypeOptions: ['宝马'],
+                licensePlatePrefixOptions: ['冀G'],
+                licensePlatePrefixOptionsDefault: '冀G',
             }).write();
         } catch (err) {
             dialog.showErrorBox('出错啦！！！', err);
@@ -44,12 +55,54 @@ app.whenReady().then(() => {
             const adapter = new FileSync(settingsPath);
             const db = low(adapter);
             // 检测密码设置
-            if (
-                !db.has('password').value() ||
-                !db.get('password').value() ||
-                typeof db.get('password').value() !== 'string'
-            ) {
-                db.set('password', '8888888').write();
+            detectionSetting(db, 'password', 'String', '888888');
+
+            // 检测会员消费常用选项设置
+            detectionSetting(db, 'memberServeOptions', 'Array', [['洗车', 30]]);
+
+            // 检测普通用户消费常用选项设置
+            detectionSetting(db, 'commonServeOptions', 'Array', [['洗车', 35]]);
+
+            // 检测车辆类型常用选项设置
+            detectionSetting(db, 'carTypeOptions', 'Array', ['宝马']);
+
+            // 检测车牌号前缀常用选项设置
+            detectionSetting(db, 'licensePlatePrefixOptions', 'Array', ['冀G']);
+
+            // 检测车牌号前缀默认添加设置
+            detectionSetting(
+                db,
+                'licensePlatePrefixOptionsDefault',
+                'String',
+                '冀G'
+            );
+
+            /**
+             * 检测数据
+             * @param {String} optionName 名称
+             * @param {String} optionType 类型
+             * @param {Type} optionVal 初始值
+             */
+            function detectionSetting(db, optionName, optionType, optionVal) {
+                if (
+                    !db.has(optionName).value() ||
+                    !db.get(optionName).value() ||
+                    getType(db.get(optionName).value()) !== optionType
+                ) {
+                    db.set(optionName, optionVal).write();
+                    return;
+                }
+                if (
+                    getType(db.get(optionName).value()) === 'Array' &&
+                    !db.get(optionName).value().length
+                ) {
+                    db.set(optionName, optionVal).write();
+                }
+                function getType(data) {
+                    return /^\[object\s(.*)\]$/.exec(
+                        Object.prototype.toString.call(data)
+                    )[1];
+                }
             }
         } catch (err) {
             dialog.showErrorBox('出错啦！！！', err);
@@ -61,6 +114,7 @@ app.whenReady().then(() => {
         try {
             const adapter = new FileSync(membersPath);
             const db = low(adapter);
+            db.defaults({}).write();
         } catch (err) {
             dialog.showErrorBox('出错啦！！！', err);
         }
@@ -71,6 +125,7 @@ app.whenReady().then(() => {
         try {
             const adapter = new FileSync(ordinaryPath);
             const db = low(adapter);
+            db.defaults({}).write();
         } catch (err) {
             dialog.showErrorBox('出错啦！！！', err);
         }
@@ -78,7 +133,7 @@ app.whenReady().then(() => {
 
     // 创建 BrowserWindow
     win = new BrowserWindow({
-        width: 1524,
+        width: 1024,
         height: 768,
         webPreferences: {
             nodeIntegration: true,

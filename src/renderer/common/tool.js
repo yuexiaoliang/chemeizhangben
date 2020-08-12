@@ -6,7 +6,6 @@ const { ipcRenderer } = require('electron');
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const getmac = require('getmac');
-import { PopUp } from './pop_up/pop_up.js';
 
 // 获取常用路径
 export const getPath = {
@@ -92,9 +91,11 @@ export function activationCodeDecryption(str) {
     const rsaPubKey = fs
         .readFileSync(path.join(__dirname, '../rsa_public_key.pem'))
         .toString();
-    return crypto
+    let code = crypto
         .publicDecrypt(rsaPubKey, Buffer.from(str, 'hex'))
         .toString('utf8');
+    const reg = /\s/gi;
+    return code.replace(reg, '');
 }
 
 /**
@@ -110,36 +111,49 @@ export function passwordVerification(val) {
  * 验证密码弹出框
  * @param {Function} fn 回调函数
  */
-export function verifyPassword(fn) {
+export function verifyPassword(callback) {
     const settingsDB = getDB.settings();
     const password = settingsDB.get('password').value();
-    PopUp.open(
-        {
-            addClass: 'verify-password',
-            type: 'warn',
-            title: '验证密码',
-            msg:
-                '<input class="password-input" type="password" placeholder="请输入密码"><p class="hint"></p>',
-            buttons: ['确定', '取消'],
-        },
-        function (index) {
-            if (index === 1) {
-                this.removePopUp();
+    const verifyPasswordElement = document.createElement('div');
+    verifyPasswordElement.classList.add('verify-password');
+    verifyPasswordElement.innerHTML = `
+        <input type="password" placeholder="输入密码，按Enter键确认">
+        <p class="hint"></p> 
+    `;
+    document.body.appendChild(verifyPasswordElement);
+
+    const passwordInput = verifyPasswordElement.querySelector('input');
+    const passwordHint = verifyPasswordElement.querySelector('.hint');
+
+    passwordInput.focus();
+    passwordInput.addEventListener('keypress', (e) => {
+        if (e.charCode === 13) {
+            const val = passwordInput.value;
+            if (!val && password !== '') {
+                passwordHint.innerHTML = '请输入密码';
                 return;
             }
-            const popUpElement = this.getPopUp();
-            const passwordInput = popUpElement.querySelector(
-                '.pop-up-msg .password-input'
-            );
-            const hintElement = popUpElement.querySelector('.pop-up-msg .hint');
-            if (passwordInput.value === password) {
-                this.removePopUp();
-                fn && fn();
-            } else {
-                hintElement.innerHTML = '密码输入错误！';
+            if (val !== password) {
+                passwordHint.innerHTML = '密码错误';
+                return;
+            }
+            if (val === password) {
+                callback && callback();
+                document.body.removeChild(verifyPasswordElement);
             }
         }
-    );
+    });
+    passwordInput.addEventListener('input', () => {
+        if (passwordHint.innerHTML) {
+            passwordHint.innerHTML = '';
+        }
+    });
+    passwordInput.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+    verifyPasswordElement.addEventListener('click', () => {
+        document.body.removeChild(verifyPasswordElement);
+    });
 }
 
 /**

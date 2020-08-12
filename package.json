@@ -5,12 +5,12 @@
   "description": "适合中小型洗车店、汽车美容店的电子账本",
   "main": "src/main.js",
   "scripts": {
-    "electron:start": "electron .",
+    "start": "electron .",
     "build": "electron-builder --ia32"
   },
   "build": {
     "productName": "车美账本",
-    "appId": "com.0313.www",
+    "appId": "co.0313.cm",
     "copyright": "布尔网络",
     "directories": {
       "output": "build"
@@ -58,6 +58,7 @@
   },
   "dependencies": {
     "getmac": "^5.13.0",
-    "lowdb": "^1.0.0"
+    "lowdb": "^1.0.0",
+    "qrcode": "^1.4.4"
   }
 }

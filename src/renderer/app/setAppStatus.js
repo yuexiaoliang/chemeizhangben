@@ -3,6 +3,7 @@ import { getDB, getMAC, activationCodeDecryption } from '../common/tool.js';
 const settingsDB = getDB.settings();
 const mac = getMAC();
 const activationCode = settingsDB.get('activationCode').value();
+const reg = /\s/gi;
 
 (() => {
     if (!activationCode || typeof activationCode !== 'string') {
@@ -10,7 +11,7 @@ const activationCode = settingsDB.get('activationCode').value();
         return;
     }
     try {
-        if (activationCodeDecryption(activationCode) !== mac) {
+        if (activationCodeDecryption(activationCode) !== mac.replace(reg, '')) {
             setStatus();
         }
     } catch (error) {

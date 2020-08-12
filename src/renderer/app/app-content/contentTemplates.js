@@ -3,11 +3,10 @@ export const settingTemplate = `
         <div class="setting-box setting-options setting-member-serve-options">
             <h3 class="box-title">会员用户服务：</h3>
             <div class="box-detail">
-                <div class="describe"><b>会员用户</b>结算时默认可选的服务项目，可以简化反复的输入</div>
+                <div class="describe"><b>会员用户</b>结账时可选的服务项目</div>
                 <div class="form">
-                    <input class="name" type="text" placeholder="项目名称">
+                    <input class="name" type="text" placeholder="输入项目名称，按Enter键">
                     <input class="price" type="number" min="0" placeholder="价格">
-                    <button class="add">添加</button>
                     <span class="hint"></span>
                 </div>
                 <ul class="list"></ul>
@@ -16,11 +15,10 @@ export const settingTemplate = `
         <div class="setting-box setting-options setting-common-serve-options">
             <h3 class="box-title">普通用户服务：</h3>
             <div class="box-detail">
-                <div class="describe"><b>普通用户</b>结算时默认可选的服务项目，可以简化反复的输入</div>
+                <div class="describe"><b>普通用户</b>结账时可选的服务项目</div>
                 <div class="form">
-                    <input class="name" type="text" placeholder="项目名称">
+                    <input class="name" type="text" placeholder="输入项目名称，按Enter键">
                     <input class="price" type="number" min="0" placeholder="价格">
-                    <button class="add">添加</button>
                     <span class="hint"></span>
                 </div>
                 <ul class="list"></ul>
@@ -29,10 +27,9 @@ export const settingTemplate = `
         <div class="setting-box setting-options setting-license-plate-prefix">
             <h3 class="box-title">车牌前缀：</h3>
             <div class="box-detail">
-                <div class="describe">结算时<b>车牌照前缀</b>默认可选的选项，可以简化反复的输入</div>
+                <div class="describe">结账时<b>车牌照前缀</b>可选的选项</div>
                 <div class="form">
-                    <input class="name" type="text" placeholder="车牌照前缀，如：冀G">
-                    <button class="add">添加</button>
+                    <input class="name" type="text" placeholder="输入车牌照前缀，按Enter键添加">
                     <span class="hint"></span>
                 </div>
                 <ul class="list"></ul>
@@ -41,7 +38,7 @@ export const settingTemplate = `
         <div class="setting-box setting-license-plate-prefix-default">
             <h3 class="box-title">默认车牌前缀：</h3>
             <div class="box-detail">
-                <div class="describe">自动添加的车牌照前缀，省去每次都要手动选择的操作</div>
+                <div class="describe">自动添加的<b>车牌照前缀</b></div>
                 <div class="form">
                     <input type="text">
                 </div>
@@ -51,10 +48,9 @@ export const settingTemplate = `
         <div class="setting-box setting-options setting-car-type">
             <h3 class="box-title">车辆类型：</h3>
             <div class="box-detail">
-                <div class="describe">结算时<b>车型</b>默认可选的前缀选项，可以简化反复的输入</div>
+                <div class="describe">结账时<b>车型</b>可选项</div>
                 <div class="form">
-                    <input class="name" type="text" placeholder="车型，如：宝马">
-                    <button class="add">添加</button>
+                    <input class="name" type="text" placeholder="输入车型，按Enter键添加">
                     <span class="hint"></span>
                 </div>
                 <ul class="list"></ul>
@@ -63,7 +59,7 @@ export const settingTemplate = `
         <div class="setting-box setting-data-location">
             <h3 class="box-title">数据储存目录：</h3>
             <div class="box-detail">
-                <div class="describe">您的数据保存在此文件夹中，<b>和软件初始设置中的数据储存目录一致</b></div>
+                <div class="describe">您的数据保存在此文件夹中，<b>注意：千万别修改或删除此文件夹中的文件，否则会造成数据出错或者丢失</b></div>
                 <div class="form">
                     <input class="location" type="text" readonly>
                     <button class="open">打开文件夹</button>
@@ -73,7 +69,7 @@ export const settingTemplate = `
         <div class="setting-box setting-password">
             <h3 class="box-title">程序密码：</h3>
             <div class="box-detail">
-                <div class="describe">在进行程序解锁，或者一些敏感操作的时候，需要验证密码，<b>和软件初始设置中的程序密码一致</b></div>
+                <div class="describe">在进行程序解锁，或者一些敏感操作的时候，需要验证密码；<b>密码格式：长度 6 - 16 位，只能包含数字和字母</b></div>
                 <div class="form">
                     <input class="password" type="password" placeholder="输入新密码">
                     <span class="look iconfont icon-icon_chakanmima_guan"></span>
@@ -299,9 +295,8 @@ export const ordinarySettleAccountsTemplate = `
             <h2>服务项目</h2>
             <div class="common-serve-options box"></div>
             <div class="add-serve-options box">
-                <input type="text" class="option-name" placeholder="项目名称">
+                <input type="text" class="option-name" placeholder="输入项目名称，按Enter键">
                 <input type="number" class="option-sum" placeholder="价格">
-                <button class="add">添加</button>
             </div>
             <div class="added-serve-options box"></div>
         </div>
@@ -335,19 +330,14 @@ export const memberSettleAccountsTemplate = `
         <input type="text" class="settle-accounts-date">
         <div class="member section">
             <h2>会员信息</h2>
-            <div class="member-info">
-                <span class="id">编号：<b>123</b></span>
-                <span class="name">名称：<b>士大夫</b></span>
-                <span class="balance">余额：<b>1233</b>元</span>
-            </div>
+            <div class="member-info"></div>
         </div>
         <div class="serve section">
             <h2>服务项目</h2>
             <div class="member-serve-options box"></div>
             <div class="add-serve-options box">
-                <input type="text" class="option-name" placeholder="项目名称">
+                <input type="text" class="option-name" placeholder="输入项目名称，按Enter键">
                 <input type="number" class="option-sum" placeholder="价格">
-                <button class="add">添加</button>
             </div>
             <div class="added-serve-options box"></div>
         </div>
@@ -362,7 +352,8 @@ export const activateAppTemplate = `
     <section class="main-section activate-app">
         <div class="step first-step">
             <h3>第一步</h3>
-            <p>发送下列编号</p>
+            <img class="weixinerweima" src="../resources/weixinerweima.png">
+            <p>扫码添加微信好友，并发送下列代码</p>
             <span class="identifier"></span>
         </div>
         <div class="step second-step">

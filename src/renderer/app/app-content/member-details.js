@@ -5,7 +5,49 @@ import { PopUp } from '../../common/pop_up/pop_up.js';
 import { SwitchPage } from './switchPage.js';
 import { memberDetailsTemplate } from './contentTemplates.js';
 
-new SwitchPage(
+class MemberDetailsSwitchPage extends SwitchPage {
+    switchPage() {
+        document.addEventListener('click', (e) => {
+            for (let i = 0; i < e.path.length; i++) {
+                const element = e.path[i];
+                if (element.nodeType === 1) {
+                    if (
+                        element.hasAttribute('switch-page') &&
+                        element.getAttribute('switch-page') ===
+                            this.options.page
+                    ) {
+                        const appSide = document.querySelector('.app-side');
+                        const appSideButtons = appSide.querySelectorAll(
+                            '.button'
+                        );
+                        const appSideMemberButton = appSide.querySelector(
+                            '.button.member'
+                        );
+                        for (let i = 0; i < appSideButtons.length; i++) {
+                            const button = appSideButtons[i];
+                            button.classList.remove('active');
+                        }
+                        appSideMemberButton.classList.add('active');
+
+                        const headerTitleElement = document.querySelector(
+                            '.app-header .header-title'
+                        );
+                        headerTitleElement.innerHTML = this.options.title;
+                        document.querySelector(
+                            '.app-main'
+                        ).innerHTML = this.options.html;
+                        this.callback(
+                            document.querySelector('.app-main').children[0],
+                            element.getAttribute('data-id')
+                        );
+                    }
+                }
+            }
+        });
+    }
+}
+
+new MemberDetailsSwitchPage(
     {
         page: 'member-details',
         title: '会员详情',
@@ -55,7 +97,7 @@ new SwitchPage(
             memberIdElement.innerHTML = memberData.id;
             memberDateElement.innerHTML = memberData.date;
             memberNameInput.value = memberData.name;
-            memberBalanceElement.innerHTML = memberData.balance;
+            memberBalanceElement.innerHTML = '￥' + memberData.balance;
             memberWeixinInput.value = memberData.contact.weixin;
             memberShoujiInput.value = memberData.contact.shouji;
             memberRamarksElement.value = memberData.ramarks;
@@ -196,9 +238,9 @@ new SwitchPage(
                                     .write();
                                 this.removePopUp();
                                 PopUp.hint({ msg: '充值成功' }, () => {
-                                    memberBalanceElement.innerHTML = memberDB
+                                    memberBalanceElement.innerHTML = `￥${memberDB
                                         .get(`${memberData.id}.balance`)
-                                        .value();
+                                        .value()}`;
                                     rendererRechargeRecord();
                                 });
                             } catch (error) {
@@ -276,8 +318,8 @@ new SwitchPage(
 
             // 添加车辆
             addCarButton.addEventListener('click', () => {
-                const carPrefix = addCarPrefixInput.value.trim();
-                const carNumber = addCarNumberInput.value.trim();
+                const carPrefix = addCarPrefixInput.value.toUpperCase().trim();
+                const carNumber = addCarNumberInput.value.toUpperCase().trim();
                 const carType = addCarTypeInput.value.trim();
 
                 if (!carPrefix) {
@@ -292,34 +334,31 @@ new SwitchPage(
                     addCarTypeInput.focus();
                     return;
                 }
-                verifyPassword(() => {
-                    try {
-                        memberDB
-                            .get(`${memberData.id}.carList`)
-                            .unshift([`${carPrefix}·${carNumber}`, carType])
-                            .write();
-                        rendererCarList();
-                        addCarPrefixInput.value = addCarNumberInput.value = addCarTypeInput.value =
-                            '';
-                        PopUp.hint(
-                            {
-                                msg: '添加成功',
-                            },
-                            () => {
-                                addCarPrefixInput.value = licensePlatePrefixOptionsDefault;
-                            }
-                        );
-                    } catch (error) {
-                        PopUp.hint(
-                            {
-                                msg: '添加失败',
-                            },
-                            () => {
-                                console.log(error);
-                            }
-                        );
-                    }
-                });
+                try {
+                    memberDB
+                        .get(`${memberData.id}.carList`)
+                        .unshift([`${carPrefix}·${carNumber}`, carType])
+                        .write();
+                    rendererCarList();
+                    addCarNumberInput.value = addCarTypeInput.value = '';
+                    PopUp.hint(
+                        {
+                            msg: '添加成功',
+                        },
+                        () => {
+                            addCarPrefixInput.value = licensePlatePrefixOptionsDefault;
+                        }
+                    );
+                } catch (error) {
+                    PopUp.hint(
+                        {
+                            msg: '添加失败',
+                        },
+                        () => {
+                            console.log(error);
+                        }
+                    );
+                }
             });
 
             // 删除车辆
@@ -403,7 +442,7 @@ new SwitchPage(
                 let total = 0;
                 for (let j = 0; j < record[1].length; j++) {
                     const item = record[1][j];
-                    sonsumerItem += `<span><i class="method">${item[0]}</i><i class="money">${item[1]}</i></span>`;
+                    sonsumerItem += `<span><i class="method">${item[0]}</i><i class="money">￥${item[1]}</i></span>`;
                     total += item[1];
                 }
                 expensesRecordHtml += `

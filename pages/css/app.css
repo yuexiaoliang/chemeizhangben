@@ -463,6 +463,7 @@ input[type="number"],
 input[type="search"] {
   padding: 0 4px;
   height: 32px;
+  line-height: 32px;
   font-size: 14px;
   border-radius: 2px;
   border: 1px solid var(--border-color);
@@ -514,6 +515,7 @@ button,
 input[type="submit"],
 input[type="button"] {
   height: 32px;
+  line-height: 32px;
   padding: 0 10px;
   font-size: 14px;
   background-color: #eee;
@@ -559,6 +561,7 @@ textarea:focus {
 select {
   padding: 0 10px;
   height: 32px;
+  line-height: 32px;
   outline: 0;
   border-color: var(--border-color);
 }
@@ -601,7 +604,7 @@ html {
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: var(--app-side-width);
-  background-color: var(--app-side-bg-color);
+  background-color: #0c0e38;
   color: #fff;
 }
 
@@ -637,6 +640,7 @@ html {
           align-items: center;
   width: var(--app-side-width);
   height: var(--app-side-width);
+  font-size: 20px;
   cursor: pointer;
 }
 
@@ -644,46 +648,26 @@ html {
   font-size: 18px;
 }
 
-.app-side .button-wrap .focus {
-  position: absolute;
-  z-index: -1;
-  display: block;
-  width: calc(var(--app-side-width) - 26px);
-  height: calc(var(--app-side-width) - 26px);
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  -webkit-transition: top .2s;
-  transition: top .2s;
-  opacity: 0;
-}
-
-.app-side .button-wrap .hint {
-  position: absolute;
-  top: 0;
-  left: calc(100% + 10px);
-  padding: 0 14px;
-  height: calc(var(--app-side-width) - 26px);
-  line-height: calc(var(--app-side-width) - 26px);
-  background-color: var(--app-side-bg-color);
+.app-side .button-wrap .button {
+  position: relative;
   color: #fff;
-  white-space: nowrap;
-  border-radius: 4px;
-  -webkit-transition: all .3s;
-  transition: all .3s;
-  visibility: hidden;
-  opacity: 0;
 }
 
-.app-side .button-wrap .hint::before {
+.app-side .button-wrap .button.active:after {
   content: '';
   position: absolute;
   top: 50%;
-  right: 100%;
-  z-index: 2;
+  left: 3px;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
-  border: 5px solid transparent;
-  border-right-color: var(--app-side-bg-color);
+  width: 1px;
+  height: 70%;
+  background-color: #fff;
+  border-radius: 2px;
+}
+
+.app-side .button-wrap-bottom .button.active {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .app-header {
@@ -769,7 +753,17 @@ html {
 }
 
 .app-header .window-control .item i.iconfont {
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 100%;
   font-size: 16px;
 }
 
@@ -804,6 +798,13 @@ html {
           transform: translateY(16px);
   -webkit-transition: all .3s;
   transition: all .3s;
+}
+
+.app-header .window-control .more .list.show {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
 }
 
 .app-header .window-control .more .list::before {
@@ -854,13 +855,6 @@ html {
   color: #333;
 }
 
-.app-header .window-control .more:hover .list {
-  visibility: visible;
-  opacity: 1;
-  -webkit-transform: translateY(0);
-          transform: translateY(0);
-}
-
 .app-main {
   position: absolute;
   top: var(--app-header-height);
@@ -899,86 +893,23 @@ html {
   background-size: cover;
 }
 
-.lockout-wrapper .unlock-form {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+.lockout-wrapper .unlock-password {
+  padding: 0 20px;
+  width: 260px;
   height: 40px;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 20px;
-}
-
-.lockout-wrapper .unlock-form input,
-.lockout-wrapper .unlock-form button {
-  height: 100%;
-  background-color: transparent;
   border: 0;
-  color: #fff;
+  text-align: center;
+  -webkit-transition: all .3s;
+  transition: all .3s;
 }
 
-.lockout-wrapper .unlock-form input {
-  padding-left: 20px;
-}
-
-.lockout-wrapper .unlock-form input::-webkit-input-placeholder {
-  color: #fff;
-  opacity: .5;
-}
-
-.lockout-wrapper .unlock-form input:-ms-input-placeholder {
-  color: #fff;
-  opacity: .5;
-}
-
-.lockout-wrapper .unlock-form input::-ms-input-placeholder {
-  color: #fff;
-  opacity: .5;
-}
-
-.lockout-wrapper .unlock-form input::placeholder {
-  color: #fff;
-  opacity: .5;
-}
-
-.lockout-wrapper .unlock-form input:focus + button, .lockout-wrapper .unlock-form input:focus::-webkit-input-placeholder {
-  opacity: 1;
-}
-
-.lockout-wrapper .unlock-form input:focus + button, .lockout-wrapper .unlock-form input:focus:-ms-input-placeholder {
-  opacity: 1;
-}
-
-.lockout-wrapper .unlock-form input:focus + button, .lockout-wrapper .unlock-form input:focus::-ms-input-placeholder {
-  opacity: 1;
-}
-
-.lockout-wrapper .unlock-form input:focus + button, .lockout-wrapper .unlock-form input:focus::placeholder {
-  opacity: 1;
-}
-
-.lockout-wrapper .unlock-form button {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 40px;
-  font-size: 18px;
-  opacity: .5;
-  cursor: pointer;
-  -webkit-transform: none;
-          transform: none;
-}
-
-.lockout-wrapper .unlock-form button:hover {
-  opacity: 1;
+.lockout-wrapper .unlock-password:focus {
+  background-color: white;
+  color: #333;
+  -webkit-box-shadow: 0 0 8px 2px #fff;
+          box-shadow: 0 0 8px 2px #fff;
 }
 
 .lockout-wrapper .unlock-hint {
@@ -1020,51 +951,43 @@ html {
   cursor: pointer;
 }
 
-.pop-up.verify-password .pop-up-msg {
+.verify-password {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999999;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
-.pop-up.verify-password .pop-up-msg .password-input {
-  width: 100%;
-  max-width: 200px;
+.verify-password input {
+  height: 40px;
+  width: 240px;
   text-align: center;
+  border-color: #fff;
 }
 
-.pop-up.verify-password .pop-up-msg .hint {
-  display: block;
-  margin: 0;
+.verify-password .hint {
+  margin: 5px 0 0 0;
   height: 20px;
   line-height: 20px;
-  font-size: 12px;
-  color: red;
-}
-
-.pop-up.verify-password .pop-up-buttons {
-  -webkit-box-pack: center !important;
-      -ms-flex-pack: center !important;
-          justify-content: center !important;
-}
-
-.pop-up.verify-password .pop-up-buttons .button {
-  height: 34px;
-}
-
-.pop-up.verify-password .pop-up-buttons .button:first-child {
-  background-color: #7373ff;
-  border-color: #7373ff;
   color: #fff;
+  font-size: 14px;
+  text-shadow: 0 0 3px #000;
 }
 
 .select {
@@ -1282,6 +1205,53 @@ html {
           transform: translateY(-50%);
 }
 
+.website-shade {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999999;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.website-shade .box {
+  padding: 20px 40px;
+  background-color: #fff;
+}
+
+.website-shade .box .title {
+  line-height: 1;
+  text-align: center;
+  font-size: 20px;
+}
+
+.website-shade .box p {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.website-shade .box .url {
+  line-height: 1.8;
+  text-align: center;
+  font-size: 16px;
+  color: var(--app-side-bg-color);
+  cursor: pointer;
+}
+
+.website-shade .box .url:hover {
+  opacity: .8;
+}
+
 .main-section {
   padding: 0 var(--app-main-padding-x);
 }
@@ -1322,7 +1292,7 @@ html {
 }
 
 .main-setting .setting-box .box-detail .describe b {
-  font-weight: normal;
+  color: red;
 }
 
 .main-setting .setting-box .box-detail .save {
@@ -1363,10 +1333,11 @@ html {
 
 .main-setting .setting-options .box-detail .form input {
   margin-right: 6px;
+  text-align: center;
 }
 
 .main-setting .setting-options .box-detail .form .name {
-  width: 200px;
+  width: 240px;
 }
 
 .main-setting .setting-options .box-detail .form .hint {
@@ -1477,6 +1448,22 @@ html {
 
 .main-setting .setting-license-plate-prefix .box-detail .form .name {
   text-transform: uppercase;
+}
+
+.main-setting .setting-license-plate-prefix .box-detail .form .name::-webkit-input-placeholder {
+  text-transform: none;
+}
+
+.main-setting .setting-license-plate-prefix .box-detail .form .name:-ms-input-placeholder {
+  text-transform: none;
+}
+
+.main-setting .setting-license-plate-prefix .box-detail .form .name::-ms-input-placeholder {
+  text-transform: none;
+}
+
+.main-setting .setting-license-plate-prefix .box-detail .form .name::placeholder {
+  text-transform: none;
 }
 
 .main-setting .setting-license-plate-prefix-default .box-detail .form {
@@ -2112,6 +2099,11 @@ html {
 
 .main-member-details .member-info .item input[readonly] {
   border: 0;
+}
+
+.main-member-details .member-info .balance span:nth-child(2) {
+  color: red;
+  font-weight: bold;
 }
 
 .main-member-details .member-info .balance .recharge {
@@ -2793,7 +2785,7 @@ html {
 }
 
 .main-bill .bill-time {
-  width: 300px;
+  width: 274px;
   height: 40px;
   font-size: 18px;
   text-align: center;
@@ -3454,6 +3446,8 @@ html {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .main-member-settle-accounts .section.member .member-info span {
@@ -3464,9 +3458,23 @@ html {
   color: #000;
 }
 
+.main-member-settle-accounts .section.member .member-info .name b {
+  color: var(--app-side-bg-color);
+  cursor: pointer;
+}
+
+.main-member-settle-accounts .section.member .member-info .name b:hover {
+  opacity: 0.8;
+}
+
 .main-member-settle-accounts .section.member .member-info .balance b {
   margin-right: 4px;
   color: red;
+}
+
+.main-member-settle-accounts .section.member .member-info .ramarks b {
+  font-weight: normal;
+  color: #999;
 }
 
 .main-member-settle-accounts .section.serve .member-serve-options {
@@ -3607,7 +3615,7 @@ html {
 }
 
 .activate-app {
-  margin: 0 auto;
+  margin: 50px auto;
   width: 100%;
   max-width: 600px;
 }
@@ -3639,7 +3647,15 @@ html {
 }
 
 .activate-app .first-step {
-  margin: 50px 0 70px;
+  margin-bottom: 70px;
+}
+
+.activate-app .first-step .weixinerweima {
+  margin-bottom: 20px;
+  width: 180px;
+  height: 180px;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
 }
 
 .activate-app .first-step .identifier {

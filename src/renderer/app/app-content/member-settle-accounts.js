@@ -2,8 +2,48 @@ import { getDB } from '../../common/tool.js';
 import { PopUp } from '../../common/pop_up/pop_up.js';
 import { SwitchPage } from './switchPage.js';
 import { memberSettleAccountsTemplate } from './contentTemplates.js';
+class MemberSettleAccountsSwitchPage extends SwitchPage {
+    switchPage() {
+        document.addEventListener('click', (e) => {
+            for (let i = 0; i < e.path.length; i++) {
+                const element = e.path[i];
+                if (element.nodeType === 1) {
+                    if (
+                        element.hasAttribute('switch-page') &&
+                        element.getAttribute('switch-page') ===
+                            this.options.page
+                    ) {
+                        const appSide = document.querySelector('.app-side');
+                        const appSideButtons = appSide.querySelectorAll(
+                            '.button'
+                        );
+                        const appSideMemberButton = appSide.querySelector(
+                            '.button.member'
+                        );
+                        for (let i = 0; i < appSideButtons.length; i++) {
+                            const button = appSideButtons[i];
+                            button.classList.remove('active');
+                        }
+                        appSideMemberButton.classList.add('active');
 
-new SwitchPage(
+                        const headerTitleElement = document.querySelector(
+                            '.app-header .header-title'
+                        );
+                        headerTitleElement.innerHTML = this.options.title;
+                        document.querySelector(
+                            '.app-main'
+                        ).innerHTML = this.options.html;
+                        this.callback(
+                            document.querySelector('.app-main').children[0],
+                            element.getAttribute('data-id')
+                        );
+                    }
+                }
+            }
+        });
+    }
+}
+new MemberSettleAccountsSwitchPage(
     {
         page: 'member-settle-accounts',
         title: '会员用户账单结算',
@@ -57,8 +97,15 @@ new SwitchPage(
             const memberData = memberDB.get(memberId).value();
             memberInfoElement.innerHTML = `
                 <span class="id">编号：<b>${memberData.id}</b></span>
-                <span class="name">名称：<b>${memberData.name}</b></span>
-                <span class="balance">余额：<b>${memberData.balance}</b>元</span>
+                <span class="name">名称：<b data-id="${
+                    memberData.id
+                }" switch-page="member-details">${memberData.name}</b></span>
+                <span class="balance">余额：<b>${
+                    memberData.balance
+                }</b>元</span>
+                <span class="ramarks">备注：<b>${
+                    memberData.ramarks || '无'
+                }</b></span>
             `;
         }
 
@@ -72,7 +119,7 @@ new SwitchPage(
                     <div class="option">
                         <span class="name">${item[0]}</span>
                         <i class="fenge"></i>
-                        <span class="sum">${item[1]}</span>
+                        <span class="sum">￥${item[1]}</span>
                     </div>
                 `;
             }
@@ -91,8 +138,9 @@ new SwitchPage(
                     ) {
                         const optionName = element.querySelector('.name')
                             .innerText;
-                        const optionSum = element.querySelector('.sum')
-                            .innerText;
+                        const optionSum = element
+                            .querySelector('.sum')
+                            .innerText.replace('￥', '');
                         addedServeOptions.innerHTML += `
                             <div class="item">
                                 <span class="option">
@@ -115,25 +163,37 @@ new SwitchPage(
                 '.option-name'
             );
             const optionSumInput = addServeOptions.querySelector('.option-sum');
-            const addButton = addServeOptions.querySelector('.add');
 
-            addButton.addEventListener('click', () => {
-                const optionNameInputValue = addServeOptions
-                    .querySelector('.option-name')
-                    .value.trim();
-                const optionSumInputValue = addServeOptions
-                    .querySelector('.option-sum')
-                    .value.trim();
-
-                if (!optionNameInputValue) {
-                    optionNameInput.focus();
-                    return;
-                }
-                if (!optionSumInputValue) {
+            optionNameInput.addEventListener('keypress', (e) => {
+                if (e.charCode === 13) {
+                    const optionNameInputValue = addServeOptions
+                        .querySelector('.option-name')
+                        .value.trim();
+                    if (!optionNameInputValue) {
+                        optionNameInput.focus();
+                        return;
+                    }
                     optionSumInput.focus();
-                    return;
                 }
-                addedServeOptions.innerHTML += `
+            });
+            optionSumInput.addEventListener('keypress', (e) => {
+                if (e.charCode === 13) {
+                    const optionNameInputValue = addServeOptions
+                        .querySelector('.option-name')
+                        .value.trim();
+                    const optionSumInputValue = addServeOptions
+                        .querySelector('.option-sum')
+                        .value.trim();
+
+                    if (!optionNameInputValue) {
+                        optionNameInput.focus();
+                        return;
+                    }
+                    if (!optionSumInputValue) {
+                        optionSumInput.focus();
+                        return;
+                    }
+                    addedServeOptions.innerHTML += `
                     <div class="item">
                         <span class="option">
                             <b class="name">${optionNameInputValue}</b>
@@ -142,9 +202,10 @@ new SwitchPage(
                         <span class="delete">删除</span>
                     </div>
                 `;
-                totalSum += optionSumInputValue * 1;
-                rendererTotalHtml();
-                optionNameInput.value = optionSumInput.value = '';
+                    totalSum += optionSumInputValue * 1;
+                    rendererTotalHtml();
+                    optionNameInput.value = optionSumInput.value = '';
+                }
             });
         })();
 

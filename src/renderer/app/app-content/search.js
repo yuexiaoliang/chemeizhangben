@@ -77,7 +77,10 @@ function mainSearch(ele) {
         const searchSelectOptionsElement = searchSelectElement.querySelector(
             '.options'
         );
-        searchSelectChosenElement.addEventListener('click', () => {
+
+        // 点击searchSelectChosenElement切换searchSelectOptionsElement状态
+        searchSelectChosenElement.addEventListener('click', (e) => {
+            e.stopPropagation();
             searchSelectOptionsElement.classList.toggle('show');
             if (searchSelectOptionsElement.classList.contains('show')) {
                 searchSelectChosenElement.style.borderRadius = '0 2px 0 0';
@@ -85,6 +88,16 @@ function mainSearch(ele) {
                 searchSelectChosenElement.style.borderRadius = '0 2px 2px 0';
             }
         });
+
+        // 点击非searchSelectChosenElement处，隐藏searchSelectOptionsElement
+        document.addEventListener('click', () => {
+            if (searchSelectOptionsElement.classList.contains('show')) {
+                searchSelectOptionsElement.classList.remove('show');
+                searchSelectChosenElement.style.borderRadius = '0 2px 0 0';
+            }
+        });
+
+        // 选择searchSelectOptionsElement的Item
         searchSelectOptionsElement.addEventListener('click', (e) => {
             const target = e.target;
             if (target.classList.contains('item')) {
@@ -94,6 +107,7 @@ function mainSearch(ele) {
                 searchInput.value = '';
                 rendererMemberList();
             }
+            searchInput.focus();
         });
     })();
 

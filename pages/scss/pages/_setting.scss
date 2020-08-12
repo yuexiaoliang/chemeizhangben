@@ -26,7 +26,7 @@
                 margin-bottom: 10px;
 
                 b {
-                    font-weight: normal;
+                    color: red;
                 }
             }
 
@@ -62,10 +62,11 @@
 
                 input {
                     margin-right: 6px;
+                    text-align: center;
                 }
 
                 .name {
-                    width: 200px;
+                    width: 240px;
                 }
 
                 .hint {
@@ -174,6 +175,10 @@
             .form {
                 .name {
                     text-transform: uppercase;
+
+                    &::placeholder {
+                        text-transform: none;
+                    }
                 }
             }
         }
